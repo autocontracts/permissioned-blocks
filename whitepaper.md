@@ -52,7 +52,7 @@ User capabilites are stored on the smart contract as a hash map of the user's bl
 
 The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and this is stored at an IPFS address that only they can access.
 
-<b>Note:</b> A naive approach would be to only encrypt the Statechain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approach is to design a security model that limits access to the information.
+<b>Note:</b> A naive approach would be to only encrypt the atatechain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approach is to design a security model that limits access to the information.
  
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
@@ -66,7 +66,7 @@ The contract key is an asymmetric key used for encrypting and decrypting the con
 
 ## IPFS Token Authentication
 
-The modified version of IPFS uses token authentication in conjuction with the IPFS Bitswap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
+The modified version of IPFS uses token authentication in conjunction with the IPFS Bitswap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
 
 ## Permissioned Blocks
 
@@ -75,3 +75,5 @@ IPFS divides and stores the contract's statechain in block sizes of 256 KB. Unli
 Authorisation occurs by IPFS making a remote request to the smart contract address of the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised. If authorised the block is sent to the requestor. The requestor then also stores the received IPFS block as a tagged Permissioned block and uses the same security model for request that they receive for this block.
 
 If the requestor is not authorised, then request is ignored. The IPFS DHT router will then have to look elsewhere. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the address will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist.
+
+## Validation of State Changes
