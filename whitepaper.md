@@ -11,18 +11,18 @@ A simplified model of a smart contract can be modelled as having a set of functi
 A smart contract function is programmed to produced a determined output for a set of given input parameters.
 The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon network consensus the new state becomes a permanent part of the blockchain.
 
-The issues with the above behaviour for storing the smart contract state information directly on the blockchain are:
+Issues with the standard model of storing the smart contract state information directly on the blockchain are:
 
 - <b> No privacy.</b> The state information is stored on the blockchain's merkel tree are visible for all to inspect. Also, the input parameters of functions that are sent in the transaction are in clear view.
-- <b> Cost. </b> The amount of data that can be sent in the transaction and stored in the blockchain's merketl tree is limited by the gas price for bytes sent and processed.
+- <b> Cost. </b> There is a limit to the amount of data that can be sent in the transaction and stored in the blockchain's merketl tree by the gas price that a users is prepared to spend for bytes sent and processed.
 
 ## Separating State from Functional Behaviour
 
 If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for protecting the state information and reduce the cost of storing data on the blockchain. 
 
-To do this we need to program the functions of a smart contract to be [Pure Functions](https://en.wikipedia.org/wiki/Pure_function). Pure functions by design, do not have the side-effect of storing the state information during the execution of a function.
+To do this we need to program the smart contract functions as being [Pure Functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a Pure function by design, does not have the side-effect of storing state information during the execution.
 
-To employ a pure functional programming model with smart contracts, the previous contract astate is combined with the current input parameters of a function to produce the new contract state.
+To use a functional programming model with smart contracts, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
