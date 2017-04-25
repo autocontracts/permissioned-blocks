@@ -24,21 +24,29 @@ To do this we need to program the functions of a smart contract to be [Pure Func
 
 To employ a pure functional programming model with smart contracts, the previous contract astate is combined with the current input parameters of a function to produce the new contract state.
 
-This new contract state is stored in a linked list structure called a <b>State Chain</b> on a decentralised storage system (a modified version of IPFS), and the hash address of the new state is sent as a transaction message to the network.
-
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
 <br>
 <b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. When another event occurs with the input parameter P2, this produces the new state S2.
 </p>
 
-## Privacy of the State Chain
+This new contract state is stored in a linked list structure called a <b>Statechain</b> on a decentralised storage system (a modified version of IPFS), and the IPFS hash address of the new state is sent as a transaction message to the network.
 
-The Permissioned Blocks security model is designed using a system of assigning capabilities that protect access to the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
+## The Statechain
+
+<p align="center">
+<img src="/images/statechain.png">
+<br>
+<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The head address is referenced by the Smart Contract
+</p>
+
+## Privacy of the Statechain
+
+The Permissioned Blocks security model is designed using a system of assigning capabilities that protect access to the Smart Contract's Statechain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
 
 The state information is encrypted with a shared contract key. The contract key is boxed using the public key of the person being granted access, and stored at an IPFS address that only they can access.
 
-<b>Note:</b> A naive approach would be simply to encrypt the State Chain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approch is to protect the information using a security model that limits access to the information.
+<b>Note:</b> A naive approach would be simply to encrypt the Statechain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approch is to protect the information using a security model that limits access to the information.
  
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
@@ -48,13 +56,16 @@ The state information is encrypted with a shared contract key. The contract key 
 
 ## Contract Key
 
-The contract key is an asymmetric key used for encrypting and decrypting the contract's State Chain. The public key for encryption is stored in the contract's metadata and the private key used for decryption is shared only with those that have been granted access. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+The contract key is an asymmetric key used for encrypting and decrypting the contract's Statechain. The public key used for encryption is stored as part of the contract's metadata and the private key used for decryption is shared only with those that have been granted access. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
 
 ## IPFS Token Authentication
 
-The modified version of IPFS uses token authentication in conjuction with the IPFS Bit Swap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
+The modified version of IPFS uses token authentication in conjuction with the IPFS Bitswap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
 
 ## Permissioned Blocks
 
-The State Chain is stored in IPFS in block sizes up to 256 KB. Unlike standard IPFS blocks, State Chain blocks are coloured as being Permissioned Blocks. Permissioned Blocks colouring occurs by storing the address of the contract that the State Chain belongs to along side the block data. Meaning that they cannot be distributed.. 
+IPFS stores the contract's Statechain in block sizes up to 256 KB. Unlike standard IPFS blocks, the blocks that contain the contract's Statechain information are <i>tagged</i> to indicate that they are Permissioned Blocks. Tagging occurs by storing the blockchain address of the contract that the Statechain belongs to alongside the block data within the IPFS datastore. When a request is made for a IPFS block from the IPFS datastore that is tagged as a Permissioned Block, additional logic then checks that the requestor is authorised to access this block. 
 
+If the requestor is not authorised to access the block, then the IPFS node simply ignores the request. The IPFS DHT router will then look elsewhere. If all other IPFS nodes either do not have the block, or they do have the block but requestor is not authorised, then the address will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block does not exist in the network.
+
+Authorisation of a Bitswap request for a Permissioned Block occurs as follows. A remote request is made to the smart contract that is located at the address that Permissioned Block has been tagged with. The smart contract contains a hash map of the blockchain accounts that are have been authorised to access the smart contract's statechain and the remote request queries this hash map to verify whether the requestor has the capability to access the block. If they do, then then the Permissioned Block is sent to the requestor. The requestor then protects the Permissioned Block using the same security model for any bitswap requests they recieve for this block.
