@@ -42,6 +42,6 @@ Note: A naive approach would be simply to encrypt the State Chain and publish th
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
 <br>
-<b>Permissioned Blocks</b> - Bob requests the state S2 from Alice via IPFS Bit Swap. Alice checks Bob's access capabilities for whether he is permitted to receive this information, and then encrypts using Bob's public key and sends.
+<b>Permissioned Blocks</b> - Bob requests the state S2 from Alice via IPFS Bit Swap. Alice checks Bob's capabilities to verify that he is permitted to receive the data and then sends. Bob decrypts the data using his contract key. 
 </p>
 
