@@ -18,7 +18,7 @@ The issues with the above behaviour for storing the smart contract state informa
 
 ## Separating State from Functional Behaviour
 
-If we separate the storage of the smart contract's state from its functional behaviour, then we can create a security model for keeping state information private and reduce the cost of storing data on the blockchain. 
+If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for protecting the state information and reduce the cost of storing data on the blockchain. 
 
 To do this we need to program the functions of a smart contract to be [Pure Functions](https://en.wikipedia.org/wiki/Pure_function). Pure functions by design, do not have the side-effect of storing the state information during the execution of a function.
 
@@ -32,11 +32,11 @@ This new contract state is stored in a linked list structure called a <b>State C
 <b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. When another event occurs with the input parameter P2, this produces the new state S2.
 </p>
 
-## Privacy of a Smart Contract's State Chain
+## Privacy of the State Chain
 
-The privacy of the contract state is controlled using a security model that has access control capabilities. These capabilities determine who can access and decrypt the state information and what contract functions they can execute.   
+The Permissioned Blocks security model uses access control capabilities to protect the privacy of the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.   
 
 ![permissioned-blocks-capabilities](/images/permissioned-blocks-capabilities.png)
 
-A naive approach would be simply to encrypt the contract state and publish it on a public decentralised network. This approach is vulnerable the information being decrypted by brute force. For the same reason why we use Firewalls in computer networks today, a better security model is to protect the information with a security model that has access control capabilities. Only those that have been granted a certain capability can access some or all of the contract data. 
+Note: A naive approach would be simply to encrypt the State Chain and publish this on a public decentralised network. This approach is vulnerable to the information being decrypted by brute force. For the same reason why we employ Firewalls in computer networks today, a better approch is to protect the information with a security model that limits access to the information. 
 
