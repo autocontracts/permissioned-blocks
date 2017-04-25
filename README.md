@@ -1,2 +1,3 @@
-# permissioned-blocks
-Permissioned Blocks - Privacy for Public Blockchains
+# Permissioned Blocks - Privacy for Public Blockchains
+
+- [White paper](/whitepaper.md)
