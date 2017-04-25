@@ -34,10 +34,12 @@ This new contract state is stored in a linked list structure called a <b>Statech
 
 ## The Statechain
 
+The statechain has a linked list structure where each state block references the previous state block's IPFS address. IPFS blocks are content addressed, which means that the IPFS address is a hash of the block's content. Therefore the statechain has the same feature of a blockchain, if the content of any statechain block were to change then the hash of the head address would also change. This means, the smart contract only needs to store the IPFS address of the last state change without needing to store the entire set of data. There is full confidence that following all the referenced IPFS addresses from the in the linked list will resolve the complete statechain.
+
 <p align="center">
 <img src="/images/statechain.png">
 <br>
-<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The head address is referenced by the Smart Contract
+<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The head address is referenced by the smart contract
 </p>
 
 ## Privacy of the Statechain
