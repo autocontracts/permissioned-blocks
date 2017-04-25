@@ -36,7 +36,12 @@ This new contract state is stored in a linked list structure called a <b>State C
 
 The Permissioned Blocks security model uses access control capabilities to protect the privacy of the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.   
 
-![permissioned-blocks-capabilities](/images/permissioned-blocks-capabilities.png)
-
-Note: A naive approach would be simply to encrypt the State Chain and publish this on a public decentralised network. This approach is vulnerable to the information being decrypted by brute force. For the same reason why we employ Firewalls in computer networks today, a better approch is to protect the information with a security model that limits access to the information. 
+Note: A naive approach would be simply to encrypt the State Chain and publish this on a public decentralised network. This approach is vulnerable to the information being decrypted by brute force. For the same reason why we employ Firewalls in computer networks today, a better approch is to protect the information with a security model that limits access to the information.
+ 
+ 
+<p align="center">
+<img src="/images/permissioned-blocks-capabilities.png">
+<br>
+<b>Permissioned Blocks</b> - Bob requests the state S2 from Alice via IPFS Bit Swap. Alice checks Bob's access capabilities for whether he is permitted to receive this information, and then encrypts using Bob's public key and sends.
+</p>
 
