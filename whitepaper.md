@@ -34,14 +34,27 @@ This new contract state is stored in a linked list structure called a <b>State C
 
 ## Privacy of the State Chain
 
-The Permissioned Blocks security model uses access control capabilities to protect the privacy of the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.   
+The Permissioned Blocks security model uses security capabilities to protect the privacy of the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
 
-Note: A naive approach would be simply to encrypt the State Chain and publish this on a public decentralised network. This approach is vulnerable to the information being decrypted by brute force. For the same reason why we employ Firewalls in computer networks today, a better approch is to protect the information with a security model that limits access to the information.
- 
+The state information is encrypted with a shared contract key. The contract key is boxed using the public key of the person being granted access, and stored at an IPFS address that only they can access.
+
+Note: A naive approach would be simply to encrypt the State Chain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approch is to protect the information using a security model that limits access to the information.
  
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
 <br>
-<b>Permissioned Blocks</b> - Bob requests the state S2 from Alice via IPFS Bit Swap. Alice checks Bob's capabilities to verify that he is permitted to receive the data and then sends. Bob decrypts the data using his contract key. 
+<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap module that uses token authentication. Before sending, Alice authenticates Bob's identity and checks the smart contract capabilities to verify that he is authorised to receive the data. Bob decrypts the data using his contract key. 
 </p>
+
+## Contract Key
+
+The contract key is an asymmetric key used for encrypting and decrypting the contract's State Chain. The public key for encryption is stored in the contract's metadata and the private key used for decryption is shared only with those that have been granted access. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+
+## IPFS Token Authentication
+
+The modified version of IPFS uses token authentication in conjuction with the IPFS Bit Swap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is devided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
+
+## Permissioned Blocks
+
+Each block of 
 
