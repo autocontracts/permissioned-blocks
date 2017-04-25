@@ -34,11 +34,11 @@ This new contract state is stored in a linked list structure called a <b>State C
 
 ## Privacy of the State Chain
 
-The Permissioned Blocks security model uses security capabilities to protect the privacy of the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
+The Permissioned Blocks security model is designed using a system of assigning capabilities that protect access to the Smart Contract's State Chain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
 
 The state information is encrypted with a shared contract key. The contract key is boxed using the public key of the person being granted access, and stored at an IPFS address that only they can access.
 
-Note: A naive approach would be simply to encrypt the State Chain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approch is to protect the information using a security model that limits access to the information.
+<b>Note:</b> A naive approach would be simply to encrypt the State Chain and publish on a public network. This approach however is vulnerable to the information being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approch is to protect the information using a security model that limits access to the information.
  
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
@@ -52,9 +52,9 @@ The contract key is an asymmetric key used for encrypting and decrypting the con
 
 ## IPFS Token Authentication
 
-The modified version of IPFS uses token authentication in conjuction with the IPFS Bit Swap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is devided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
+The modified version of IPFS uses token authentication in conjuction with the IPFS Bit Swap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in exisiting authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
 
 ## Permissioned Blocks
 
-Each block of 
+The State Chain is stored in IPFS in block sizes up to 256 KB. Unlike standard IPFS blocks, State Chain blocks are coloured as being Permissioned Blocks. Permissioned Blocks colouring occurs by storing the address of the contract that the State Chain belongs to along side the block data. Meaning that they cannot be distributed.. 
 
