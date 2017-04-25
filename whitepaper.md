@@ -32,11 +32,11 @@ To use a functional programming model with smart contracts, the previous contrac
 
 ## The Statechain
 
-The statechain is stored on a decentralised storage system which is a modified version of IPFS. The statechain has a linked list structure such that each state block references the previous state's address.
+The statechain is stored on a decentralised storage system that is a modified version of IPFS. The statechain has a linked list structure such that each state has a reference to the previous state's address.
 
 IPFS blocks are content addressed, which means that the IPFS address is a hash of the block's content. Therefore the statechain has the same useful feature of a blockchain, in that, if the content of any statechain block were to change then the hash of the head address would also change. This means that the smart contract only needs to store the IPFS address of the last state change without needing to store the entire set of data. Following all the referenced IPFS addresses in the linked list will resolve the complete statechain.
 
-By only storing the latest statechain IPFS address in the contract significantly reduces the contract data storage costs to be negligible compared to storing the complete state history. Also, from the just inspecting the hash address of the statechain does not reveal any information about the content of the statechain.
+By only storing the latest statechain IPFS address in the contract significantly reduces the contract storage costs to become negligible compared to storing the complete state history. Also from the viewpoint of the blockchain, inspecting the hash address of the statechain without resolving the IPFS data does not reveal any information about the content of the statechain.
 
 <p align="center">
 <img src="/images/statechain.png">
@@ -46,7 +46,7 @@ By only storing the latest statechain IPFS address in the contract significantly
 
 ## Privacy of the Statechain
 
-The Permissioned Blocks security model is designed using a system of assigning capabilities that protect access to the Smart Contract's Statechain. The capabilities determine who can access and decrypt the state information and what contract functions they can execute.
+Resolving the statechain data requires being authenticated and authorised to access the statechain. Users need to be granted capabilities in order to access the statechain and decrypt the statechain's contents. Capabilities are also used to grant authorisation to execute specific smart contract functions.
 
 The state information is encrypted with a shared contract key. The contract key is boxed using the public key of the person being granted access, and stored at an IPFS address that only they can access.
 
