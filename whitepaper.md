@@ -18,9 +18,9 @@ Issues with the standard model of storing the smart contract state information d
 
 ## Separating State from Functional Behaviour
 
-If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for protecting the state information and reduce the cost of storing data on the blockchain. 
+If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring privacy of the contract's state information and reduce the cost of storing data on the blockchain. 
 
-To do this we need to program the smart contract functions as being [Pure Functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a Pure function by design, does not have the side-effect of storing state information during the execution.
+To do this we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design, does not have the side-effect of storing state information during the execution.
 
 To use a functional programming model with smart contracts, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
 
@@ -30,11 +30,13 @@ To use a functional programming model with smart contracts, the previous contrac
 <b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. When another event occurs with the input parameter P2, this produces the new state S2.
 </p>
 
-This new contract state is stored in a linked list structure called a <b>Statechain</b> on a decentralised storage system (a modified version of IPFS), and the IPFS hash address of the new state is sent as a transaction message to the network.
-
 ## The Statechain
 
-The statechain has a linked list structure where each state block references the previous state block's IPFS address. IPFS blocks are content addressed, which means that the IPFS address is a hash of the block's content. Therefore the statechain has the same feature of a blockchain, if the content of any statechain block were to change then the hash of the head address would also change. This means, the smart contract only needs to store the IPFS address of the last state change without needing to store the entire set of data. There is full confidence that following all the referenced IPFS addresses from the in the linked list will resolve the complete statechain.
+The statechain is stored on a decentralised storage system which is a modified version of IPFS. The statechain has a linked list structure such that each state block references the previous state's address.
+
+IPFS blocks are content addressed, which means that the IPFS address is a hash of the block's content. Therefore the statechain has the same useful feature of a blockchain, in that, if the content of any statechain block were to change then the hash of the head address would also change. This means that the smart contract only needs to store the IPFS address of the last state change without needing to store the entire set of data. Following all the referenced IPFS addresses in the linked list will resolve the complete statechain.
+
+By only storing the latest statechain IPFS address in the contract significantly reduces the contract data storage costs to be negligible compared to storing the complete state history. Also, from the just inspecting the hash address of the statechain does not reveal any information about the content of the statechain.
 
 <p align="center">
 <img src="/images/statechain.png">
