@@ -1,3 +1,5 @@
+# Permissioned Blocks White Paper
+
 ## Smart Contract Model
 
 A simplified model of a smart contract can be modelled as having a set of functions with internal state.
