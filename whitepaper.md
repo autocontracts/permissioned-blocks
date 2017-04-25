@@ -3,9 +3,8 @@
 A simplified model of a smart contract can be modelled as having a set of functions with internal state.
 
 <p align="center">
-![SmartContractModel](/images/smart-contract-model.png)
-
-Smart Contract Model
+<img src="/images/smart-contract-model.png">
+<b>Smart Contract Model</b>
 </p>
 
 
