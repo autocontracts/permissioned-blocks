@@ -7,7 +7,7 @@ The white paper draft detailing the engineering behind the technology that can b
 [![Demo](images/video-thumbnail.png)](https://www.youtube.com/watch?v=Zt9DIopmzbA)
 <br>
 
-Highlights:
+Demo Highlights:
 
 - 100% privacy of smart contract functional state information.
 - Max throughput of 10,000 transactions per second (using Tendermint consensus engine).
