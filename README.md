@@ -1,6 +1,6 @@
 # Permissioned Blocks - Bringing Privacy to Public Blockchains
 
-The white paper (still in progress) with the engineering details:
+The white paper (still in progress) that details the engineering design decisions:
 
 [White Paper - Permissioned Blocks](https://github.com/autocontracts/permissioned-blocks/blob/master/whitepaper.md) 
 
