@@ -14,5 +14,5 @@ Demo Highlights:
 - No gas processing fees.
 - Decentralised solution using a folk of [IPFS](https://ipfs.io/) for the secure storage of smart contract state.
 - Compatible with any Turing Complete blockchain (e.g. [Ethereum](https://www.ethereum.org/), [Hyperledger](https://www.hyperledger.org/)). Decoupled and modular design.
-- Multi user/role security capability model.  
+- Multi user/role security model capabilities.  
 
