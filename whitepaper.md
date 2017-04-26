@@ -34,7 +34,7 @@ To use a functional programming model with smart contracts, the previous contrac
 
 ## The Statechain
 
-The statechain is stored on a decentralised storage system that is a modified version of IPFS. The statechain has a linked list structure such that each state has a reference to the previous state's address.
+The state changes are stored on a decentralised storage system that is a modified version (folk) of IPFS. The state changes are known as a <b>statechain</b> as they are stored in a linked list structure such that each state has a reference to the previous state's address.
 
 IPFS blocks are content addressed, which means that the IPFS address is a hash of the block's content. Therefore the statechain has the same useful feature of a blockchain, in that, if the content of any statechain block were to change then the hash of the head address would also change. This means that the smart contract only needs to store the IPFS address of the last state change without needing to store the entire set of data. Following all the referenced IPFS addresses in the linked list will resolve the complete statechain.
 
