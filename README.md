@@ -2,7 +2,7 @@
 
 The white paper draft detailing the engineering behind the technology that can be found here:
 
-[White Paper - Permissioned Blocks](https://github.com/autocontracts/permissioned-blocks) 
+[White Paper - Permissioned Blocks](https://github.com/autocontracts/permissioned-blocks/blob/master/whitepaper.md) 
 
 [![Demo](images/video-thumbnail.png)](https://www.youtube.com/watch?v=Zt9DIopmzbA)
 <br>
