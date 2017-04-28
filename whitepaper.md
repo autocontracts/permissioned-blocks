@@ -46,7 +46,7 @@ By only storing the latest statechain IPFS address in the contract significantly
 <b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
 </p>
 
-## Privacy of the Statechain
+## Statechain Privacy
 
 Resolving the statechain requires being authenticated and authorised. Users authenticate who they are using a blockchain account and authorisation is handled by capabilities that are granted to users. 
 
