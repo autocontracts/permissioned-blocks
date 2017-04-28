@@ -67,7 +67,7 @@ The statechain is encrypted using a shared contract key. The contract key is box
 
 ## Contract Key
 
-The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encryption is stored with the contract's metadata and the private key used for decryption is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encryption, is stored with the contract's metadata and the private key that is used for decryption, is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted permission. The boxed key is stored in IPFS using Permissioned Blocks (described below). This means that key can only be access by the authorised user.
 
 ## IPFS Token Authentication
 
