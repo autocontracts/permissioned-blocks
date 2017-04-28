@@ -89,3 +89,18 @@ When the requestor receives the IPFS block, it is also tagged in their datastore
 If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other IPFS nodes if they have the block. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist on the network.
 
 ## Validation of State Changes
+
+Since state information is not stored on the smart contract, validation is required to verify that a state change recorded on the statechain is valid. In order to achieve this, an oracle called an Endorser is endorses any proposed state changes. The following  algorithm for proposing and endorsing state changes occurs. Consider the following simple smart contract function written in solidity:
+```
+function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
+      balance = balance + balance * commission / 100;
+      tax = tax + balance * 20 / 100
+  }
+```
+Using a functional programming pattern, this function has parametes where <i>balance</i> and <i>tax</i> are state information, and <i>commission</i> is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are not member variables of the contract, so are return by the function to be stored on the statechain.
+
+1. Bob retrieves the latest balance and tax variables from the state change. 
+2. He makes a <i>Call</i> request to the function calculateCommission. This request returns the new balance and tax state. Note: This is not a <i>Transaction</i> sent to the blockchain network. This is simply a call to the function on his own private node.
+3. Bob updates the statechain, generating a new IPFS address, which is a hash of the new history of state changes.
+4. Bob saves the new IPFS addess for the statechain head in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
+5. The Endorser then calls the same calculateCommission function as Bob using the state information he used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable called <i>state</i> which holds the verified IPFS statechain head address.
