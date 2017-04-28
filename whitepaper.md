@@ -88,7 +88,7 @@ When the requestor receives the IPFS block, it is also tagged in their datastore
 
 If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other IPFS nodes if they have the block. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist on the network.
 
-## Validation of State Changes
+## Statechain Validation
 
 Since state information is not stored in the smart contract, validation is required in order to verify that any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour used. Consider the following solidity function:
 ```
