@@ -90,17 +90,17 @@ If the requestor is not authorised, then request is simply ignored. The IPFS DHT
 
 ## Validation of State Changes
 
-Since state information is not stored on the smart contract, validation is required to verify that a state change recorded on the statechain is valid. In order to achieve this, an oracle called an Endorser is endorses any proposed state changes. The following  algorithm for proposing and endorsing state changes occurs. Consider the following simple smart contract function written in solidity:
+Since state information is not stored in the smart contract, validation is required in order to verify that any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour used. Consider the following solidity function:
 ```
 function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
       balance = balance + balance * commission / 100;
       tax = tax + balance * 20 / 100
   }
 ```
-Using a functional programming pattern, this function has parametes where <i>balance</i> and <i>tax</i> are state information, and <i>commission</i> is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are not member variables of the contract, so are return by the function to be stored on the statechain.
+Using a functional programming pattern, this function has parameters where, <i>balance</i> and <i>tax</i> are state information, and <i>commission</i> is input information. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function instead.
 
-1. Bob retrieves the latest balance and tax variables from the state change. 
-2. He makes a <i>Call</i> request to the function calculateCommission. This request returns the new balance and tax state. Note: This is not a <i>Transaction</i> sent to the blockchain network. This is simply a call to the function on his own private node.
-3. Bob updates the statechain, generating a new IPFS address, which is a hash of the new history of state changes.
-4. Bob saves the new IPFS addess for the statechain head in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
-5. The Endorser then calls the same calculateCommission function as Bob using the state information he used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable called <i>state</i> which holds the verified IPFS statechain head address.
+1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the state change. 
+2. He makes a <i>Call</i> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. This request returns the new balance and tax state information. Note: This is not a <i>Transaction</i> sent to the blockchain network. This is simply a call to the function on his own private node.
+3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and recording the <i>commission</i> variable he used as an input. This generates a new IPFS address, that is a hash of the new history of state changes.
+4. Bob saves the new IPFS addess of the statechain in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
+5. The Endorser then calls the same calculateCommission function as Bob using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter he used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another smart contract member variable called <i>state</i> which holds the verified IPFS statechain head address.
