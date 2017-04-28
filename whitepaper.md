@@ -53,8 +53,6 @@ Resolving the statechain requires being authenticated and authorised. Users auth
 The capabilites are stored on the smart contract as a hash map of the user's blockchain account. The capabilities are permission to access the statechain and to execute specified smart contract functions. 
 
 The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
-
-<b>Note:</b> A naive approach would be to only encrypt the satatechain without access controls. This approach however is vulnerable to the information that would be public for all to see, being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approach is to design a security model that limits access to the information being protected.
  
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
@@ -62,20 +60,26 @@ The statechain is encrypted using a shared contract key. The contract key is box
 <b>Permissioned Blocks</b> - Bob requests state S2 from Alice via a modified IPFS Bit Swap module that has the Permissioned Blocks Manager. Before sending, the Permissioned Blocks Manager on Alice's device authenticates Bob's identity and looks up the smart contract hash map to verify that Bob is authorised to receive the data. Upon authorisation the data is sent to Bob how decrypts the data using his version of the contract key. 
 </p>
 
+<b>Note:</b> A naive approach would be to only encrypt the satatechain without access controls. This approach however is vulnerable to the information that would be public for all to see, being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approach is to design a security model that limits access to the information being protected.
+
 ## Contract Key
 
-The contract key is an asymmetric key used for encrypting and decrypting the contract's Statechain. The public key used for encryption is stored as part of the contract's metadata and the private key used for decryption is shared only with those that have been granted access. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encryption is stored with the contract's metadata and the private key used for decryption is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
 
 ## IPFS Token Authentication
 
-The modified version of IPFS uses token authentication in conjunction with the IPFS Bitswap algorithm to determine whether a request for an IPFS data block should be distributed or not. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into segments, with the last segment containing a digital signature of the person who created the token. The token signature is generated using the blockchain account of token creator. 
+The modified Permissioned Blocks version of IPFS uses token authentication in conjunction with the IPFS Bitswap algorithm to determine whether a request for an IPFS data block is permitted to be distributed. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contans the issuer, capabilities and nonce information, and last segment contains the digital signature. The token's signature is generated using the blockchain account the user making the request. 
 
 ## Permissioned Blocks
 
-IPFS divides and stores the contract's statechain in block sizes of 256 KB. Unlike standard IPFS blocks, the statechain blocks are <i>tagged</i> to indicate that they are Permissioned Blocks. Tagging occurs by storing the smart contract's blockchain address with the block data in the IPFS datastore. When a request is made to retrieve an IPFS block from the IPFS datastore that has been tagged, additional logic is executed to verify that the requestor is authorised to receive this block. 
+IPFS divides and stores data in block sizes of 256 KB. The Permissiond Blocks version of IPFS has extended this functionality to tag certain blocks as being Permissioned Blocks and other as standard IPFS blocks. Permissioned blocks require the requestor to be authorised in order to receive the block being requested.
 
-Authorisation occurs by IPFS making a remote request to the smart contract address of the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised. If authorised the block is sent to the requestor. The requestor then also stores the received IPFS block as a tagged Permissioned block and uses the same security model for request that they receive for this block.
+Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address with the block data. When a request is made to retrieve a block from the datastore, if it is tagged then the authorisation needs to occur. 
 
-If the requestor is not authorised, then request is ignored. The IPFS DHT router will then have to look elsewhere. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the address will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist.
+Authorisation occurs by a remote call from IPFS to the blockchain in order to query the smart contract that is located at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised the block is sent to the requestor. 
+
+When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
+
+If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other IPFS nodes if they have the block. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist on the network.
 
 ## Validation of State Changes
