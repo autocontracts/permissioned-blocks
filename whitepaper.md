@@ -75,9 +75,9 @@ The modified Permissioned Blocks version of IPFS uses token authentication in co
 
 ## Permissioned Blocks
 
-IPFS divides and stores data in block sizes of 256 KB. The Permissiond Blocks version of IPFS has extended this functionality to tag certain blocks as being Permissioned Blocks and other as standard IPFS blocks. Permissioned blocks require the requestor to be authorised in order to receive the block being requested.
+IPFS divides and stores data in block sizes of 256 KB. The Permissiond Blocks version of IPFS has extended this functionality to allow tagging of certain blocks as being Permissioned Blocks. Permissioned blocks require the requestor to be authorised in order to receive the block being requested.
 
-Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address with the block data. When a request is made to retrieve a block from the datastore, if it is tagged then the authorisation needs to occur. 
+Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then authorisation of the user to reques that block needs to occur. 
 
 Authorisation occurs by a remote call from IPFS to the blockchain in order to query the smart contract that is located at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised the block is sent to the requestor. 
 
