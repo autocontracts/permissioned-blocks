@@ -46,7 +46,7 @@ By only storing the latest statechain IPFS address in the contract significantly
 <b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
 </p>
 
-## Statechain Privacy
+## Statechain Security Model
 
 Resolving the statechain requires being authenticated and authorised. Users authenticate who they are using a blockchain account and authorisation is handled by capabilities that are granted to users. 
 
@@ -57,7 +57,7 @@ The statechain is encrypted using a shared contract key. The contract key is box
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
 <br>
-<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via a modified IPFS Bit Swap module that has the Permissioned Blocks Manager. Before sending, the Permissioned Blocks Manager on Alice's device authenticates Bob's identity and looks up the smart contract hash map to verify that Bob is authorised to receive the data. Upon authorisation the data is sent to Bob how decrypts the data using his version of the contract key. 
+<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob then decrypts the data using his version of the contract key. 
 </p>
 
 <b>Note:</b> A naive approach would be to only encrypt the satatechain without any access control measures in place. This approach however is vulnerable to the information, that would be public for all to see, being decrypted by brute force. For the same reason why firewalls are employed in computer networks today, a better approach is to design a security model that limits access to the information being protected.
