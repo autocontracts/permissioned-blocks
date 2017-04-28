@@ -60,7 +60,7 @@ The statechain is encrypted using a shared contract key. The contract key is box
 <b>Permissioned Blocks</b> - Bob requests state S2 from Alice via a modified IPFS Bit Swap module that has the Permissioned Blocks Manager. Before sending, the Permissioned Blocks Manager on Alice's device authenticates Bob's identity and looks up the smart contract hash map to verify that Bob is authorised to receive the data. Upon authorisation the data is sent to Bob how decrypts the data using his version of the contract key. 
 </p>
 
-<b>Note:</b> A naive approach would be to only encrypt the satatechain without access controls. This approach however is vulnerable to the information that would be public for all to see, being decrypted by brute force. For the same reason firewalls are employed today in computer networks, a better approach is to design a security model that limits access to the information being protected.
+<b>Note:</b> A naive approach would be to only encrypt the satatechain without any access control measures in place. This approach however is vulnerable to the information, that would be public for all to see, being decrypted by brute force. For the same reason why firewalls are employed in computer networks today, a better approach is to design a security model that limits access to the information being protected.
 
 ## Contract Key
 
