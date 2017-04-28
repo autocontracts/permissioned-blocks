@@ -47,7 +47,7 @@ By only storing the latest statechain IPFS address in the contract significantly
 <b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
 </p>
 
-## The Benefits of using IPFS as Decentralised Storage
+## IPFS as Decentralised Storage
 
 ## Statechain Security Model
 
