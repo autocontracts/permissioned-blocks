@@ -78,6 +78,12 @@ Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing 
 
 Authorisation occurs by a remote call from IPFS to the blockchain in order to query the smart contract that is located at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised the block is sent to the requestor. 
 
+<p align="center">
+<img src="/images/permissioned-block.png">
+<br>
+<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify that Bob is authorised to access this block.
+</p>
+
 When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
 
 If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other IPFS nodes if they have the block. If all other IPFS nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as if the block simply does not exist on the network.
