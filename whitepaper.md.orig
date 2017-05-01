@@ -72,7 +72,11 @@ The statechain is encrypted using a shared contract key. The contract key is box
 
 ## Contract Key
 
+<<<<<<< HEAD
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encryption, is stored with the contract's metadata and the private key that is used for decryption, is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted permission. The boxed key is stored in IPFS using Permissioned Blocks (described below). This means that key can only be access by the authorised user.
+=======
 The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+>>>>>>> master
 
 ## IPFS Token Authentication
 
@@ -80,9 +84,15 @@ The folked version of IPFS uses token authentication during the IPFS Bitswap alg
 
 ## Permissioned Blocks
 
+<<<<<<< HEAD
+IPFS divides and stores data in block sizes of 256 KB. The Permissiond Blocks version of IPFS has extended this functionality to allow tagging of certain blocks as being Permissioned Blocks. Permissioned blocks require the requestor to be authorised in order to receive the block being requested.
+
+Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then authorisation of the user to reques that block needs to occur. 
+=======
 The folked verson of IPFS has been extended to tag certain blocks as being <b>Permissioned Blocks</b>. Permissioned blocks require the authorisation in order to access the requested block.
 
 Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address along with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then the authorisation needs to occur. 
+>>>>>>> master
 
 Authorisation occurs by a remote call from IPFS to the blockchain to query the smart contract that at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
 
