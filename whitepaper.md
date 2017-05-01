@@ -12,20 +12,20 @@ A very simple model of a smart contract can be shown as having a set of function
 </p>
 
 A smart contract function is programmed to produced a determined output for a set of given input parameters.
-The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon network consensus the new state becomes a permanent part of the blockchain.
+The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon consensus the new state becomes a permanent part of the blockchain.
 
-The disadvantage of storing smart contract state information directly on the blockchain and distributed to all nodes are:
+The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) and distributed to all nodes are:
 
-- <b> No privacy.</b> The state information that is stored on the blockchain's merkel tree is visible for all to see. The input parameters sent to the functions are also in clear view for all to see.
-- <b> Cost. </b> Users are limited to the amount of data that can be sent in the transaction and stored on the blockchain due to the gas price for processing and storing that data.
+- <b> No privacy.</b> The state information is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The input parameters for functions sent in transactions to the network are also in clear view for all to see.
+- <b> Cost. </b> Users are limited by the amount gas they are prepared to pay for the data that is sent for processing and storing on the network.
 
 ## Separating State from Functional Behaviour
 
-If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and significantly reduce the cost of data storage. 
+If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and at the same time significantly reduce the cost of data storage. 
 
-To do this we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information during the execution. With Ethereum it is possible to so this with the Solidity programming language which I will show in an example below.
+To do this we need to write the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information. With Ethereum it is possible to so using the Solidity programming language which is shown in an example below.
 
-To use a functional programming model with smart contracts, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
+To use a functional programming pattern when writing smart contracts functions, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
@@ -33,18 +33,27 @@ To use a functional programming model with smart contracts, the previous contrac
 <b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. Another contract transaction occurs that has the input parameter P2 and is combined with S1 to produce the new state S2.
 </p>
 
+```
+function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) returns (uint total, uint tax) {
+      total = total + total * price * quantity;
+      tax = tax + total * taxRate / 100
+  }
+```
+
+<p align="center">
+<b>A pure function</b> - A running balance of total and tax. The state information is total and tax. The input parameters are price, quantity and taxRate.
+</p>
+
 ## The Statechain
 
-To record the state changes of the smart contract and store on a decentralised storage system, IPFS was selected for the following reasons:
+In order to retain the decentralisation properties of a blockchain system, we need to record the smart contract state changes on a decentralised storage system, IPFS was selected for the following reasons:
 - Has a decentralised p2p file sharing algorithm called BitSwap
-- The functionality to store data structures in object form - (IPLD)[https://github.com/ipld/specs]
-- Has good performance for streaming data.
+- The functionality to store data structures in object form - [IPLD](https://github.com/ipld/specs)
+- Has streaming capabilities of large digital media formats (musics, movies etc).
 
-To store the history of the smart contract state changes, a linked list data structure was chosen such that each state change references the previous state. I have called this a <b>statechain</b>.
+To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. I have called this a <b>statechain</b>.
 
-IPFS divides data into sizes of 256KB blocks that are content addressed, which means that the IPFS address is that hash of a block's content. Therefore the statechain has the same useful features of a blockchain, in that, if the content of any block were to change then the hash of the head address would also change. This means that we only need the smart contract to store the IPFS address of the last state change in oder to know that this links to the full untampered history of the contract's state. We follow the link references to resolve the complete statechain.
-
-By storing only the statechain address on the blockchain significantly reduces the contract storage costs to negligible in comparison to storing the complete state history. Also, the statechain address is just the hash of the state history, it does not reveal the actual state information. So now that we have a link between blockchain and the statechain, we can now design a security model for accessing the statechain.
+IPFS divides data into sizes of 256KB blocks that are content addressed, which means that the IPFS address is a hash of a block's content. Therefore we can observce that the statechain has the same useful features of a blockchain, in that, if the content of any block were to change, then the hash of the head address would also change. This useful property means that we only need to store the IPFS address of the last state change on the smart contract in oder to know that the addresses the full untampered history of the contract's state. We can then follow the linked references to resolve the complete statechain.
 
 <p align="center">
 <img src="/images/statechain.png">
@@ -52,27 +61,31 @@ By storing only the statechain address on the blockchain significantly reduces t
 <b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
 </p>
 
+Benefits:
+- <b> Privacy</b> - The statechain address is the result of a one-way hashing function. Determination of the state information from the address alone cannot be calculated. Only by busing IPFS to resolve the content of the address can the state information be known. The Permissioned Blocks security model described below has been designed to protect secure this information.
+- <b> Cost</b> - By storing only the statechain address on the blockchain significantly reduces the storage costs to negligible in comparison to storing the complete state history of the smart contract.
+
 ## IPFS as Decentralised Storage
 
 ## Statechain Security Model
 
-Resolving the statechain requires being authenticated and authorised. Users are authenticated via their blockchain account and authorisation is handled by a capability system granting permission to access the statechain and to execute specified smart contract functions.  
+Resolving the statechain requires both authentication of the request message and verificaton that the requestor is authorised to access the information. 
 
-The capabilites are stored on the smart contract as a hash map of the user's blockchain account.
+- <b> Authentication</b> occurs by harnessing the blockchain's account features. A user proves the authenticity of the message requesting the statechain via a digital signature. The digital signature is produced using a blockchain account that they own.
+- <b> Authorisation</b> occurs through a verification procedure that checks that the requestor is authorised to access the statechain information. The smart contract that holds the address for linking the statechain stores a mapping of blockchain accounts to capabilities. These capabilities specify permission to access the statechain and to execute various smart contract funtions.
+
+
+## Secure Transmisson of State Information
 
 The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
- 
+
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
 <br>
 <b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob decrypts the data using his version of the contract key. 
 </p>
-
-<b>Note:</b> A naive approach would be to encrypt the satatechain without any access control measures in place. This approach is vulnerable to the information, that would be public for all to see, being decrypted by brute force. For the same reason why firewalls are employed in computer networks today, a better approach is to design a security model that limits access to the information being protected.
-
-## Contract Key
-
-The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
 
 ## IPFS Token Authentication
 
