@@ -1,0 +1,129 @@
+# Permissioned Blocks White Paper
+## Introduction
+
+## Smart Contract Model
+
+A very simple model of a smart contract can be shown as having a set of functions with internal state.
+
+<p align="center">
+<img src="/images/smart-contract-model.png">
+<br>
+<b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
+</p>
+
+A smart contract function is programmed to produced a determined output for a set of given input parameters.
+The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon network consensus the new state becomes a permanent part of the blockchain.
+
+The disadvantage of storing smart contract state information directly on the blockchain and distributed to all nodes are:
+
+- <b> No privacy.</b> The state information that is stored on the blockchain's merkel tree is visible for all to see. The input parameters sent to the functions are also in clear view for all to see.
+- <b> Cost. </b> Users are limited to the amount of data that can be sent in the transaction and stored on the blockchain due to the gas price for processing and storing that data.
+
+## Separating State from Functional Behaviour
+
+If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and significantly reduce the cost of data storage. 
+
+To do this we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information during the execution. With Ethereum it is possible to so this with the Solidity programming language which I will show in an example below.
+
+To use a functional programming model with smart contracts, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
+
+<p align="center">
+<img src="/images/smart-contract-using-pure-functions.png">
+<br>
+<b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. Another contract transaction occurs that has the input parameter P2 and is combined with S1 to produce the new state S2.
+</p>
+
+## The Statechain
+
+To record the state changes of the smart contract and store on a decentralised storage system, IPFS was selected for the following reasons:
+- Has a decentralised p2p file sharing algorithm called BitSwap
+- The functionality to store data structures in object form - (IPLD)[https://github.com/ipld/specs]
+- Has good performance for streaming data.
+
+To store the history of the smart contract state changes, a linked list data structure was chosen such that each state change references the previous state. I have called this a <b>statechain</b>.
+
+IPFS divides data into sizes of 256KB blocks that are content addressed, which means that the IPFS address is that hash of a block's content. Therefore the statechain has the same useful features of a blockchain, in that, if the content of any block were to change then the hash of the head address would also change. This means that we only need the smart contract to store the IPFS address of the last state change in oder to know that this links to the full untampered history of the contract's state. We follow the link references to resolve the complete statechain.
+
+By storing only the statechain address on the blockchain significantly reduces the contract storage costs to negligible in comparison to storing the complete state history. Also, the statechain address is just the hash of the state history, it does not reveal the actual state information. So now that we have a link between blockchain and the statechain, we can now design a security model for accessing the statechain.
+
+<p align="center">
+<img src="/images/statechain.png">
+<br>
+<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
+</p>
+
+## IPFS as Decentralised Storage
+
+## Statechain Security Model
+
+Resolving the statechain requires being authenticated and authorised. Users are authenticated via their blockchain account and authorisation is handled by a capability system granting permission to access the statechain and to execute specified smart contract functions.  
+
+The capabilites are stored on the smart contract as a hash map of the user's blockchain account.
+
+The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
+ 
+<p align="center">
+<img src="/images/permissioned-blocks-capabilities.png">
+<br>
+<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob decrypts the data using his version of the contract key. 
+</p>
+
+<b>Note:</b> A naive approach would be to encrypt the satatechain without any access control measures in place. This approach is vulnerable to the information, that would be public for all to see, being decrypted by brute force. For the same reason why firewalls are employed in computer networks today, a better approach is to design a security model that limits access to the information being protected.
+
+## Contract Key
+
+<<<<<<< HEAD
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encryption, is stored with the contract's metadata and the private key that is used for decryption, is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted permission. The boxed key is stored in IPFS using Permissioned Blocks (described below). This means that key can only be access by the authorised user.
+=======
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+>>>>>>> master
+
+## IPFS Token Authentication
+
+The folked version of IPFS uses token authentication during the IPFS Bitswap algorithm to determine whether a request for an IPFS data block is permitted. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contans the issuer, capabilities and nonce information, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+
+## Permissioned Blocks
+
+<<<<<<< HEAD
+IPFS divides and stores data in block sizes of 256 KB. The Permissiond Blocks version of IPFS has extended this functionality to allow tagging of certain blocks as being Permissioned Blocks. Permissioned blocks require the requestor to be authorised in order to receive the block being requested.
+
+Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then authorisation of the user to reques that block needs to occur. 
+=======
+The folked verson of IPFS has been extended to tag certain blocks as being <b>Permissioned Blocks</b>. Permissioned blocks require the authorisation in order to access the requested block.
+
+Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address along with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then the authorisation needs to occur. 
+>>>>>>> master
+
+Authorisation occurs by a remote call from IPFS to the blockchain to query the smart contract that at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
+
+<p align="center">
+<img src="/images/permissioned-block.png">
+<br>
+<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify that Bob is authorised to access this block.
+</p>
+
+When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
+
+If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other  nodes if they have the block. If all other nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as though the block simply does not exist.
+
+## Statechain Validation
+
+Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
+```
+function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
+      balance = balance + balance * commission / 100;
+      tax = tax + balance * 20 / 100
+  }
+```
+Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which is state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function.
+
+1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
+2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain networ, it is a function call made on his own private blockchain node.
+3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
+4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
+5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
+
+## Contract Metadata
+
+## Conclusion
+## Citations
