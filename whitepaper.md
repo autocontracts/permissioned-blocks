@@ -11,20 +11,20 @@ A very simple model of a smart contract can be shown as having a set of function
 <b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
 </p>
 
-A smart contract's state is modified by sending function input parameters as a transaction message to the network. The transaction is validated by network, and upon network consensus, the new contract state becomes a permanent part of the blockchain. The determined output that is a result of this state transition is then obtained by quering the smart contract.
+A smart contract's state is modified by sending function input parameters as a transaction message to the network. The transaction is validated by network, and upon network consensus, the new contract state becomes a permanent part of the blockchain. The deterministic output, that is a result of this state transition, is then obtained by quering the smart contract.
 
 The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) are:
 
-- <b> No privacy.</b> The state information is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The input parameters for functions sent in transactions and distributed to the network are also in clear view for all to see.
-- <b> Cost. </b> Users are limited by the amount gas they are prepared to pay for the data that is sent for processing and storing on the network.
+- <b> No privacy.</b> The state information that is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The function input parameters sent in transactions and distributed to the network are also in clear view for all to see.
+- <b> Cost. </b> In Ethereum there is a cost (gas price) for processing and storing data sent in transaction messages to the network. 
 
-## Separating State from Functional Behaviour
+## Separating State Persistance from Functional Behaviour
 
-If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and at the same time significantly reduce the cost of data storage and in turn enables the ability to store large state information packets.
+If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this state information on an alternative storage system other than to directly on the blockchain. Then we are able to design a security model for ensuring the privacy of the smart contract state information and at the same time significantly reduce the cost of data storage.
 
-To do this we need to write the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information. With Ethereum it is possible to do so using the Solidity programming language shown in the example below.
+To do this we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming, a pure function does not have any side-effects, and persistence of state information by a function is considered a side-effect. Etherum uses the Solidity programming language for writing smart contracts, and as will be shown, it is possible to refactor a smart contract function to not store state information and still have the desired behavioural outcome.
 
-To use a functional programming pattern when writing smart contracts functions, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
+To apply a functional programming pattern to writing smart contracts, we combine the previous contract state with the current input parameters of a function to produce the new contract state.
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
@@ -45,12 +45,12 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 
 ## The Statechain
 
-In order to retain the decentralisation properties of a blockchain system, we need to record the smart contract state changes on a decentralised storage system, IPFS was selected for the following reasons:
-- Has a decentralised p2p file sharing algorithm called BitSwap
-- The functionality to store data structures in object form - [IPLD](https://github.com/ipld/specs)
+In order to retain the blockchain benefits of decentralisation, the external storage for persistence of the state transitions needs to be also decentralised. For the design of Permissioned Blocks, (IPFS)[https://ipfs.io/] was selected for the following reasons:
+- Uses a distributed p2p file sharing algorithm called BitSwap
+- Can store data structures in object form - [IPLD](https://github.com/ipld/specs)
 - Has streaming capabilities of large digital media formats (musics, movies etc).
 
-To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. We will call this a <b>statechain</b>.
+To store the history of the smart contract state changes, a linked list data structure was chosen such that each state change references the previous state. We will call this a <b>statechain</b>.
 
 By harnessing IPFS addressing, the statechain has the same immutability feature of a blockchain. IPFS uses a content addressing scheme such that the address of a block of data is the hash of that data. If we make the links of the statechain to be address references of IPFS blocks, then if any state in the statechain were to be modified, this would cause the calculation of the statechain head address to be different. Resulting in statechain address no longer matching the stored statechain address in the smart contract.
 
@@ -122,7 +122,7 @@ function calculateCommission(uint balance, uint tax, uint commission) returns (u
 Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which is state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function.
 
 1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
-2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain networ, it is a function call made on his own private blockchain node.
+2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
 3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
 4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
 5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
