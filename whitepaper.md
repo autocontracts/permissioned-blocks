@@ -100,13 +100,13 @@ Token authentication is used to prove the authenticity of message requesting sta
 }
 ```
 <p align="center">
-<b>Claims</b> - claims asserted by the requestor in JSON format. 
+<b>Claims</b> - The first section of the token are claims asserted by the requestor in JSON format and then Base64Url encoded. 
 </p>
 
 <p align="center">
 <img src="/images/digital-signing.png">
 <br>
-<b>Digital Signing</b> - The public key of the requestor is used to generate a digital signature of the claims. An Ethereum account is derived by an associated public key.
+<b>Digital Signing</b> - The second section of the token is the digital signature of the claims. The public key of the requestor is used to generate a digital signature of the claims. An Ethereum account is derived by an associated public key.
 </p>
 
 ## Permissioned Blocks Authorisation
