@@ -14,23 +14,23 @@ A very simple model of a smart contract can be shown as having a set of function
 A smart contract function is programmed to produced a determined output for a set of given input parameters.
 The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon consensus the new state becomes a permanent part of the blockchain.
 
-The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) and distributed to all nodes are:
+The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) are:
 
-- <b> No privacy.</b> The state information is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The input parameters for functions sent in transactions to the network are also in clear view for all to see.
+- <b> No privacy.</b> The state information is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The input parameters for functions sent in transactions and distributed to the network are also in clear view for all to see.
 - <b> Cost. </b> Users are limited by the amount gas they are prepared to pay for the data that is sent for processing and storing on the network.
 
 ## Separating State from Functional Behaviour
 
-If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and at the same time significantly reduce the cost of data storage. 
+If we separate the storage of the smart contract's state from its functional behaviour, we can then create a security model for ensuring the privacy of the contract's state information and at the same time significantly reduce the cost of data storage and in turn enables the ability to store large state information packets.
 
-To do this we need to write the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information. With Ethereum it is possible to so using the Solidity programming language which is shown in an example below.
+To do this we need to write the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). In functional programming a pure function by design does not have the side-effect of storing state information. With Ethereum it is possible to do so using the Solidity programming language shown in the example below.
 
 To use a functional programming pattern when writing smart contracts functions, the previous contract state is combined with the current input parameters of a function to produce the new contract state.
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
 <br>
-<b>A Smart Contract with Pure Functions</b> - An initial event, with parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. Another contract transaction occurs that has the input parameter P2 and is combined with S1 to produce the new state S2.
+<b>A Smart Contract with Pure Functions</b> - The parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. Another state change occurs where the input parameter P2 and is combined with S1 to produce the new state S2.
 </p>
 
 ```
@@ -51,7 +51,7 @@ In order to retain the decentralisation properties of a blockchain system, we ne
 - The functionality to store data structures in object form - [IPLD](https://github.com/ipld/specs)
 - Has streaming capabilities of large digital media formats (musics, movies etc).
 
-To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. This we will call a <b>statechain</b>.
+To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. We will call this a <b>statechain</b>.
 
 By harnessing IPFS addressing, the statechain has the same immutability feature of a blockchain. IPFS uses a content addressing scheme such that the address of a block of data is the hash of that data. If we make the links of the statechain to be address references of IPFS blocks then if any state change recorded in the statechain were to be modified then this would mean the statechain address stored in the smart contract would not match.  
 
