@@ -80,26 +80,19 @@ Resolving the statechain requires both authentication and authorisation. Authent
 - <b> Authentication</b> - occurs by harnessing the blockchain's cryptography features. A requestor proves the authenticity of a message,  by attaching a digital signature to the message that they send. The digital signature is produced using the blockchain account of the requestor. And is verified using the public key associated with that blockchain account. This verifies that only the requestor could have created the signature.
 - <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
 
-
-## Secure Transmisson of State Information
-
-The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
-
-The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
-
 <p align="center">
-<img src="/images/permissioned-blocks-capabilities.png">
+<img src="/images/capabilities.png">
 <br>
-<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob decrypts the data using his version of the contract key. 
+<b>Authorisation</b> - The smart contract stores blockchain accounts with permissions to access the statechain and execute functions.
 </p>
 
 ## Permissioned Blocks
 
-The folked verson of IPFS has been extended to tag certain blocks as being <b>Permissioned Blocks</b>. Permissioned blocks require the authorisation in order to access the requested block.
+IPFS has been extended so that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
-Blocks are tagged in the IPFS datastore as being Permissioned Blocks by storing the smart contract's blockchain address along with the block data. When a request is made to retrieve a block from the datastore, if it is tagged, then the authorisation needs to occur. 
+IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks in the IPFS datastore, permissioned blocks are tagged using the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation needs to occur. 
 
-Authorisation occurs by a remote call from IPFS to the blockchain to query the smart contract that at the address specified by the tagged block. The remote procedure then queries the smart contracts capability hash map to verify whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
+Authorisation occurs by a remote call from IPFS to the blockchain that queries the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
 
 <p align="center">
 <img src="/images/permissioned-block.png">
@@ -114,6 +107,18 @@ If the requestor is not authorised, then request is simply ignored. The IPFS DHT
 ## IPFS Token Authentication
 
 The folked version of IPFS uses token authentication during the IPFS Bitswap algorithm to determine whether a request for an IPFS data block is permitted. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contans the issuer, capabilities and nonce information, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+
+## Secure Transmisson of Permissioned Blocks
+
+The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
+
+The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+
+<p align="center">
+<img src="/images/permissioned-blocks-capabilities.png">
+<br>
+<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob decrypts the data using his version of the contract key. 
+</p>
 
 ## Statechain Validation
 
