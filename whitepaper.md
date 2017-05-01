@@ -11,8 +11,7 @@ A very simple model of a smart contract can be shown as having a set of function
 <b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
 </p>
 
-A smart contract function is programmed to produced a determined output for a set of given input parameters.
-The state of a smart contract is modified by sending input parameters of a function in a transaction message to the network. The transaction is validated by network and upon consensus the new state becomes a permanent part of the blockchain.
+A smart contract's state is modified by sending function input parameters as a transaction message to the network. The transaction is validated by network, and upon network consensus, the new contract state becomes a permanent part of the blockchain. The determined output that is a result of this state transition is then obtained by quering the smart contract.
 
 The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) are:
 
