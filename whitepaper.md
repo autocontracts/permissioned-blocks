@@ -99,18 +99,17 @@ Token authentication is used to prove the authenticity of message requesting sta
       IssuedAt: [BlockNumber.TransactionNumber.TransactionHash]
 }
 ```
-
 <p align="center">
-Digitally signed claims by the requestor. 
+<b>Claims</b> - claims asserted by the requestor in JSON format. 
 </p>
 
 <p align="center">
 <img src="/images/digital-signing.png">
 <br>
-<b>Digital Signing</b> - The public key of the requestor is used to generate a digital signature of the claims. The public key derives the Ethereum account of the requestor.
+<b>Digital Signing</b> - The public key of the requestor is used to generate a digital signature of the claims. An Ethereum account is derived by an associated public key.
 </p>
 
-## Permissioned Blocks
+## Permissioned Blocks Authorisation
 
 IPFS has been extended such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
