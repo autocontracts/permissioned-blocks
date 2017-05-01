@@ -88,7 +88,7 @@ Resolving the statechain requires both authentication and authorisation. Authent
 
 ## Token Authentication
 
-Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token ([JWT](https://jwt.io/introduction/)) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a [JSON Web Token](https://jwt.io/introduction/) (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
 
 ```
 {
@@ -99,9 +99,17 @@ Token authentication is used to prove the authenticity of message requesting sta
       IssuedAt: [BlockNumber.TransactionNumber.TransactionHash]
 }
 ```
+
 <p align="center">
-Claims that are digitally signed by the requestor. 
+Digitally signed claims by the requestor. 
 </p>
+
+<p align="center">
+<img src="/images/digital-signing.png">
+<br>
+<b>Digital Signing</b> - The public key of the requestor is used to generate a digital signature of the claims. The public key derives the Ethereum account of the requestor.
+</p>
+
 ## Permissioned Blocks
 
 IPFS has been extended such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
