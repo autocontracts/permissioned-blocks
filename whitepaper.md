@@ -83,14 +83,30 @@ Resolving the statechain requires both authentication and authorisation. Authent
 <p align="center">
 <img src="/images/capabilities.png">
 <br>
-<b>Authorisation</b> - The smart contract stores blockchain accounts with permissions to access the statechain and execute functions.
+<b>Authorisation</b> - The smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
 </p>
 
+## Token Authentication
+
+Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token ([JWT](https://jwt.io/introduction/)) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+
+```
+{
+      State Address: [IPFS Address]
+      Blockchain: [Target Blockchain e.g. ETH]
+      Account: [Blockchain account]
+      Issuer: [Node ID]
+      IssuedAt: [BlockNumber.TransactionNumber.TransactionHash]
+}
+```
+<p align="center">
+Claims that are digitally signed by the requestor. 
+</p>
 ## Permissioned Blocks
 
-IPFS has been extended so that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
+IPFS has been extended such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
-IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks in the IPFS datastore, permissioned blocks are tagged using the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation needs to occur. 
+IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged using the smart contract's blockchain address in the IPFS datastore. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation needs to occur. 
 
 Authorisation occurs by a remote call from IPFS to the blockchain that queries the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
 
@@ -103,10 +119,6 @@ Authorisation occurs by a remote call from IPFS to the blockchain that queries t
 When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
 
 If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will then look elsewhere by querying other  nodes if they have the block. If all other nodes in the network either do not have the block, or the requestor is not authorised, then the block will not be resolved and a timeout will occur. When the timeout occurs, it will appear to the requestor as though the block simply does not exist.
-
-## IPFS Token Authentication
-
-The folked version of IPFS uses token authentication during the IPFS Bitswap algorithm to determine whether a request for an IPFS data block is permitted. The token is similar to a Javascript Web Token (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contans the issuer, capabilities and nonce information, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
 
 ## Secure Transmisson of Permissioned Blocks
 
