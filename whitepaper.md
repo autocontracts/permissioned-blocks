@@ -113,14 +113,14 @@ Token authentication is used to prove the authenticity of message requesting sta
 
 IPFS has been extended such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
-IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged using the smart contract's blockchain address in the IPFS datastore. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation needs to occur. 
+IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation needs to occur. 
 
-Authorisation occurs by a remote call from IPFS to the blockchain that queries the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
+Authorisation occurs by a remote call from IPFS to the blockchain, querying the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
 
 <p align="center">
 <img src="/images/permissioned-block.png">
 <br>
-<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify that Bob is authorised to access this block.
+<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify if Bob is authorised to access this block.
 </p>
 
 When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
