@@ -41,7 +41,7 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 ```
 
 <p align="center">
-<b>A pure function</b> - A running balance of total and tax. The state information is total and tax. The input parameters are price, quantity and taxRate.
+<b>Solidity pure function</b> - A function that calculates the running balance of total and tax. The state information is total and tax. The input parameters are price, quantity and taxRate.
 </p>
 
 ## The Statechain
@@ -51,9 +51,11 @@ In order to retain the decentralisation properties of a blockchain system, we ne
 - The functionality to store data structures in object form - [IPLD](https://github.com/ipld/specs)
 - Has streaming capabilities of large digital media formats (musics, movies etc).
 
-To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. I have called this a <b>statechain</b>.
+To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. This we will call a <b>statechain</b>.
 
-IPFS divides data into sizes of 256KB blocks that are content addressed, which means that the IPFS address is a hash of a block's content. Therefore we can observce that the statechain has the same useful features of a blockchain, in that, if the content of any block were to change, then the hash of the head address would also change. This useful property means that we only need to store the IPFS address of the last state change on the smart contract in oder to know that the addresses the full untampered history of the contract's state. We can then follow the linked references to resolve the complete statechain.
+By harnessing IPFS addressing, the statechain has the same immutability feature of a blockchain. IPFS uses a content addressing scheme such that the address of a block of data is the hash of that data. If we make the links of the statechain to be address references of IPFS blocks then if any state change recorded in the statechain were to be modified then this would mean the statechain address stored in the smart contract would not match.  
+
+This useful property means that we only need to store the IPFS address of the last state change on the smart contract in oder to know that the addresses the full untampered history of the contract's state. We can then follow the linked references to resolve the complete statechain.
 
 <p align="center">
 <img src="/images/statechain.png">
@@ -62,17 +64,17 @@ IPFS divides data into sizes of 256KB blocks that are content addressed, which m
 </p>
 
 Benefits:
-- <b> Privacy</b> - The statechain address is the result of a one-way hashing function. Determination of the state information from the address alone cannot be calculated. Only by busing IPFS to resolve the content of the address can the state information be known. The Permissioned Blocks security model described below has been designed to protect secure this information.
-- <b> Cost</b> - By storing only the statechain address on the blockchain significantly reduces the storage costs to negligible in comparison to storing the complete state history of the smart contract.
+- <b> Privacy</b> - The statechain address is the result of a one-way hashing function of the state information. Determination of the state information from the address alone cannot be calculated. Only by resolving the content of the address using the IPFS protocol can the state information be known. The Permissioned Blocks security model described below, extends the IPFS protocol with a security layer to protect resolving IPFS addresses by unauthorised actors.
+- <b> Cost</b> - By storing only the statechain address on the blockchain significantly reduces the storage costs to negligible in comparison to storing the complete state history of the smart contract in the blockchain.
 
 ## IPFS as Decentralised Storage
 
 ## Statechain Security Model
 
-Resolving the statechain requires both authentication of the request message and verificaton that the requestor is authorised to access the information. 
+Resolving the statechain requires both authentication and authorisation. Authentication that the request message was sent by the requestor and verificaton that the requestor is authorised to access the statechain. 
 
-- <b> Authentication</b> occurs by harnessing the blockchain's account features. A user proves the authenticity of the message requesting the statechain via a digital signature. The digital signature is produced using a blockchain account that they own.
-- <b> Authorisation</b> occurs through a verification procedure that checks that the requestor is authorised to access the statechain information. The smart contract that holds the address for linking the statechain stores a mapping of blockchain accounts to capabilities. These capabilities specify permission to access the statechain and to execute various smart contract funtions.
+- <b> Authentication</b> - occurs by harnessing the blockchain's account features. A requestor proves the authenticity of the message being sent via a digital signature. The digital signature is produced using a blockchain account that they own.
+- <b> Authorisation</b> - occurs through a verification that the requestor is authorised to access the statechain information. This is performed by checking with the smart contract that is linked to the statechain that the requestor is authorised. The smart contract stores a mapping of blockchain accounts to capabilities. These capabilities specify permissions to access the statechain and to execute various smart contract functions.
 
 
 ## Secure Transmisson of State Information
