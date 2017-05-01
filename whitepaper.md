@@ -35,7 +35,7 @@ To use a functional programming pattern when writing smart contracts functions, 
 
 ```
 function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) returns (uint total, uint tax) {
-      total = total + total * price * quantity;
+      total = total + price * quantity;
       tax = tax + total * taxRate / 100
   }
 ```
