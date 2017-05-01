@@ -3,9 +3,9 @@
 
 ## Smart Contract Model
 
-A smart contract's state is modified by sending function input parameters as a transaction message to the network. The transaction is validated by network, and upon network consensus, the new contract state becomes a permanent part of the blockchain. The deterministic output, that is a result of this state transition, is then obtained by quering the smart contract.
+We can model a smart contract as a state machine. A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
 
-We can model the smart contract as a state machine that has a set of functions that modify the internal state and produce deterministic outputs. 
+A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus, the new contract state becomes a permanent part of the blockchain. The output of the function is obtained by any node in the network by quering the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -13,26 +13,26 @@ We can model the smart contract as a state machine that has a set of functions t
 <b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
 </p>
 
-The disadvantage of storing smart contract state information directly on a blockchain (such as Ethereum) are:
+The disadvantage of storing smart contract state information directly on a blockchain (such as in Ethereum) are:
 
-- <b> No privacy.</b> The state information that is stored on the blockchain's internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) is visible for all to see. The function input parameters are distributed as transactions to the network and these are also in clear view for all to see.
-- <b> Cost. </b> In Ethereum there is a cost (gas price) for processing and storing data sent in transaction messages to the network. 
+- <b> No privacy.</b> The internal storage (Ethereum - a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree)) that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read.
+- <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages. 
 
 ## Separating State Persistance from Functional Behaviour
 
-If we separate the action of storing the smart contract's state from its functional behaviour, we can then store the state information on an alternative storage system other than to directly on the blockchain. We are then able to design a security model for ensuring the privacy of the smart contract state and at the same time significantly reduce the cost of data storage.
+If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
 
-To achieve this desired outcome, we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). A pure function by definition in functional programming does not have any side-effects. And the persistence of state information is considered a side-effect. 
+To achieve this desired outcome, we need to program the smart contract functions as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). A pure function by definition in functional programming, does not have any side-effects. And the persistence of state information in functional programming is considered a side-effect. 
 
-To apply a functional programming pattern to writing smart contracts, we combine the previous contract state with the current input parameters of a function to produce the new contract state.
+To apply a functional programming pattern to writing smart contracts, we combine the previous contract state, with the current input parameters of a function, to produce the new contract state.
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
 <br>
-<b>A Smart Contract with Pure Functions</b> - The parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. Another state change occurs where the input parameter P2 and is combined with S1 to produce the new state S2.
+<b>A Smart Contract with Pure Functions</b> - The parameter P1 is combined with the initial contract state of S0 to produce the new contract state S1. An another state change occurs, where the input parameter P2 is combined with S1, to produce the new state S2.
 </p>
 
-Etherum uses the Solidity programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure funcation and not persist state information as in following example:
+Ethereum uses the Solidity programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure funcation, and thus not persist state information. This is as shown in following example:
 
 ```
 function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) returns (uint total, uint tax) {
@@ -42,42 +42,43 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 ```
 
 <p align="center">
-<b>Solidity pure function</b> - A function that calculates the running balance of total and tax. The state information is total and tax. The input parameters are price, quantity and taxRate.
+<b>Solidity pure function</b> - A function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information is the varialbles <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
 </p>
 
 ## The Statechain
 
-In order to retain the blockchain benefits of decentralisation, the external storage for persisting state transitions needs to be also decentralised. For the design of Permissioned Blocks, [IPFS](https://ipfs.io/) was selected for the following reasons:
+In order to retain the benefits of decentralisation, the alternative storage for persisting the state changes needs to be also decentralised. For this and the following reasons, [IPFS](https://ipfs.io/) was selected:
 - Uses a distributed p2p file sharing algorithm called BitSwap.
+- Uses a content addressing scheme for resolving data.
 - Can store data structures in object form - [IPLD](https://github.com/ipld/specs).
-- Has streaming capabilities of large digital media formats (musics, movies etc).
+- Can serve large digital content (books, music, movies etc).
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state. We will call this a <b>statechain</b>.
 
-IPFS uses a content addressing scheme. This means that the address of a block of data is the hash of that data. By harnessing the IPFS addressing scheme, the statechain has the same immutability features of a blockchain. For example, if the statechain is linked together using IPFS blocks, such that each block links the next using an IPFS address, then any modification of a block would cause the calculation of the statechain's head address to be different. This would result in statechain head address no longer matching the stored statechain address in the smart contract.
+IPFS uses a content addressing scheme for resolving data. This means that the address of a block of data is the hash of that data. By harnessing the IPFS addressing scheme, the statechain has the same immutability features of a blockchain. For example, if the statechain is linked together, such that each block links the next using an IPFS address, then any modification of a block would cause the calculation of the statechain's head address to be different. This would result in statechain head address no longer matching the stored statechain address in the smart contract.
 
 <p align="center">
 <img src="/images/statechain.png">
 <br>
-<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the latest state change IPFS address.
+<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the IPFS address of the latest state change.
 </p>
 
-This useful property means that we need only to store the address of the last state change on the smart contract, and with this, we know that we have the full untampered history of the contract's state. We can then follow the linked references to resolve the complete statechain.
+This useful property means that we need only to store the address of the lastest state change on the smart contract, and with this, we know that we have the full untampered history. We can then follow the linked references to resolve the complete statechain.
 
 Benefits:
-- <b> Privacy</b> - The statechain address is the result of a one-way hashing function of the state information. Determination of the state information cannot be calculated from the address alone. Only by resolving the content using the IPFS protocol can the state information be known. 
-- <b> Cost</b> - By storing only the statechain address on the blockchain, significantly reduces the storage costs to negligible, in comparison to storing the complete state history on the blockchain.
+- <b> Privacy</b> - The statechain address is the result of a one-way hashing function of the state information. Determination of the state information cannot be calculated from the address alone. Only by resolving the content using the IPFS protocol, can the state information be known. 
+- <b> Cost</b> - By storing the statechain address on the blockchain, significantly reduces the storage costs to negligible, in comparison to storing the complete state history on the blockchain.
 
 ## IPFS as Decentralised Storage
 
 ## Statechain Security Model
 
-Permissioned Blocks extends the IPFS protocol with a security layer to protect the statechain being resolved by unauthorised actors.
+Permissioned Blocks extends the IPFS protocol with a security layer that protects statechain from unauthorised access.
 
-Resolving the statechain requires both authentication and authorisation. Authentication that the request message was sent by the true requestor, and verificaton that the requestor is authorised to access the statechain. 
+Resolving the statechain requires both authentication and authorisation. Authentication of a requestor, and verificaton that they are authorised to access the statechain. 
 
-- <b> Authentication</b> - occurs by harnessing the blockchain's account features. A requestor proves the authenticity of a message sent by attaching a digital signature to the message. The digital signature is produced using a blockchain account. This is verified using the public key of the requestor's blockchain account to check that only they could have created the signature.
-- <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to capabilities. These capabilities are permissions to access the statechain and to execute smart contract functions.
+- <b> Authentication</b> - occurs by harnessing the blockchain's cryptography features. A requestor proves the authenticity of a message,  by attaching a digital signature to the message that they send. The digital signature is produced using the blockchain account of the requestor. And is verified using the public key associated with that blockchain account. This verifies that only the requestor could have created the signature.
+- <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
 
 
 ## Secure Transmisson of State Information
