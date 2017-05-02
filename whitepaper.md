@@ -82,7 +82,7 @@ Resolving the statechain requires both authentication and authorisation of the r
 - <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
 
 <p align="center">
-<img src="/images/authentication_authorisation..png">
+<img src="/images/authentication_authorisation.png">
 <br>
 <b>Authentication & Authorisation</b> - The smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
 </p>
@@ -123,7 +123,7 @@ Authorisation occurs by a remote call from IPFS to the blockchain, querying the 
 <p align="center">
 <img src="/images/permissioned-block-request.png">
 <br>
-<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify if Bob is authorised to access this block.
+<b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS instance to Alice's IPFS instance for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's IPFS instance makes a remote call to her blockchain instance to verify if Bob is authorised to access this block.
 </p>
 
 When the requestor receives the IPFS block, it is also tagged in their datastore as a Permissioned Block so that the same authorisation logic is used when others make a request for this block.
