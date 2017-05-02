@@ -82,9 +82,9 @@ Resolving the statechain requires both authentication and authorisation of the r
 - <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
 
 <p align="center">
-<img src="/images/capabilities.png">
+<img src="/images/authentication_authorisation..png">
 <br>
-<b>Authorisation</b> - The smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
+<b>Authentication & Authorisation</b> - The smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
 </p>
 
 ## Token Authentication
