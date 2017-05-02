@@ -132,15 +132,17 @@ If the requestor is not authorised, then request is simply ignored. The IPFS DHT
 
 ## Secure Transmisson of Permissioned Blocks
 
-The statechain is encrypted using a shared contract key. The contract key is boxed using the public key of the person being granted a capability and stored at an IPFS address that only they can access.
+The IPFS bitswap channel that is used for transmission of the state information between nodes must be secured in order to retain the confidentiality of the smart contract. To secure the channel, all communications are encrypted, such that only authorised blockchain accounts can decrypt the information.
 
-The contract key is an asymmetric key used for encrypting and decrypting the statechain. The public key that is used for encrypting is stored with the contract's metadata and the private key used for decrypting is shared only with those that are granted access to the statechain. Sharing of the private key occurs by a method of boxing, that is, encrypting the contract key using the public key of the person being granted access. The boxed key is then stored at an IPFS address that can only be accessed by using a signed token.
+Communication of the statechain information is encrypted using a shared contract key. The contract key an asymmetric key that is generated when the smart contract is deployed to the blockchain network. The key has a public key for encryption of communications and a private key for decryption. The public key is stored with the smart contract's metadata and the private key is shared only with those that are granted access to the statechain. 
 
 <p align="center">
 <img src="/images/permissioned-blocks-capabilities.png">
 <br>
-<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the modified IPFS Bit Swap protocol for Permissioned Blocks. Before sending, Alice's device authenticates Bob's identity and verifies if he is authorised to receive the data. Upon authorisation the data is encrypted using Alice's contract key and sent to Bob. Bob decrypts the data using his version of the contract key. 
+<b>Permissioned Blocks</b> - Bob requests state S2 from Alice via the IPFS Bit Swap protocol. Alice verifies that Bob has authorisation, encrypts S2 using a share key, and sends the data. Bob receives the data and decrypts using his version of the shared contract key. 
 </p>
+
+Sharing of the contract's private key occurs by a method of boxing. For example, Alice is owner of a smart contract and wishes to grant Bob permission to the access state information of the contract. Bob generates an Ethereum account and gives Alice the public key for that account. Alice encrypts the contract's private key using Bob's public key to create a boxed key that only Bob can decrypt. Alice stores Bob's boxed key on her IPFS instance, tagging each IPFS block with the smart contract address, such that they become Permissioned Blocks. Alice then updates the smart contract, adding Bob's account and the address of the boxed key. Bob queries the smart contract to retrieve the IPFS address of the box key, and then makes an IPFS request to resolve the key. Upon receiving the boxed key, he decrypts the message using his private key to retrieve the contract's private key.  
 
 ## Statechain Validation
 
