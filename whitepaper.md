@@ -84,7 +84,7 @@ Resolving the statechain requires both authentication and authorisation of the r
 <p align="center">
 <img src="/images/authentication_authorisation.png">
 <br>
-<b>Authentication & Authorisation</b> - The smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
+<b>Authentication & Authorisation</b> - A signed request authenticates the requestor and the smart contract stores blockchain accounts that have permission to access the statechain and execute its functions.
 </p>
 
 ## Token Authentication
