@@ -121,7 +121,7 @@ IPFS divides and stores data in block sizes of 256KB. To set apart permissioned 
 Authorisation occurs by a remote call from IPFS to the blockchain, querying the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the block is sent to the requestor. 
 
 <p align="center">
-<img src="/images/permissioned-block.png">
+<img src="/images/permissioned-block-request.png">
 <br>
 <b>IPFS Bitswap Authorisation</b> - A request is made from Bob's IPFS node to Alice's IPFS node for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's node makes a secure remote call to her instance of the blockchain to verify if Bob is authorised to access this block.
 </p>
