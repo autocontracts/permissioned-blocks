@@ -70,6 +70,23 @@ Benefits:
 - <b> Privacy</b> - The statechain address stored in the smart contract, is the result of a one-way hashing function of the statechain information. Determination of the statechain information cannot be calculated from the address alone. Only by resolving the content using the IPFS protocol, can the statechain information be known. 
 - <b> Cost</b> - By storing the statechain address on the blockchain, significantly reduces the storage costs to negligible, in comparison to storing the complete state history on the blockchain.
 
+## Statechain Validation
+
+Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
+```
+function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
+      balance = balance + balance * commission / 100;
+      tax = tax + balance * 20 / 100
+  }
+```
+Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which is state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function.
+
+1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
+2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
+3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
+4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
+5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
+
 ## IPFS as Decentralised Storage
 
 ## Statechain Security Model
@@ -145,23 +162,6 @@ Communication of the statechain information is encrypted using a shared contract
 Sharing of the contract's private key occurs by a method of boxing. For example, Alice is owner of a smart contract and wishes to grant Bob permission to the access state information of the contract. Bob generates an Ethereum account and gives Alice the public key for that account. Alice encrypts the contract's private key using Bob's public key to create a boxed key that only Bob can decrypt. Alice stores Bob's boxed key on her IPFS instance, tagging each IPFS block with the smart contract address, such that they become Permissioned Blocks. Alice then updates the smart contract, adding Bob's account and the address of the boxed key. Bob queries the smart contract to retrieve the IPFS address of the box key, and then makes an IPFS request to resolve the key. Upon receiving the boxed key, he decrypts the message using his private key to retrieve the contract's private key.  
 
 Alice can revoke access to Bob by generating a new contract key and encrypting all state changes going forward with this key. Alice would then update the smart contract by removing Bob's capabilities and updating any other users that may have been granted permissions, with the address of the new contract key.
-
-## Statechain Validation
-
-Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
-```
-function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
-      balance = balance + balance * commission / 100;
-      tax = tax + balance * 20 / 100
-  }
-```
-Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which is state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function.
-
-1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
-2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
-3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
-4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
-5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ## Contract Metadata
 
