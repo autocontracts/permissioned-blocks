@@ -144,6 +144,8 @@ Communication of the statechain information is encrypted using a shared contract
 
 Sharing of the contract's private key occurs by a method of boxing. For example, Alice is owner of a smart contract and wishes to grant Bob permission to the access state information of the contract. Bob generates an Ethereum account and gives Alice the public key for that account. Alice encrypts the contract's private key using Bob's public key to create a boxed key that only Bob can decrypt. Alice stores Bob's boxed key on her IPFS instance, tagging each IPFS block with the smart contract address, such that they become Permissioned Blocks. Alice then updates the smart contract, adding Bob's account and the address of the boxed key. Bob queries the smart contract to retrieve the IPFS address of the box key, and then makes an IPFS request to resolve the key. Upon receiving the boxed key, he decrypts the message using his private key to retrieve the contract's private key.  
 
+Alice can revoke access to Bob by generating a new contract key and encrypting all state changes going forward with this key. Alice would then update the smart contract by removing Bob's capabilities and updating any other users that may have been granted permissions, with the address of the new contract key.
+
 ## Statechain Validation
 
 Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
