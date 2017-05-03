@@ -51,7 +51,6 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this and the following reasons, [IPFS](https://ipfs.io/) was selected:
 - Uses a distributed p2p file sharing algorithm called BitSwap.
 - Uses a content addressing scheme for resolving data.
-- Can store data structures in object form - [IPLD](https://github.com/ipld/specs).
 - Can serve large digital content (books, music, movies etc).
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
@@ -72,22 +71,28 @@ Benefits:
 
 ## Statechain Validation
 
-Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
+Validation of the statechain may need to be required in some user cases if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect ```a + b = c```, but a malicious actor could claim to have executed the function and updates the statechain with the result as ```a + b = z```. In this case validation by an oracle service should be employed to endorse the state changes. 
+
+The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
 ```
 function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
       balance = balance + balance * commission / 100;
       tax = tax + balance * 20 / 100
   }
 ```
-Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which is state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why they are return by the function.
+Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which are state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why we see that they are return by the function.
 
 1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
 2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
 3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
-4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
-5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
+4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <b>Transaction</b> to the blockchain. 
+5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS an verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
-## IPFS as Decentralised Storage
+### Simple Contracts - No validation required
+There is are use cases when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is to reference to digital content (e.g. a pdf file) that the owner of the contract would like to publish. 
+
+### Multiple statechains
+A smart contract could also be configured in a hybrid to have two or more statechains. For example, there may be one statechain that does not require validation, and other statechains that require validation but by different oracles.
 
 ## Statechain Security Model
 
