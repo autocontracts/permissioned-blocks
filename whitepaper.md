@@ -72,6 +72,29 @@ Benefits:
 
 ## Statechain Validation
 
+We can divide smart contract functions into simple and complex:
+- <b> Simple</b> - The function is a 'setter function', that is solely to update state information without any calculations and is only executed by the owner of the smart contract. 
+
+```
+function setTerms(string _terms) {
+   if ( msg.sender != owner ) {
+      throw;
+   }
+
+   terms = _terms;
+}
+```
+<p align="center"><b>A simple function</b></p>
+
+- <b> Complex</b> - The function has statements that calculate the change in state information. 
+
+```
+function calculate(uint a, uint b) {
+   c = a + b
+}
+```
+<p align="center"><b>A complex function</b></p>
+
 Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
 ```
 function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
