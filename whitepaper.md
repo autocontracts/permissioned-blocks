@@ -51,7 +51,6 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this and the following reasons, [IPFS](https://ipfs.io/) was selected:
 - Uses a distributed p2p file sharing algorithm called BitSwap.
 - Uses a content addressing scheme for resolving data.
-- Can store data structures in object form - [IPLD](https://github.com/ipld/specs).
 - Can serve large digital content (books, music, movies etc).
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
