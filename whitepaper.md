@@ -16,7 +16,15 @@ A smart contract's state is modified by sending function input parameters as a t
 The disadvantage of storing the smart contract state information directly on a blockchain (such as in Ethereum) are:
 
 - <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
-- <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages. 
+- <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
+
+## Permissioned Based Distributed File Sharing
+<p align="center">
+<img src="/images/IPFS-file-sharing-3.png">
+<br>
+<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content.
+</p>
+
 
 ## Separating State Persistance from Functional Behaviour
 
@@ -71,7 +79,11 @@ Benefits:
 
 ## Statechain Validation
 
-Validation of the statechain may need to be required in some user cases if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect ```a + b = c```, but a malicious actor could claim to have executed the function and updates the statechain with the result as ```a + b = z```. In this case validation by an oracle service should be employed to endorse the state changes. 
+Validation of the statechain may need to be required in some user cases if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect 
+```a + b = c```, 
+but a malicious actor could claim to have executed the function and updates the statechain with the result as 
+```a + b = z```. 
+In this case validation by an oracle service should be employed to endorse the state changes. 
 
 The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
 ```
@@ -92,7 +104,7 @@ Using a functional programming pattern, this function has parameters <i>balance<
 There is are use cases when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is to reference to digital content (e.g. a pdf file) that the owner of the contract would like to publish. 
 
 ### Multiple statechains
-A smart contract could also be configured in a hybrid to have two or more statechains. For example, there may be one statechain that does not require validation, and other statechains that require validation but by different oracles.
+A smart contract could also be configured in a hybrid to have two or more statechains. For example, there may be one statechain that does not require validation, and other statechains that require validation by multiple oracles.
 
 ## Statechain Security Model
 
