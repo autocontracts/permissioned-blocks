@@ -19,10 +19,23 @@ The disadvantage of storing the smart contract state information directly on a b
 - <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
 
 ## Permissioned Based Distributed File Sharing
+
+<p align="center">
+<img src="/images/IPFS-file-sharing-1.png">
+<br>
+<b>Stage 1</b> - Node A owns contract and digital content.
+</p>
+
+<p align="center">
+<img src="/images/IPFS-file-sharing-2.png">
+<br>
+<b>Stage 2</b> - Node B is authorised. Node A shares digital content with Node B.
+</p>
+
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content.
+<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content with Node D.
 </p>
 
 
