@@ -90,9 +90,10 @@ Using a functional programming pattern, this function has parameters <i>balance<
 5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ### Simple Contracts - No validation required
-There is a use case when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is a reference to digital content that the owner of the contract would like to publish. 
+There is are use cases when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is to reference to digital content (e.g. a pdf file) that the owner of the contract would like to publish. 
 
-## IPFS as Decentralised Storage
+### Multiple statechains
+A smart contract could also be configured in a hybrid to have two or more statechains. For example, there may be one statechain that does not require validation, and other statechains that require validation but by different oracles.
 
 ## Statechain Security Model
 
