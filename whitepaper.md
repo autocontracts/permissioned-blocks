@@ -1,6 +1,28 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
+## Permissioned Based File Sharing
+
+<p align="center">
+<img src="/images/IPFS-file-sharing-1.png">
+<br>
+<b>Stage 1</b> - Node A owns contract and digital content.
+</p>
+<br>
+<p align="center">
+<img src="/images/IPFS-file-sharing-2.png">
+<br>
+<b>Stage 2</b> - Node B is authorised. Node A shares digital content with Node B.
+</p>
+<br>
+<p align="center">
+<img src="/images/IPFS-file-sharing-3.png">
+<br>
+<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content with Node D.
+</p>
+
+
+
 ## Smart Contract Model
 
 We can model a smart contract as a [state machine](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
@@ -17,27 +39,6 @@ The disadvantage of storing the smart contract state information directly on a b
 
 - <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
 - <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
-
-## Permissioned Based Distributed File Sharing
-
-<p align="center">
-<img src="/images/IPFS-file-sharing-1.png">
-<br>
-<b>Stage 1</b> - Node A owns contract and digital content.
-</p>
-
-<p align="center">
-<img src="/images/IPFS-file-sharing-2.png">
-<br>
-<b>Stage 2</b> - Node B is authorised. Node A shares digital content with Node B.
-</p>
-
-<p align="center">
-<img src="/images/IPFS-file-sharing-3.png">
-<br>
-<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content with Node D.
-</p>
-
 
 ## Separating State Persistance from Functional Behaviour
 
