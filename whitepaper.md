@@ -72,30 +72,9 @@ Benefits:
 
 ## Statechain Validation
 
-We can divide smart contract functions into simple and complex:
-- <b> Simple</b> - The function is a 'setter function', that is solely to update state information without any calculations and is only executed by the owner of the smart contract. 
+Validation of the statechain may need to be required if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect a + b = c, but when a malicious actor could claim to have executed the function and records the result as a + b = z on the statechain. In this case validation by an oracle service should be employed to verify each function execution. 
 
-```
-function setTerms(string _terms) {
-   if ( msg.sender != owner ) {
-      throw;
-   }
-
-   terms = _terms;
-}
-```
-<p align="center"><b>A simple function</b></p>
-
-- <b> Complex</b> - The function has statements that calculate the change in state information. 
-
-```
-function calculate(uint a, uint b) {
-   c = a + b
-}
-```
-<p align="center"><b>A complex function</b></p>
-
-Since state information is not stored in the smart contract, validation is required in order to verify any changes recorded on the statechain are valid. In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
+In order to achieve this, an oracle called an Endorser is used to endorse state changes. The following simplified algorithm describes the proposing and endorsing behaviour. Consider the following solidity function:
 ```
 function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
       balance = balance + balance * commission / 100;
@@ -109,6 +88,9 @@ Using a functional programming pattern, this function has parameters <i>balance<
 3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
 4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <i>Transaction</i> to the blockchain. 
 5. The Endorser then calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob used to verify that the IPFS address stored in the <i>proposed_state</i> member variable is correct. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
+
+### Simple Contracts - No validation required
+There is a use case when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is a reference to digital content that the owner of the contract would like to publish. 
 
 ## IPFS as Decentralised Storage
 
