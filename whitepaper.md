@@ -183,7 +183,7 @@ In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the bloc
 
 ## Permissioned Blocks Authorisation
 
-IPFS has been extended such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
+The Permissioned Blocks design extends IPFS such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
 IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation need to occur. 
 
