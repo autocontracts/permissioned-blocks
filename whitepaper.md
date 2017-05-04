@@ -25,22 +25,20 @@ For example, an author an e-book who normally sells their work using a centralis
 <p align="center">
 <img src="/images/IPFS-file-sharing-1.png">
 <br>
-<b>Step 1</b> - Node A creates a smart contract and adds digital content to their node.
+<b>Step 1</b> - Node A creates a smart contract that controls access to digital content on their node.
 </p>
 <br>
 <p align="center">
 <img src="/images/IPFS-file-sharing-2.png">
 <br>
-<b>Step 2</b> - In exchange for a token, Node B is granted permission to access content. Node A shares digital content with Node B.
+<b>Step 2</b> - In exchange for a token, Node B is granted access. Node A then shares the digital content with Node B.
 </p>
 <br>
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Step 3</b> - In exchange for a token, Node D is granted permission to access content. Node A & Node B share digital content with Node D.
+<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D.
 </p>
-
-
 
 ## Smart Contract Model
 
