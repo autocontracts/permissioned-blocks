@@ -9,7 +9,7 @@ The Permissioned Blocks technology can be divided into two categories for securi
 
 Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent), are permissionless protocols. By design, there is no central control governing how content is shared between nodes in the network. However, the combination of peer-to-peer file sharing and smart contract technology opens the possibility for new products and services to be developed. 
 
-Using smart contract technology, we can add another integation layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. Benefits such as:
+Using smart contract technology, we can add another integration layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. Benefits such as:
 - No dependency on a central point of control that may charge service fees.
 - Higher data throughput as demand increases.
 - It is a low cost, self-sustaining network. No need for server farms.
@@ -20,7 +20,7 @@ Using smart contract technology, we can add another integation layer on top of p
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, an author an e-book who normally sells their work using a centralised online publisher could instead use a peer-to-peer network protocol. They would create a smart contract that distributions their e-book in exchange for crypto-currency. The minimum infrustructure required would be a laptop that can connect to the network. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using online publishers.
+For example, an author an e-book who normally sells their work using a centralised online publisher could instead use a peer-to-peer network protocol. They would create a smart contract that distributions their e-book in exchange for crypto-currency. The minimum infrastructure required would be a laptop that can connect to the network. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using online publishers.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -48,7 +48,7 @@ For example, an author an e-book who normally sells their work using a centralis
 
 We can model a smart contract as a [state machine](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
 
-A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus, the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by quering the smart contract.
+A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus, the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -61,7 +61,7 @@ The disadvantage of storing the smart contract state information directly on a b
 - <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
 - <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
 
-## Separating State Persistance from Functional Behaviour
+## Separating State Persistence from Functional Behaviour
 
 If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
 
@@ -106,7 +106,7 @@ To store the history of the smart contract state changes, a linked list data str
 
 IPFS uses a content addressing scheme for resolving data. This means that the address of a block of data is the hash of that data. By harnessing the IPFS addressing scheme, the statechain has the same immutability features of a blockchain. For example, if the statechain is linked together, such that each block links to the next using an IPFS address, then any modification to a block would cause the hash calculation for the statechain's head address to be different. This would result in statechain head address no longer matching the stored statechain address in the smart contract.
 
-This useful property means that we need only to store the address of the lastest state change in the smart contract to be able to follow the linked references and resolve the complete statechain, knowing that we have the full untampered history of the smart contract's state.
+This useful property means that we need only to store the address of the latest state change in the smart contract to be able to follow the linked references and resolve the complete statechain, knowing that we have the full untampered history of the smart contract's state.
 
 Benefits:
 - <b> Privacy</b> - The statechain address stored in the smart contract, is the result of a one-way hashing function of the statechain information. Determination of the statechain information cannot be calculated from the address alone. Only by resolving the content using the IPFS protocol, can the statechain information be known. 
@@ -127,16 +127,16 @@ function calculateCommission(uint balance, uint tax, uint commission) returns (u
       tax = tax + balance * 20 / 100
   }
 ```
-Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which are state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why we see that they are return by the function.
+Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which are state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why we see that they are returned by the function.
 
 1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
 2. He makes a <b>Call</b> to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
 3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
 4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <b>Transaction</b> to the blockchain. 
-5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS an verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
+5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS and verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ### Simple Contracts - No validation required
-Validation of the statechain is not necessary for use cases where the calculation of state change information doe not occuer. That is in scenarios where the smart contract does not have any functions related to the statechain. This may be where the statechain only holds digital content (e.g. a pdf file) that is linked to the smart contract. The owner creates the smart contract in order to control the behaviour of how the digital content is accessed and distributed.
+Validation of the statechain is not necessary for use cases where the calculation of state change information doe not occur. That is in scenarios where the smart contract does not have any functions related to the statechain. This may be where the statechain only holds digital content (e.g. a pdf file) that is linked to the smart contract. The owner creates the smart contract in order to control the behaviour of how the digital content is accessed and distributed.
 
 ### Multiple statechains
 A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain no requiring validation, and other statechains requiring validation by multiple oracles.
@@ -145,10 +145,10 @@ A smart contract could be configured with a hybrid of two or more statechains. F
 
 Permissioned Blocks extends the IPFS protocol with a security layer that protects the statechain from unauthorised access.
 
-Resolving the statechain requires both authentication and authorisation of the requestor. That is, authentication that a message sent by a requstor for requesting statecahin information is authentic, and verificaton that the requestor is authorised to access the statechain. 
+Resolving the statechain requires both authentication and authorisation of the requestor. That is, authentication that a message sent by a requester for requesting statechain information is authentic, and verification that the requestor is authorised to access the statechain. 
 
 - <b> Authentication</b> - occurs by harnessing the blockchain's cryptography features. A requestor proves the authenticity of a message  by attaching a digital signature to the message being sent. The digital signature is produced and validated using the requestor's blockchain.
-- <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by quering the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
+- <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by querying the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
 
 <p align="center">
 <img src="/images/authentication_authorisation.png">
@@ -199,7 +199,7 @@ If the requestor successfully receives the IPFS block, it is likewise tagged in 
 
 If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will need to look elsewhere by querying other  nodes if they have the block. The routing system will continue to search for the requested block until a timeout occurs on the requestor's node. When the timeout occurs, this will signal to the requestor that the block cannot be resolved either because the block does not exist or they do not have permission to access the block.
 
-## Secure Transmisson Channel
+## A Secure Transmission Channel
 
 The IPFS bitswap channel used for transmission of blocks between nodes must be secured in order to retain the confidentiality of the smart contract's state information. To secure the channel, all communications are encrypted, such that only authorised blockchain accounts can decrypt the information.
 
