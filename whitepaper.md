@@ -1,9 +1,9 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-The Permissioned Blocks technology can be divided into two different uses for the privacy of blockchain content:
-- <b> Internal Smart Contract </b> - Permission to read smart contract data execute associated smart contract functions.
-- <b> External Digital Content</b> - Permission to access digital content linked to a smart contract.
+The Permissioned Blocks technology can be divided into two categories for securing the privacy of blockchain content:
+- <b> Internal smart contract data</b> - Authorisation to read smart contract state information and execute associated smart contract functions.
+- <b> External digital content</b> - Authorisation to access digital content that is linked to a smart contract, such as documents, music or video content.
 
 ## Permissioned Based File Sharing
 
