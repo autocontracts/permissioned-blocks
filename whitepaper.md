@@ -44,7 +44,7 @@ For example, an author an e-book who normally sells their work using a centralis
 <b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D. The data throughput speed is increased as demand has increased.
 </p>
 
-## Smart Contract Model
+## The Smart Contract State Machine
 
 We can model a smart contract as a [state machine](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
 
