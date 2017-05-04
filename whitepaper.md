@@ -1,6 +1,10 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
+The Permissioned Blocks technology can be divided into two different uses for the privacy of blockchain content:
+- <b> Internal Smart Contract </b> - Permission to read smart contract data execute associated smart contract functions.
+- <b> External Digital Content</b> - Permission to access digital content linked to a smart contract.
+
 ## Permissioned Based File Sharing
 
 Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent), are permissionless protocols. By design, there is no central control governing how content is shared between nodes in the network. However, the combination of peer-to-peer file sharing and smart contract technology opens the possibility for new products and services to be developed. 
@@ -37,7 +41,7 @@ For example, an author an e-book who normally sells their work using a centralis
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D.
+<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D. The data throughput speed is increased as demand has increased.
 </p>
 
 ## Smart Contract Model
@@ -132,10 +136,10 @@ Using a functional programming pattern, this function has parameters <i>balance<
 5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS an verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ### Simple Contracts - No validation required
-There is are use cases when validation of the statechain is not necessary. This is when the smart contract does not have functions that  calculate changes in state information. Instead, the purpose to the smart contract is to reference to digital content (e.g. a pdf file) that the owner of the contract would like to publish. 
+Validation of the statechain is not necessary for use cases where the calculation of state change information doe not occuer. That is in scenarios where the smart contract does not have any functions related to the statechain. This may be where the statechain only holds digital content (e.g. a pdf file) that is linked to the smart contract. The owner creates the smart contract in order to control the behaviour of how the digital content is accessed and distributed.
 
 ### Multiple statechains
-A smart contract could also be configured in a hybrid to have two or more statechains. For example, there may be one statechain that does not require validation, and other statechains that require validation by multiple oracles.
+A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain no requiring validation, and other statechains requiring validation by multiple oracles.
 
 ## Statechain Security Model
 
