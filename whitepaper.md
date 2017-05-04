@@ -115,9 +115,13 @@ Benefits:
 ## Statechain Validation
 
 Validation of the statechain may need to be required in some user cases if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect 
+
 ```a + b = c```, 
+
 but a malicious actor could claim to have executed the function and updates the statechain with the result as 
+
 ```a + b = z```. 
+
 In this case validation by an oracle service should be employed to endorse the state changes. 
 
 The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
