@@ -5,7 +5,10 @@
 
 Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent), are permissionless protocols. By design, there is no central control governing how content is shared between nodes in the network. However, the combination of peer-to-peer file sharing and smart contract technology opens the possibility for new products and services to be developed. 
 
-Using smart contract technology, we can add another integation layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. 
+Using smart contract technology, we can add another integation layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. Benefits such as:
+- No dependency on a central point of control that may charge service fees.
+- Higher data throughput as demand increases.
+- It is a low cost, self-sustaining network. No need for server farms.
 
 <p align="center">
 <img src="/images/blockchain-inegration-layers.png">
@@ -13,24 +16,28 @@ Using smart contract technology, we can add another integation layer on top of p
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, an author an e-book who normally uses an online publisher to upload and sell their work from a cloud service, could instead use a peer-to-peer protocol. They would create a smart contract that distributions the e-book in exchange for crypto-currency. The minimum infrustructure required would be a laptop that connects to the network and publishes their content. The main benefit for the author would be a substantial increase in revenue by removing the dependencies and costs of using online publishers.
+For example, an author an e-book who normally sells their work using a centralised online publisher could instead use a peer-to-peer network protocol. They would create a smart contract that distributions their e-book in exchange for crypto-currency. The minimum infrustructure required would be a laptop that can connect to the network. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using online publishers.
+
+<p align="center">
+<b>Distribution of Digital Content using a Smart Contract</b>
+</p>
 
 <p align="center">
 <img src="/images/IPFS-file-sharing-1.png">
 <br>
-<b>Stage 1</b> - Node A owns contract and digital content.
+<b>Step 1</b> - Node A creates a smart contract and adds digital content to their node.
 </p>
 <br>
 <p align="center">
 <img src="/images/IPFS-file-sharing-2.png">
 <br>
-<b>Stage 2</b> - Node B is authorised. Node A shares digital content with Node B.
+<b>Step 2</b> - In exchange for a token, Node B is granted permission to access content. Node A shares digital content with Node B.
 </p>
 <br>
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Stage 3</b> - Node D is authorised. Node A & Node B share digital content with Node D.
+<b>Step 3</b> - In exchange for a token, Node D is granted permission to access content. Node A & Node B share digital content with Node D.
 </p>
 
 
