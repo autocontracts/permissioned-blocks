@@ -3,6 +3,12 @@
 
 ## Permissioned Based File Sharing
 
+Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent), are permissionless protocols. By design, there is no central control governing how content is shared between nodes in the network. However, the combination of peer-to-peer file sharing and smart contract technology can open the possibility for new products and services. 
+
+With smart contract technology, we can add a logic layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. 
+
+For example, an author an e-book that normally uses an online publisher for uploading their work to the cloud, could instead use a peer-to-peer protocol. They would create a smart contract that distributions the content in exchange for crypto-currency. The minimum infrustructure required would be a laptop that can connect to the network in order to publish their content. The benefit for the author would be a substantial increase in revenue by removing the dependencies and costs of using online publishers.
+
 <p align="center">
 <img src="/images/IPFS-file-sharing-1.png">
 <br>
