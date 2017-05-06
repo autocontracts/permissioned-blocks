@@ -1,23 +1,23 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-Blockchain technology with smart contracts promises to impact our lives in many ways. This is by redefining business models and economies, such that users will interact with one another in a direct peer-to-peer fashion without relying on intermediaries.
+Blockchain technology with smart contracts promises to impact our lives in many ways. By redefining business models and economies in such a way that users will interact with one another in a peer-to-peer fashion without relying on intermediaries.
 
-However blockchain technology is still in development, and there are short-comings that currently limit blockchain's practical use and uptake. One of such limitations is the lack of privacy in executing and storing blockchain transactions. Data associated with any transaction on a public blockchain today, such as Ethereum, is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, not very practical for many use cases. Use cases that require privacy and security of confidential and personal information. 
+However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy executing and storing blockchain transactions. Data associated with any transaction on a public blockchain today, such as Ethereum, is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases. Use cases that require privacy and security of confidential and personal information. 
 
 This white paper describes technology developed by Autonomous Contracts called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information for blockchain transactions can be kept private and only accessed by those they are granted permission.
 
 Permissioned Blocks can be used in two modes:
 - To secure <b>smart contract</b> information - storage of smart contract static data and calculation results.
-- To secure <b>digital content</b> attached to a smart contract - For example, legal/non-legal documents, music, video...etc.
+- To secure <b>digital content</b> attached to a smart contract - For example, legal and non-legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks means that this technology can be used with any blockchain that has smart contract capabilites (that is Turing Complete).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (that is Turing Complete).
 
-Various solutions have attempted to solve the blockchain privacy problem by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual data. Ownership is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete, as there remains open questions of where the private data is to be stored and how sharing of that data will be controlled.
+Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of that data will be controlled.
 
-Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised network nodes that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private to only those that have been permissioned. 
+Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised blockchain accounts that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks. 
 
-Some use cases of Permissioned Blocks are:
+Some use cases are:
 - Buying, selling and the subscription of digital content (books, magazines, music, movies...)
 - Digital certificate registration (Land titles, Birth Certificates, University qualifications...).
 - Personal management of health records.
