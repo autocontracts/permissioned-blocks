@@ -29,9 +29,9 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared. As a result, they are predominantly used today for the illegal sharing of digital content. 
+Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared. As a result, they are predominantly used today for illegal sharing of digital content. 
 
-However, if we combine a file sharing protocol with a blockchain protocol that governs how the content is shared, this opens the possibility to harness the benefits of distributed networks without occuring copyright infringements or the leaking of confidential information.
+If we combine a file sharing protocol with a blockchain protocol that governs how the content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of confidential information.
 
 Benefits such as:
 - No cloud service fees. No dependency on a centralised service provider to control the sharing of content. 
@@ -44,7 +44,7 @@ Benefits such as:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, an author of an e-book, who normally sells their work using a centralised online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for crypto-currency. The minimum infrastructure required by the author in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs associated with using an online publisher.
+For example, an author of an e-book, who normally sells their work using a centralised online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency payment. The minimum infrastructure required by the author in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
