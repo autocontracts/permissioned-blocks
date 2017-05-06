@@ -13,7 +13,7 @@ Permissioned Blocks can be used in two modes:
 
 The blockchain described and used in this white paper is the Ethereum blockchain, however the modular and decoupled design of Permissioned Blocks means that this technology can be used with any blockchain that has smart contract capabilites (is Turing Complete).
 
-There have been attempts to provide a solution to storing unique fingerprint (known as a one-way hashing function) of a document file on the blockchain. However, these are not a complete solutions, as they leave the storage of the complete data set as the responsibility of the end user, which has the problem of the data being lost or destroyed, or a third party provider, which nullifies the blockchain benefits of decentralisatoin. These solutions also do not address the securing of smart contract computations, such as the calculation of bond payments, commissions and taxes.  
+Various solutions attempt to solve this privacy problem, by only storing a unique fingerprint (known as a one-way hashing function) of a document file on the blockchain. However, these are not a complete solutions, as they leave the storage of the complete data set as an open question. These solutions also do not address the privacy of smart contract computations, such as the calculation of bond payments, commissions and taxes.  
 
 Some use cases of Permissioned Blocks are:
 - Buying, selling and subscription of digital content (books, music, movies...)
