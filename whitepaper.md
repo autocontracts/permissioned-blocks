@@ -1,18 +1,28 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-The Permissioned Blocks technology can be divided into two categories for securing the privacy of blockchain content:
-- <b> Internal smart contract data</b> - Authorisation to read smart contract state information and execute associated smart contract functions.
-- <b> External digital content</b> - Authorisation to access digital content that is linked to a smart contract, such as documents, music or video content.
+Blockchain and smart contract technology promises to redefine business models, economies, and potentially impact our daily lives. 
+
+However, since the technology is still in development and maturing, there are some short-comings that limit blockchain's practical use and uptake. One of these limitations is the lack of privacy in blockchain transactions. Any transaction published on a public blockchain usedc today such as Ethereum, is available in the open and in the clear for all to read and interpret. This does not make it very practical for many use cases that require privacy and the security of confidential and personal information. 
+
+This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks is a solution that secures smart contract data and attached files, such that only those that are permissioned, can access and view this information.
+
+Permissioned Blocks can be used in two modes:
+- <b> To secure digital content attached to a smart contract</b> - documents, music, video, etc..
+- <b> To secure smart contract information</b> - data storage and calculation results.
+
+The blockchain employed in the white paper is the Ethereum blockchain, however, the modular design of Permissioned Blocks means that it can be used with any blockchain that has smart contract capabilites (is Turing Complete).
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent), are permissionless protocols. By design, there is no central control governing how content is shared between nodes in the network. However, the combination of peer-to-peer file sharing and smart contract technology opens the possibility for new products and services to be developed. 
+Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared. As a result, they are predominantly used today for the illegal sharing of digital content. 
 
-Using smart contract technology, we can add another integration layer on top of peer-to-peer file sharing protocols that governs how the content is distributed, whilst retaining the same benefits of having a distributed architecture. Benefits such as:
-- No dependency on a central point of control that may charge service fees.
+However, if we combine a file sharing protocol with a blockchain protocol that governs how the content is shared, this opens the possibility to harness the benefits of distributed networks without occuring copyright infringements or the leaking of confidential information.
+
+Benefits such as:
+- No cloud service fees. No dependency on a centralised service provider to control the sharing of content. 
 - Higher data throughput as demand increases.
-- It is a low cost, self-sustaining network. No need for server farms.
+- A low cost, self-sustaining system.
 
 <p align="center">
 <img src="/images/blockchain-inegration-layers.png">
@@ -20,7 +30,7 @@ Using smart contract technology, we can add another integration layer on top of 
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, an author an e-book who normally sells their work using a centralised online publisher could instead use a peer-to-peer network protocol. They would create a smart contract that distributions their e-book in exchange for crypto-currency. The minimum infrastructure required would be a laptop that can connect to the network. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using online publishers.
+For example, an author of an e-book, who normally sells their work using a centralised online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for crypto-currency. The minimum infrastructure required by the author in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs associated with using an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
