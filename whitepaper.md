@@ -1,27 +1,27 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-Blockchain technology with smart contracts promises to impact our lives in many ways. By redefining business models and economies in such a way that users will interact with one another in a peer-to-peer fashion without relying on intermediaries.
+Blockchain technology with smart contracts promises to impact our lives in many ways. By redefining business models and economies in such a way, that users will interact with one another in a peer-to-peer fashion without relying on intermediaries.
 
-However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy executing and storing blockchain transactions. Data associated with any transaction on a public blockchain today, such as Ethereum, is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases. Use cases that require privacy and security of confidential and personal information. 
+However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy executing and storing blockchain transactions. Data associated with any transaction on a public blockchain used today, such as Ethereum, is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases. Use cases that require privacy and security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information for blockchain transactions can be kept private and only accessed by those they are granted permission.
+This white paper describes technology developed by Autonomous Contracts called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information of blockchain transactions remain private to only those that have been granted permission.
 
 Permissioned Blocks can be used in two modes:
-- To secure <b>smart contract</b> information - storage of smart contract static data and calculation results.
-- To secure <b>digital content</b> attached to a smart contract - For example, legal and non-legal documents, music, video...etc.
+- To secure <b>smart contract</b> information - input values and calculation results.
+- To secure <b>digital content</b> attached to a smart contract - E.g. legal and non-legal documents, music, video...etc.
 
 The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (that is Turing Complete).
 
-Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of that data will be controlled.
+Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership of the data is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of the data will be controlled.
 
-Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised blockchain accounts that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks. 
+Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised blockchain accounts that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
 
 Some use cases are:
 - Buying, selling and the subscription of digital content (books, magazines, music, movies...)
-- Digital certificate registration (Land titles, Birth Certificates, University qualifications...).
+- Digital certificate registration (Land titles, birth certificates, university qualifications...).
 - Personal management of health records.
-- Real Estate; cash-flow management of rental properties.
+- Real estate; cash-flow management of rental properties.
 - Know Your Customer (KYC) verification procedures for financial services.
 - Improved credit scoring for financial services via real-time and complete credit & trade histories. 
 - Trade finance, invoicing and payment records.
@@ -29,13 +29,14 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared. As a result, they are predominantly used today for illegal sharing of digital content. 
+Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared.
 
 If we combine a file sharing protocol with a blockchain protocol that governs how the content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of confidential information.
 
-Benefits such as:
-- No cloud service fees. No dependency on a centralised service provider to control the sharing of content. 
-- Higher data throughput as demand increases.
+Benefits: 
+- No dependency on a centralised service that controls data access. 
+- No cloud service fees.
+- Higher network throughput as demand increases.
 - A low cost, self-sustaining system.
 
 <p align="center">
@@ -44,7 +45,7 @@ Benefits such as:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, an author of an e-book, who normally sells their work using a centralised online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency payment. The minimum infrastructure required by the author in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency payment. The minimum infrastructure required by the author in order to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -65,7 +66,7 @@ For example, an author of an e-book, who normally sells their work using a centr
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D. The data throughput speed is increased as demand has increased.
+<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D. Network throughput has increased, as two nodes are now sharing the data.
 </p>
 
 ## The Smart Contract State Machine
@@ -115,10 +116,10 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 
 ## The Statechain
 
-If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this and the following reasons, [IPFS](https://ipfs.io/) was selected:
+If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, [IPFS](https://ipfs.io/) was selected:
 - Uses a distributed p2p file sharing algorithm called BitSwap.
 - Uses a content addressing scheme for resolving data.
-- Can serve an sized digital content (books, music, movies etc).
+- Can serve any sized digital content.
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
 
@@ -164,7 +165,7 @@ Using a functional programming pattern, this function has parameters <i>balance<
 5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS and verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ### Simple Contracts: No statechain validation
-Validation of the statechain is not necessary for use cases where the calculation of state change information doe not occur. That is in scenarios where the smart contract does not have any functions related to the statechain. This may be where the statechain only holds digital content (e.g. a pdf file) that is linked to the smart contract. The owner creates the smart contract in order to control the behaviour of how the digital content is accessed and distributed.
+Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state inforation to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
 
 ### Complex Contracts: Multi-statechain validation
 A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain no requiring validation, and other statechains requiring validation by multiple oracles.
