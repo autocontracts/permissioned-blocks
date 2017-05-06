@@ -1,15 +1,15 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-Blockchain and smart contract technology promises to redefine business models, economies, and potentially impact our daily lives. 
+Blockchain and smart contract technology promises to redefine business models, economies, and has the potential to impact our daily lives. 
 
-However, since the technology is still in development and maturing, there are some short-comings that limit blockchain's practical use and uptake. One of these limitations is the lack of privacy in blockchain transactions. Any transaction published on a public blockchain usedc today such as Ethereum, is available in the open and in the clear for all to read and interpret. This does not make it very practical for many use cases that require privacy and the security of confidential and personal information. 
+However, blockchain technology is still in development and maturing, so there are some short-comings that limit blockchain's practical use and uptake. One of these limitations is the lack of privacy in blockchain transactions. Any transaction published on a public blockchain used today, such as Ethereum, is available in the open and clear for all to read and interpret. This does not make blockchain technology in its current form very practical for use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks is a solution that secures smart contract data and attached files, such that only those that are permissioned, can access and view this information.
+This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks is a solution that secures smart contract data and any files attached to a smart contract. Using this technology, owners of a smart contract can add permissions in order to control who can access and the smart contract information.
 
 Permissioned Blocks can be used in two modes:
-- <b> To secure digital content attached to a smart contract</b> - documents, music, video, etc..
-- <b> To secure smart contract information</b> - data storage and calculation results.
+- To secure <b> smart contract information</b> - data storage and calculation results.
+- To secure <b>digital content</b> attached to a smart contract - documents, music, video, etc..
 
 The blockchain employed in the white paper is the Ethereum blockchain, however, the modular design of Permissioned Blocks means that it can be used with any blockchain that has smart contract capabilites (is Turing Complete).
 
