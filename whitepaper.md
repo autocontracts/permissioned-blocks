@@ -16,14 +16,14 @@ The blockchain described and used in this white paper is the Ethereum blockchain
 Some designs to this problem of privacy, attempt to provide a solution by only storing only a unique fingerprint (known as a one-way hashing function) of a document file on the blockchain. However, this is not a complete solution, as it leaves the storage the data to the user offchain, which can be lost or destroyed. Also, these solutions do not address the securing of smart contract information such as the data used to calculate bond payments, commissions and taxes.  
 
 Some use cases of Permissioned Blocks are:
-- Buy and selling of digital content.
-- Subscription models for digital content.
-- Digital Registration (Land titles, Birth Certifates, University qualifications)
-- Electronic health records
-- Know Your Customer (KYC) verification procedures for financial services
-- Improved credit scoring for financail services, via real-time and complete credit and trade histories. 
+- Buying, selling and subscription models for digital content.
+- Digital Registration (Land titles, Birth Certifates, University qualifications).
+- Personal management of health records.
+- Real Estate, cash-flow management of rental properties.
+- Know Your Customer (KYC) verification procedures for financial services.
+- Improved credit scoring for financial services via real-time and complete credit and trade histories. 
 - Trade finance, invoicing and payment records.
-- Insurance history
+- Insurance history.
 
 ## Permissioned Based File Sharing
 
