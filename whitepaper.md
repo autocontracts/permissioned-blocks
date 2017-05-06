@@ -8,10 +8,10 @@ However, blockchain technology is still in development and maturing, so there ar
 This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks is a solution that secures smart contract data and any files attached to a smart contract. Using this technology, owners of a smart contract can add permissions in order to control who can access and the smart contract information.
 
 Permissioned Blocks can be used in two modes:
-- To secure <b> smart contract information</b> - data storage and calculation results.
-- To secure <b>digital content</b> attached to a smart contract - documents, music, video, etc..
+- To secure <b>smart contract</b> information - storage of smart contract data and calculation results.
+- To secure <b>digital content</b> - documents, music, video...etc, that are attached to a smart contract.
 
-The blockchain employed in the white paper is the Ethereum blockchain, however, the modular design of Permissioned Blocks means that it can be used with any blockchain that has smart contract capabilites (is Turing Complete).
+The blockchain described and used in this white paper is the Ethereum blockchain, however the modular and decoupled design of Permissioned Blocks means that the technology can be used with any blockchain that has smart contract capabilites (is Turing Complete).
 
 ## Permissioned Based File Sharing
 
