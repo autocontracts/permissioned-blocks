@@ -1,11 +1,11 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-Blockchain and smart contract technology promises to redefine business models, economies, and has the potential to impact our daily lives. 
+Blockchain and smart contract technology promises to redefine business models, economies and impact our daily lives. 
 
-However, blockchain technology is still in development and maturing, so there are some short-comings that limit blockchain's practical use and uptake. One of these limitations is the lack of privacy in blockchain transactions. Any transaction published on a public blockchain used today, such as Ethereum, is available in the open and clear for all to read and interpret. This does not make blockchain technology in its current form very practical for use cases that require privacy and the security of confidential and personal information. 
+However, blockchain technology is yet to mature, are there are short-comings that limit blockchain's practical use and uptake. One of these limitations is the lack of privacy of blockchain transactions. The data for any transaction executed on a blockchain used today, such as Ethereum, is available in the open and clear for all to read and interpret. This does not leave blockchain technology in its current form very practical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks is a solution that secures smart contract data and any files attached to a smart contract. Using this technology, owners of a smart contract can add permissions in order to control who can access and the smart contract information.
+This white paper describes the technical designs of a technology developed by Autonmous Contracts called <b>Permissioned Blocks</b>. Permissioned Blocks provides a solution to securing smart contract data and files attached to a smart contract. Using this technology, owners of a smart contract can add permissions in order to control who can access and the smart contract information.
 
 Permissioned Blocks can be used in two modes:
 - To secure <b>smart contract</b> information - storage of smart contract data and calculation results.
