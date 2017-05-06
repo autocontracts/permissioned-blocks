@@ -250,7 +250,9 @@ Sharing of the contract's private key occurs by a method of boxing. For example,
 
 Alice can revoke access to Bob by generating a new contract key and encrypting all state changes going forward with this key. Alice would then update the smart contract by removing Bob's capabilities, and updating any other users that may have been granted permissions with the address of the new contract key.
 
-## Contract Metadata
+## Smart Contract Metadata
+
+## Smart Contracts Written in any Language
 
 ## Conclusion
 ## Citations
