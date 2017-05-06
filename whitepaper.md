@@ -13,7 +13,7 @@ Permissioned Blocks can be used in two modes:
 
 The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (that is Turing Complete).
 
-Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership of the data is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of the data will be controlled.
+Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership of the data is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of the data is to be controlled.
 
 Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised blockchain accounts that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
 
