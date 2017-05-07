@@ -22,7 +22,7 @@ Permissioned Blocks can be used in two modes:
 - To secure <b>smart contract</b> information - input values and calculation results of smart contract functions.
 - To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
 
 Various solutions[[6]](http://www.learningmachine.com/) [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) on the blockchain in place of the actual private data. Ownership of the data is proved by whomever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
 
