@@ -84,13 +84,13 @@ A smart contract's state is modified by sending function input parameters as a t
 The disadvantage of storing the smart contract state information directly on a blockchain are:
 
 - <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a Merkle Patricia Tree[[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
-- <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
+- <b> Cost. </b> In Ethereum there is a cost (the gas price[[16]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc)) for processing and storing the data sent in transaction messages.
 
 ## Separating State Persistence from Functional Behaviour
 
 If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
 
-To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[16]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[17]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
+To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[17]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
 ```
 var values = { a: 1 };
 
@@ -110,7 +110,6 @@ var c = impureFunction( values );
 </p>
 
 <p><br></p>
-
 ```
 var values = { a: 1 };
 
@@ -137,7 +136,7 @@ To apply a functional programming pattern to writing smart contracts, we combine
 <b>A Smart Contract with Pure Functions</b> - The first stage change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
 </p>
 
-Ethereum uses the Solidity[[18]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
+Ethereum uses the Solidity[[19]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
 ```
 contract ImpureSmartContract {
   uint public total; 
@@ -153,7 +152,7 @@ contract ImpureSmartContract {
 <b>An impure function</b> - A Solidity impure function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
 </p>
 
-
+<p><br></p>
 ```
 contract PureSmartContract {
   function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
@@ -171,10 +170,10 @@ Here we see that the variables <i>total</i> and <i>tax</i> are returned by the f
 
 ## The Statechain
 
-If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[19]](https://ipfs.io/) was selected:
-- Uses a distributed p2p file sharing algorithm called BitSwap.
-- Uses a content addressing scheme for resolving data.
-- Can serve any sized digital content.
+If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[20]](https://ipfs.io/), which is a Content Addressed, Versioned, P2P File System[[21]](https://arxiv.org/pdf/1407.3561v1.pdf) was selected:
+- Uses a distributed p2p file sharing algorithm called BitSwap[[22]](https://github.com/ipfs/specs/tree/master/bitswap).
+- Uses a content addressing scheme[[23]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data.
+- Serves versioned digital content of any size.
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
 
@@ -206,7 +205,8 @@ In this case validation by an oracle service should be employed to endorse the s
 
 The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
 ```
-function calculateCommission(uint balance, uint tax, uint commission) returns (uint balance, uint tax) {
+function calculateCommission(uint balance, uint tax, uint commission) 
+          returns (uint balance, uint tax) {
       balance = balance + balance * commission / 100;
       tax = tax + balance * 20 / 100
   }
@@ -242,7 +242,7 @@ Resolving the statechain requires both authentication and authorisation of the r
 
 ## Token Authentication
 
-Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a [JSON Web Token](https://jwt.io/introduction/) (JWT) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token (JWT)[[24]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
 
 ```
 {
@@ -325,8 +325,13 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [[12]](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
 - [[13]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
 - [[14]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
-- [[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Etheruem Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
-- [[16]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
-- [[17]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
-- [[18]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
-- [[19]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
+- [[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
+- [[16]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc) "Ethereum Gas Fuel and Fees" by Joseph Chow https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc
+- [[17]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
+- [[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
+- [[19]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
+- [[20]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
+- [[21]](https://arxiv.org/pdf/1407.3561v1.pdf) "IPFS - Content Addressed, Versioned, P2P File System" by Juan Benet https://arxiv.org/pdf/1407.3561v1.pdf
+- [[22]](https://github.com/ipfs/specs/tree/master/bitswap) Bitswap Specs https://github.com/ipfs/specs/tree/master/bitswap
+- [[23]](https://en.wikipedia.org/wiki/Content-addressable_storage) Content Adressable Storage https://en.wikipedia.org/wiki/Content-addressable_storage
+- [[24]](https://jwt.io/introduction/) JSON Web Tokens - Introduction https://jwt.io/introduction
