@@ -109,6 +109,7 @@ var c = impureFunction( values );
 <b>An impure function</b> - A Javascript impure function
 </p>
 
+
 ```
 var values = { a: 1 };
 
@@ -150,7 +151,8 @@ contract ImpureSmartContract {
 <p align="center">
 <b>An impure function</b> - A Solidity impure function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
 </p>
-<br>
+
+
 ```
 contract PureSmartContract {
   function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
@@ -308,7 +310,7 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 
 ## Conclusion
 ## Citations
-- [1](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) "A Gentle Introduction to Smart Contracts" by Antony Lewis https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts
+- [[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) "A Gentle Introduction to Smart Contracts" by Antony Lewis https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts
 - [2](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) "Privacy on the Blockchain" by Vitalik Buterin https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/
 - [3](https://www.ethereum.org/) Ethereum https://www.ethereum.org/
 - [4](http://autocontracts.io/) Autonomous Contracts http://autocontracts.io/
