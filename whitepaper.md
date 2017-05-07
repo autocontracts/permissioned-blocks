@@ -155,6 +155,7 @@ contract ImpureSmartContract {
 </p>
 
 <p><br></p>
+
 ```
 contract PureSmartContract {
   function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
