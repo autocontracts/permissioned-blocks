@@ -19,8 +19,8 @@ This white paper describes technology developed by Autonomous Contracts[[4]](htt
 </p>
 
 Permissioned Blocks can be used in two modes:
-- To secure <b>smart contract</b> information - input values and calculation results.
-- To secure <b>digital content</b> attached to a smart contract - E.g. legal and non-legal documents, music, video...etc.
+- To secure <b>smart contract</b> information - input values and calculation results of smart contract functions.
+- To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
 The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
 
