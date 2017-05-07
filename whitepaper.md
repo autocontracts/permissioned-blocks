@@ -27,7 +27,7 @@ The blockchain used and described in this white paper is the Ethereum blockchain
 <p align="center">
 <img src="/images/permissioned-blocks-architechture-demo.png">
 <br>
-<b>Working Demo</b> - The architecture of permissioned blocks.
+<b>Working Demo</b> - The architecture of a working demo of permissioned blocks.
 </p>
 
 Various solutions[[6]](http://www.learningmachine.com/) [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) on the blockchain in place of the actual private data. Ownership of the data is proved by whomever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
