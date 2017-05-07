@@ -108,7 +108,7 @@ var c = impureFunction( values );
 <p align="center">
 <b>An impure function</b> - A Javascript impure function
 </p>
-<br>
+
 ```
 var values = { a: 1 };
 
