@@ -310,7 +310,7 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 
 ## Smart Contract Metadata
 
-## Smart Contracts Written in any Language
+## Smart Contracts in any Language
 
 ## Conclusion
 ## Citations
@@ -331,7 +331,7 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
 - [[16]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc) "Ethereum Gas Fuel and Fees" by Joseph Chow https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc
 - [[17]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
-- [[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
+- [[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions in Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
 - [[19]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
 - [[20]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
 - [[21]](https://arxiv.org/pdf/1407.3561v1.pdf) "IPFS - Content Addressed, Versioned, P2P File System" by Juan Benet https://arxiv.org/pdf/1407.3561v1.pdf
