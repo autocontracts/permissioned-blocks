@@ -128,7 +128,7 @@ var c = pureFunction( values.a );
 <p align="center">
 <b>A Pure function</b> - A Javascript pure function
 </p>
-
+<p><br></p>
 To apply a functional programming pattern to writing smart contracts, we combine the previous contract state, with the current input parameters of a function, to produce the new contract state.
 
 <p align="center">
