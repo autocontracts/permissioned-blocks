@@ -29,7 +29,7 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[10](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receieve the content.
+Current peer-to-peer file sharing protocols such as BitTorrent[[10]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receieve the content.
 
 However, if we combine a file sharing protocol with a blockchain protocol to govern to whom content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of sensitive or confidential information.
 
@@ -45,7 +45,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[11](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency[12](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure required by the autho to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[11](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency[[12]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure required by the autho to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -81,16 +81,51 @@ A smart contract's state is modified by sending function input parameters as a t
 <b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
 </p>
 
-The disadvantage of storing the smart contract state information directly on a blockchain (such as in Ethereum) are:
+The disadvantage of storing the smart contract state information directly on a blockchain are:
 
-- <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a [Merkle Patricia Tree](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
+- <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a Merkle Patricia Tree[[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
 - <b> Cost. </b> In Ethereum there is a cost (the gas price) for processing and storing the data sent in transaction messages.
 
 ## Separating State Persistence from Functional Behaviour
 
 If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
 
-To achieve this desired outcome, we need to program the functions of a smart contract as being [pure functions](https://en.wikipedia.org/wiki/Pure_function). A pure function, by definition in functional programming, does not have any side-effects. One such side-effect, is the persistence of state information. 
+To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[16]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[17]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
+```
+var values = { a: 1 };
+
+function impureFunction ( items ) {
+  var b = 1;
+
+  items.a = items.a * b + 2;
+
+  return items.a;
+}
+
+var c = impureFunction( values );
+// Now `values.a` is 3, the impure function modifies it.
+```
+<p align="center">
+<b>Non pure function</b> - A Javascript impure function
+</p>
+
+```
+var values = { a: 1 };
+
+function pureFunction ( a ) {
+  var b = 1;
+
+  a = a * b + 2;
+
+  return a;
+}
+
+var c = pureFunction( values.a );
+// `values.a` has not been modified, it's still 1
+```
+<p align="center">
+<b>Pure function</b> - A Javascript pure function
+</p>
 
 To apply a functional programming pattern to writing smart contracts, we combine the previous contract state, with the current input parameters of a function, to produce the new contract state.
 
@@ -270,3 +305,6 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [12](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
 - [13](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
 - [14](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
+- [15](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Etheruem Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
+- [16](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
+- [17](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
