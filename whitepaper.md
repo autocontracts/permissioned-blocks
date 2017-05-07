@@ -109,7 +109,7 @@ var c = impureFunction( values );
 <b>An impure function</b> - A Javascript impure function
 </p>
 
-<p></p>
+<p><br></p>
 
 ```
 var values = { a: 1 };
@@ -316,17 +316,17 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [[3]](https://www.ethereum.org/) Ethereum https://www.ethereum.org/
 - [[4]](http://autocontracts.io/) Autonomous Contracts http://autocontracts.io/
 - [[5]](https://en.wikipedia.org/wiki/Turing_machine) Turing Machine https://en.wikipedia.org/wiki/Turing_machine
-- [[6]](http://www.learningmachine.com/) The Learning Machine
-- [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity
+- [[6]](http://www.learningmachine.com/) The Learning Machine http://www.learningmachine.com/
+- [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain
 - [[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function) One way hashing function https://en.wikipedia.org/wiki/Cryptographic_hash_function
 - [[9]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in Commercial Real Estate" by Deloitte Financial Services https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf
 - [[10]](https://en.wikipedia.org/wiki/BitTorrent) Bit Torrent https://en.wikipedia.org/wiki/BitTorrent
-- [11](https://www.amazon.com/) Amazon https://www.amazon.com
-- [12](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
-- [13](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
-- [14](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
-- [15](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Etheruem Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
-- [16](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
-- [17](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
-- [18](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
-- [19](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
+- [[11]](https://www.amazon.com/) Amazon https://www.amazon.com
+- [[12]](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
+- [[13]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
+- [[14]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
+- [[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Etheruem Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
+- [[16]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
+- [[17]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
+- [[18]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
+- [[19]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
