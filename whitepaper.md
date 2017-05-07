@@ -105,6 +105,7 @@ function impureFunction ( items ) {
 var c = impureFunction( values );
 // Now `values.a` is 3, the impure function modifies it.
 ```
+<br>
 <p align="center">
 <b>Non pure function</b> - A Javascript impure function
 </p>
@@ -135,7 +136,7 @@ To apply a functional programming pattern to writing smart contracts, we combine
 <b>A Smart Contract with Pure Functions</b> - The first stage change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
 </p>
 
-Ethereum uses the Solidity programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
+Ethereum uses the Solidity[[18]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
 
 ```
 function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
@@ -149,9 +150,11 @@ function calculateTotal(uint total, uint tax, uint price, uint quantity, uint ta
 <b>Solidity pure function</b> - A function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
 </p>
 
+Here we see that the variables <i>total</i> and <i>tax</i> are returned by the function and their values are not persisted by the smart contract function.
+
 ## The Statechain
 
-If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, [IPFS](https://ipfs.io/) was selected:
+If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[19]](https://ipfs.io/) was selected:
 - Uses a distributed p2p file sharing algorithm called BitSwap.
 - Uses a content addressing scheme for resolving data.
 - Can serve any sized digital content.
@@ -308,3 +311,5 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [15](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Etheruem Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
 - [16](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
 - [17](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions is Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
+- [18](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
+- [19](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
