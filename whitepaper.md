@@ -110,6 +110,7 @@ var c = impureFunction( values );
 </p>
 
 <p><br></p>
+
 ```
 var values = { a: 1 };
 
