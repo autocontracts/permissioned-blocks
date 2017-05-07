@@ -1,27 +1,27 @@
 # Permissioned Blocks White Paper
 ## Introduction
 
-Blockchain technology with smart contracts promises to impact our lives in many ways. By redefining business models and economies in such a way, that users will interact with one another in a peer-to-peer fashion without relying on intermediaries.
+Blockchain technology with smart contracts promises to impact our lives in many ways. By redefining business models and economies such that users can enter into transactions with one another, in a peer-to-peer fashion, without relying on intermediaries.
 
-However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy executing and storing blockchain transactions. Data associated with any transaction on a public blockchain used today, such as Ethereum, is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases. Use cases that require privacy and security of confidential and personal information. 
+However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy[[1]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) when executing and storing blockchain transactions. Data associated with any transaction on a public blockchain used today, such as Ethereum[[2]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information of blockchain transactions remain private to only those that have been granted permission.
+This white paper describes technology developed by Autonomous Contracts[[3]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information remain private to those that take part in a blockchain transaction or have been granted permission to access to view the information.
 
 Permissioned Blocks can be used in two modes:
 - To secure <b>smart contract</b> information - input values and calculation results.
 - To secure <b>digital content</b> attached to a smart contract - E.g. legal and non-legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (that is Turing Complete).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (is a turing complete virtual machine[[4]](https://en.wikipedia.org/wiki/Turing_machine)).
 
-Various solutions have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function) on the blockchain in place of the actual private data. Ownership of the data is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains open questions of where the private data is to be stored and how sharing of the data is to be controlled.
+Various solutions[[5]](http://www.learningmachine.com/) [[6]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[7]]) on the blockchain in place of the actual private data. Ownership of the data is proved by whomever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
 
-Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and only shared with authorised blockchain accounts that have been granted permission. This white paper also shows how computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
+Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and shared only with authorised blockchain accounts. Furthermore, computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
 
 Some use cases are:
 - Buying, selling and the subscription of digital content (books, magazines, music, movies...)
-- Digital certificate registration (Land titles, birth certificates, university qualifications...).
+- Digital certificate registrations (Land titles, birth certificates, university qualifications...).
 - Personal management of health records.
-- Real estate; cash-flow management of rental properties.
+- Real estate; cash-flow management of rental properties[[7]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf).
 - Know Your Customer (KYC) verification procedures for financial services.
 - Improved credit scoring for financial services via real-time and complete credit & trade histories. 
 - Trade finance, invoicing and payment records.
@@ -256,3 +256,11 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 
 ## Conclusion
 ## Citations
+- [1](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) "Privacy on the Blockchain" by Vitalik Buterin https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/
+- [2](https://www.ethereum.org/) Ethereum https://www.ethereum.org/
+- [3](http://autocontracts.io/) Autonomous Contracts http://autocontracts.io/
+- [4](https://en.wikipedia.org/wiki/Turing_machine) Turing Machine https://en.wikipedia.org/wiki/Turing_machine
+- [5](http://www.learningmachine.com/) The Learning Machine
+- [6](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity
+- [7](https://en.wikipedia.org/wiki/Cryptographic_hash_function) One way hashing function https://en.wikipedia.org/wiki/Cryptographic_hash_function
+- [8[(https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in Commercial Real Estate" by Deloitte Financial Services
