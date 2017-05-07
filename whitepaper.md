@@ -29,12 +29,12 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architecture with no central point of control, means that there are no governing rules for how content is shared.
+Current peer-to-peer file sharing protocols such as BitTorrent[10](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receieve the content.
 
-If we combine a file sharing protocol with a blockchain protocol that governs how the content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of confidential information.
+However, if we combine a file sharing protocol with a blockchain protocol to govern to whom content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of sensitive or confidential information.
 
 Benefits: 
-- No dependency on a centralised service that controls data access. 
+- No dependency on centralised services in order to control data access. 
 - No cloud service fees.
 - Higher network throughput as demand increases.
 - A low cost, self-sustaining system.
@@ -45,7 +45,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher, could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency payment. The minimum infrastructure required by the author in order to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[11](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency[12](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure required by the autho to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -60,20 +60,20 @@ For example, consider an author of an e-book who normally sells their work using
 <p align="center">
 <img src="/images/IPFS-file-sharing-2.png">
 <br>
-<b>Step 2</b> - In exchange for a token, Node B is granted access. Node A then shares the digital content with Node B.
+<b>Step 2</b> - In exchange for cryptocurrency, Node B is granted access. Node A then shares the digital content with Node B.
 </p>
 <br>
 <p align="center">
 <img src="/images/IPFS-file-sharing-3.png">
 <br>
-<b>Step 3</b> - In exchange for a token, Node D is granted access. Node A & Node B share the digital content with Node D. Network throughput has increased, as two nodes are now sharing the data.
+<b>Step 3</b> - In exchange for cryptocurrency, Node D is granted access. Node A & Node B share the digital content with Node D. Network throughput has increased, as two nodes are now serving the data to Node D.
 </p>
 
 ## The Smart Contract State Machine
 
-We can model a smart contract as a [state machine](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
+We can model a smart contract as a state machine[[13]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
 
-A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus, the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
+A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus[[14]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -265,3 +265,8 @@ Alice can revoke access to Bob by generating a new contract key and encrypting a
 - [7](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity
 - [8](https://en.wikipedia.org/wiki/Cryptographic_hash_function) One way hashing function https://en.wikipedia.org/wiki/Cryptographic_hash_function
 - [9](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in Commercial Real Estate" by Deloitte Financial Services https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf
+- [10](https://en.wikipedia.org/wiki/BitTorrent) Bit Torrent https://en.wikipedia.org/wiki/BitTorrent
+- [11](https://www.amazon.com/) Amazon https://www.amazon.com
+- [12](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
+- [13](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
+- [14](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
