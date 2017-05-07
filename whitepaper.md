@@ -1,17 +1,28 @@
-# Permissioned Blocks White Paper
+
+<h1 align="center">Permissioned Blocks White Paper</h1>
+<p align="center">
+By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
+</p>
+
 ## Introduction
 
 Blockchain technology with smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises to impact our lives in many ways. By redefining business models and economies such that users can enter into transactions with one another, in a peer-to-peer fashion, without relying on intermediaries.
 
-However, blockchain technology is still in development, and there are a few short-comings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) when executing and storing blockchain transactions. Data associated with any transaction on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and security of confidential and personal information. 
+However, blockchain technology is still in development, and there are a few shortcomings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). The data associated with any transaction on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information remain private to those that take part in a blockchain transaction or have been granted permission to access to view the information.
+This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain private to those that have been granted permission to read the information.
+
+<p align="center">
+<img src="/images/blockchain-privacy.png">
+<br>
+<b>Permissioned Blocks</b> - A figurative representation of a private block of data being shared with an authorised user.
+</p>
 
 Permissioned Blocks can be used in two modes:
-- To secure <b>smart contract</b> information - input values and calculation results.
-- To secure <b>digital content</b> attached to a smart contract - E.g. legal and non-legal documents, music, video...etc.
+- To secure <b>smart contract</b> information - input values and calculation results of smart contract functions.
+- To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that this technology can be used with any blockchain that has smart contract capabilites (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
 
 Various solutions[[6]](http://www.learningmachine.com/) [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) on the blockchain in place of the actual private data. Ownership of the data is proved by whomever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
 
@@ -29,7 +40,7 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[10]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receieve the content.
+Current peer-to-peer file sharing protocols such as BitTorrent[[10]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receive the content.
 
 However, if we combine a file sharing protocol with a blockchain protocol to govern to whom content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of sensitive or confidential information.
 
@@ -45,7 +56,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[11](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a crypto-currency[[12]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure required by the autho to publish their work to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[[11]](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a cryptocurrency[[12]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -308,11 +319,11 @@ Sharing of the contract's private key occurs by a method of boxing. For example,
 
 Alice can revoke access to Bob by generating a new contract key and encrypting all state changes going forward with this key. Alice would then update the smart contract by removing Bob's capabilities, and updating any other users that may have been granted permissions with the address of the new contract key.
 
-## Smart Contract Metadata
-
-## Smart Contracts in any Language
-
 ## Conclusion
+In this paper we have introduced a new technology called Permissioned Blocks that is a combination of blockchain and peer-to-peer file sharing technology. Permissioned Blocks allows businesses and individuals to conduct transactions on public blockchains whilst keeping sensitive information private. 
+
+Current blockchain technology is designed to share all transaction data with all nodes in the blockchain network. Permission Blocks changes this by only sharing confidential and personal information with other nodes in the network upon permission being granted.
+
 ## Citations
 - [[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) "A Gentle Introduction to Smart Contracts" by Antony Lewis https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts
 - [[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) "Privacy on the Blockchain" by Vitalik Buterin https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/
