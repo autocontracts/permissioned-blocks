@@ -105,11 +105,10 @@ function impureFunction ( items ) {
 var c = impureFunction( values );
 // Now `values.a` is 3, the impure function modifies it.
 ```
-<br>
 <p align="center">
-<b>Non pure function</b> - A Javascript impure function
+<b>An impure function</b> - A Javascript impure function
 </p>
-
+<br>
 ```
 var values = { a: 1 };
 
@@ -125,7 +124,7 @@ var c = pureFunction( values.a );
 // `values.a` has not been modified, it's still 1
 ```
 <p align="center">
-<b>Pure function</b> - A Javascript pure function
+<b>A Pure function</b> - A Javascript pure function
 </p>
 
 To apply a functional programming pattern to writing smart contracts, we combine the previous contract state, with the current input parameters of a function, to produce the new contract state.
@@ -137,17 +136,32 @@ To apply a functional programming pattern to writing smart contracts, we combine
 </p>
 
 Ethereum uses the Solidity[[18]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
-
 ```
-function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
-            returns (uint total, uint tax) {
-      total = total + price * quantity;
-      tax = tax + total * taxRate / 100
-  }
+contract ImpureSmartContract {
+  uint public total; 
+  uint public tax;
+  
+  function calculateTotal(uint price, uint quantity, uint taxRate) {
+        total = total + price * quantity;
+        tax = tax + total * taxRate / 100
+   }
+}
 ```
-
 <p align="center">
-<b>Solidity pure function</b> - A function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
+<b>An impure function</b> - A Solidity impure function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
+</p>
+<br>
+```
+contract PureSmartContract {
+  function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
+              returns (uint total, uint tax) {
+        total = total + price * quantity;
+        tax = tax + total * taxRate / 100
+   }
+}
+```
+<p align="center">
+<b>A pure function</b> - A Solidity pure function that calculates the running balance of <i>total</i> and <i>tax</i>. The state information are the variables <i>total</i> and <i>tax</i>. The input parameters are <i>price</i>, <i>quantity</i> and <i>taxRate</i>.
 </p>
 
 Here we see that the variables <i>total</i> and <i>tax</i> are returned by the function and their values are not persisted by the smart contract function.
