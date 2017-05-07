@@ -15,7 +15,7 @@ This white paper describes technology developed by Autonomous Contracts[[4]](htt
 <p align="center">
 <img src="/images/blockchain-privacy.png">
 <br>
-<b>Permissioned Blocks</b> - A figurative representation of a private block of data being shared with another authorised user.
+<b>Permissioned Blocks</b> - A figurative representation of a private block of data being shared with an authorised user.
 </p>
 
 Permissioned Blocks can be used in two modes:
