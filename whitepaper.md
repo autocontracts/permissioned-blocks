@@ -6,11 +6,11 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Introduction
 
-Blockchain technology with smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises to the creation of new business models and economies. The key factor this technology brings, is enablement of users to transact with one another in a peer-to-peer manner, without relying on intermediaries.
+Blockchain technology and smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. The main factor to bring this into being, is the enablement of users to transact with one another in a peer-to-peer manner without requiring intermediaries.
 
-However, blockchain technology is still in development, and there are a few shortcomings today that limit the technology's practical use and uptake. One of such limitations is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). The data associated with any transaction on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
+However, blockchain technology is still in development and maturing, and there are some shortcomings today that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain private to those that have been granted permission to read the information. A working example is demonstrated [here](https://www.youtube.com/watch?v=Zt9DIopmzbA).
+This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain private to those that have been granted permission. You can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA).
 
 <p align="center">
 <img src="/images/blockchain-privacy.png">
