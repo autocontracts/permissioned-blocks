@@ -6,7 +6,7 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Introduction
 
-Blockchain technology and smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. The main factor to bring this into being, is the enablement of users to transact with one another in a peer-to-peer manner without requiring intermediaries.
+Blockchain technology and smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. The main factor to bring this into being, is the enablement of users to transact with one another, peer-to-peer, without requiring intermediaries.
 
 However, blockchain technology is still in development and maturing, and there are some shortcomings today that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
