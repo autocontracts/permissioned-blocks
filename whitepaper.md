@@ -36,6 +36,7 @@ Permissioned Blocks goes further, and describes a decentralised model where priv
 
 Some use cases are:
 - Buying, selling and the subscription of digital content (books, magazines, music, movies...)
+- A distributed booking channel for accommodation.
 - Digital certificate registrations (Land titles, birth certificates, university qualifications...).
 - Personal management of health records.
 - Real estate; cash-flow management of rental properties[[9]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf).
@@ -43,6 +44,7 @@ Some use cases are:
 - Improved credit scoring for financial services via real-time and complete credit & trade histories. 
 - Trade finance, invoicing and payment records.
 - Insurance history.
+- and more...
 
 ## Permissioned Based File Sharing
 
