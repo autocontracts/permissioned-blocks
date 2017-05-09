@@ -9,7 +9,8 @@ The white paper above details the engineering design decisions for Permissioned 
 
 Demo Highlights:
 
-- 100% privacy of smart contract functional state information.
+- Grant access rights to digital content   
+- Transfer ownership of digital contract (Land Title in this demo)
 - Max throughput of 10,000 transactions per second (using [Tendermint](https://tendermint.com/) consensus engine).
 - No gas processing fees.
 - Decentralised solution using a folk of [IPFS](https://ipfs.io/) for the secure storage of smart contract state information.
