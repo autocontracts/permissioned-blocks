@@ -1,8 +1,8 @@
 # Permissioned Blocks - Bringing Privacy to Public Blockchains
 
-The white paper (still in progress) that details the engineering design decisions behind the prototype shown in the following demo video:
-
 [White Paper - Permissioned Blocks](https://github.com/autocontracts/permissioned-blocks/blob/master/whitepaper.md) 
+
+The white paper above details the engineering design decisions for Permissioned Blocks. You can view a working demonstration of this technology in the following demo video, or you can install and run the demo with the instructions below.
 
 [![Demo](images/video-thumbnail.png)](https://www.youtube.com/watch?v=Zt9DIopmzbA)
 <br>
@@ -45,4 +45,4 @@ $ docker stop device-2
 $ docker rm device-2
 ```
 
-At the moment, the demo is uses LinkedIn in order to identify yourself, and register your deivce. So, you'll have to create a dummy account in order to test using the second device. Other login options will be added later...
+The demo is uses LinkedIn in the digital identity manager. You'll have to create a dummy account in order to test interacting with another entity. Other login options will be added later.
