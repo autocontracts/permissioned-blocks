@@ -19,9 +19,9 @@ Demo Highlights:
 
 ## Run Demo
 
-A docker image has been created as the easiest way to run the permissioned blocks demo, with all the environment settings setup for you. For instructions for install Docker see [here](https://docs.docker.com/engine/installation/). 
+A docker image has been created as the easiest way to run the permissioned blocks demo, with all the environment settings setup for you. If you don't have Docker installed on your machine follow these instructions [here](https://docs.docker.com/engine/installation/). 
 
-Run the following command:
+Then run the following command:
 ```
 $ docker run --name device-1 -p 3001:3001 -p 4001:4001 -e LOCALHOST="0.0.0.0:3001" -e IPFS_SWARMHOST="/ip4/0.0.0.0/tcp/4001" autocontracts/permissionedblocks 
 ```
