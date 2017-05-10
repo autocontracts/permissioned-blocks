@@ -46,4 +46,4 @@ $ docker stop device-2
 $ docker rm device-2
 ```
 
-The demo uses LinkedIn OAuth as the methos for logging into the digital identity manager and registering your device. You'll have to create a dummy account in order to test granting permissions and transferring ownership to another entity. Other login options will be added later.
+The demo uses LinkedIn OAuth as the method for logging into the digital identity manager and registering your device. You'll have to create a dummy LinkedIn account (if you don't have two) to create another entity, in order to test granting permissions and transferring ownership. Other login options will be added later.
