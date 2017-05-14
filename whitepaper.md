@@ -152,7 +152,7 @@ To apply a functional programming pattern to writing smart contracts, we combine
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
-<b>A Smart Contract with Pure Functions</b> - The first stage change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
+<b>A Smart Contract with Pure Functions</b> - The first state change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
 </p>
 
 <p><br></p>
