@@ -10,7 +10,7 @@ Blockchain technology and smart contracts[[1]](https://bitsonblocks.net/2016/02/
 
 However, blockchain technology is still in development and maturing, and there are some shortcomings today that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain private to those that have been granted permission. The technology has been built and tested, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for furthur inspection.
+This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between to those parties that have been granted permission. The approach I took in writing this white paper was to develop a system based on current and as mature as possible technology. The technology has been built and tested, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for furthur inspection.
 
 <p align="center">
 <img src="/images/blockchain-privacy.png">
