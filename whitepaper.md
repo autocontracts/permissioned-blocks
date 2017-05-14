@@ -245,7 +245,7 @@ Using a functional programming pattern, this function has parameters <i>balance<
 Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state inforation to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
 
 ### Complex Contracts: Multi-statechain validation
-A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain no requiring validation, and other statechains requiring validation by multiple oracles.
+A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain requiring no validation, and other statechains requiring validation by multiple endorser-oracles.
 
 ## Statechain Security Model
 
