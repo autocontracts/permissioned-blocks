@@ -29,6 +29,12 @@ $ docker run --name device-1 -p 3001:3001 -p 4001:4001 -e LOCALHOST="0.0.0.0:300
 This will host the contract-manager on port 3001, and IPFS on port 4001.
 Make sure that you do not have a firewall blocking these ports and they are open.
 
+If you receive the following error:
+```
+Failed to resolve swarm connection: swarm/connect: connect QmWBWBYTWsuKFPgVknTcDFrSsdCkzA6GJYiNcSkYWw8GHA failure: dial attempt failed: context deadline exceeded
+```
+I have noticed an issue where one of the swarm validator nodes on the Google Engine Cluster is failing. I think it is a capacity issue that I am resolving... sorry, raise an issue to alert me if this happens.
+
 To clean up:
 ```
 $ docker stop device-1
