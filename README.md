@@ -11,7 +11,7 @@ Demo Highlights:
 
 - Grant access rights to digital content   
 - Transfer ownership of digital contract (Land Title in this demo)
-- Max throughput of 10,000 transactions per second (using [Tendermint](https://tendermint.com/) consensus engine).
+- An order of magnitude faster than vanilla etherum. Max throughput of ~10,000 transactions per second (using [Tendermint](https://tendermint.com/) consensus engine).
 - No gas processing fees.
 - Decentralised solution using a folk of [IPFS](https://ipfs.io/) for the secure storage of smart contract state information.
 - Compatible with any Turing Complete blockchain (e.g. [Ethereum](https://www.ethereum.org/), [Hyperledger](https://www.hyperledger.org/)). Decoupled and modular design.
@@ -28,12 +28,6 @@ $ docker run --name device-1 -p 3001:3001 -p 4001:4001 -e LOCALHOST="0.0.0.0:300
 
 This will host the contract-manager on port 3001, and IPFS on port 4001.
 Make sure that you do not have a firewall blocking these ports and they are open.
-
-If you receive the following error:
-```
-Failed to resolve swarm connection: swarm/connect: connect QmWBWBYTWsuKFPgVknTcDFrSsdCkzA6GJYiNcSkYWw8GHA failure: dial attempt failed: context deadline exceeded
-```
-I have noticed an issue where one of the swarm validator nodes on the Google Engine Cluster is failing. I think it is a capacity issue that I am resolving... sorry, raise an issue to alert me if this happens.
 
 To clean up:
 ```
