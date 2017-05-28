@@ -34,7 +34,7 @@ There are two categories Permissioned Blocks can be applied:
 - To secure <b>smart contract</b> state information - internal state information recorded during a blockchain transaction.
 - To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[9]](https://en.wikipedia.org/wiki/Turing_machine)).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities. That is, a blockchain with network nodes that contain turing complete virtual machines[[9]](https://en.wikipedia.org/wiki/Turing_machine) for proecessing transactions.
 
 <p align="center">
 <img src="/images/permissioned-blocks-architechture-demo.png">
