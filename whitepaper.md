@@ -6,15 +6,15 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Background
 
-In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition in order to improve cash flow management in the real estate industry. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the concepts and potential of Midasium to disrupt the commerical real estate sector are further presented. 
+In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily could create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  Midasium was used to show the potential of such blockchain models to disrupt the commerical real estate sector. 
 
-In 2015 I saw that there were some challenges with using blockchain technology that needed further research and development for the full potential of this technology to be realised. These were:
+Although the vision of Midasium was apealing, there still remain technical challenges using blockchain technology that needed further research and development for the full potential of this technology to be realised. These were:
 - <b>Scalability</b> - The throughput speeds and latency times of the leading blockchains were too slow for use cases with large transactional volumes.
 - <b>Privacy</b> - All information on a public blockchain is visible for all participants to read.
 
-In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have also recently done work in this area. However, I believe this white paper provides a different angle for solving the problem, and as such, this design has some unique features and benefits that could be very useful to various use cases.  
+In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have also recently produced valuable solutions in this area. However, I believe the designs in this white paper provides a different angle for solving the problem, and as such, it has some unique features and benefits when applied to various use cases.  
 
-"External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, further expands on this paper to describe a recompilation technique when applying this design, that abstracts away some of the complexities in order to make programming of a smart contract easier.
+"External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, expands on this design to describe a technique that could be applied in order to abstract away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
 
 ## Introduction
 
