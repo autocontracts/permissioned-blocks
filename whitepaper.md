@@ -42,13 +42,13 @@ The blockchain used and described in this white paper is the Ethereum blockchain
 <b>Working Demo</b> - The architecture of a working demonstration of permissioned blocks.
 </p>
 
-Various solutions[[10]](http://www.learningmachine.com/) [[11]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[12]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) on the blockchain in place of the actual private data. Ownership of the data is proved by whoever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
+Many blockchain solutions[[10]](http://www.learningmachine.com/) [[11]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) link externally stored data to a blockchain using a unique fingerprint (known as a one-way hashing function[[12]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) of the data set. These solutions tend to rely on traditional centralised databases for the external storage, which in effect nullifies some of the unique characteristics of a distributed blockchain architecture.
 
-Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and shared only with authorised blockchain accounts. Furthermore, computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
+Permissioned Blocks describes a decentralised model for linking external data to a public blockchain. External data that is <i>attached</i> to a smart contract and shared only with authorised accounts. Furthermore, computation of smart contract functions, such as calculation of bond payments, commissions and taxes, can also remain private using this technology. 
 
 Some use cases are:
-- Buying, selling and the subscription of digital content (books, magazines, music, movies...)
-- A distributed booking channel for accommodation.
+- Buying, selling and subscription of digital content (books, magazines, music, movies...)
+- A distributed booking channel for the travel industry.
 - Digital certificate registrations (Land titles, birth certificates, university qualifications...).
 - Personal management of health records.
 - Real estate; cash-flow management of rental properties[[13]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf).
@@ -60,15 +60,16 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receive the content.
+Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once content is added to a network node, the data will be freely shared with any other node. Creators and owners of digital content are almost powerless to stop copyright material being distriubuted on such networks.
 
-However, if we combine a file sharing protocol with a blockchain protocol to govern to whom content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of sensitive or confidential information.
+If we combine a peer-to-peer file sharing protocol with a blockchain protocol, this opens the possibility to harness the benefits of both protocols. That is, a low cost data sharing network with security control logic that protects access to copyright material and confidential information.
 
 Benefits: 
-- No dependency on centralised services in order to control data access. 
-- No cloud service fees.
-- Higher network throughput as demand increases.
-- A low cost, self-sustaining system.
+- No dependency on a centralised service to control data access.
+- More resilient to network failures or cyber attacks due to a distributed architecture. One node failure will not compromise the entire network.
+- Improved security of confidential data.
+- Higher data throughput as demand increases.
+- A low cost, self-sustaining network.
 
 <p align="center">
 <img src="/images/blockchain-inegration-layers.png">
@@ -76,7 +77,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[[15]](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned based file sharing protocol where a smart contract is be used to distribute their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using the online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
