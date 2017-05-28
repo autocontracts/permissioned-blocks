@@ -6,23 +6,23 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Background
 
-In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) to improve the cash flow management for the real estate industry at the finals of a Citibank competition. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the concepts and potential of Midasium to disrupt the commerical real estate sector are discussed. 
+In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition in order to improve cash flow management in the real estate industry. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the concepts and potential of Midasium to disrupt the commerical real estate sector are further presented. 
 
-However, in 2015 I saw that there were some challenges with blockchain technology that needed further research and development for the full potential of this technology to be realised. These were:
-- <b>Scalability</b> - The throughput speeds of the leading blockchain technologies (Bitcoin, Ethereum) were too slow for mass adoption.
+In 2015 I saw that there were some challenges with using blockchain technology that needed further research and development for the full potential of this technology to be realised. These were:
+- <b>Scalability</b> - The throughput speeds and latency times of the leading blockchains were too slow for use cases with large transactional volumes.
 - <b>Privacy</b> - All information on a public blockchain is visible for all participants to read.
 
-In 2016, I set out to do my own work on solving the privacy issue, and this white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have since done work in this area. However, I believe this white paper provides a different way of attacking the problem, and as such, has some unique features and benefits that could be very useful to various use cases.  
+In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have also recently done work in this area. However, I believe this white paper provides a different angle for solving the problem, and as such, this design has some unique features and benefits that could be very useful to various use cases.  
 
-"External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, further expands on this paper to describe a recompilation technique that makes programming of a smart contract seemless in order to apply this solution.
+"External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, further expands on this paper to describe a recompilation technique when applying this design, that abstracts away some of the complexities in order to make programming of a smart contract easier.
 
 ## Introduction
 
-Blockchain technology and smart contracts[[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. The main factor to bring this into being, is the enablement of users to transact with one another, peer-to-peer, without requiring intermediaries.
+Blockchain technology with smart contracts[[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promise the creation of new business models and economies. A major benefit is efficiencies realised by participants transacting with one another in a peer-to-peer manner, without requiring intermediaries.
 
-However, blockchain technology is still in development and maturing, and there are some shortcomings today that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data on a public blockchain used today, such as Ethereum[[7]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
+However, blockchain technology is still in development and maturing, and there are some shortcomings that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data recorded on a public blockchain, such as Ethereum[[7]](https://www.ethereum.org/), is available in the open and clear for all participants to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[8]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between to those parties that have been granted permission. The approach I took in writing this white paper was to develop a system based upon current and as mature as possible technology. That is, technology that has a large user base and has been hardened through iterative software versions. The technology has been built and tested, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for furthur inspection.
+This white paper describes technology developed by Autonomous Contracts[[8]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between parties. A protoype of Permissioned Blocks has been developed, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for further inspection.
 
 <p align="center">
 <img src="/images/blockchain-privacy.png">
@@ -30,8 +30,8 @@ This white paper describes technology developed by Autonomous Contracts[[8]](htt
 <b>Permissioned Blocks</b> - A figurative representation of a private block of data being shared with an authorised user.
 </p>
 
-Permissioned Blocks can be used in two modes:
-- To secure <b>smart contract</b> information - input values and calculation results of smart contract functions.
+There are two categories Permissioned Blocks can be applied:
+- To secure <b>smart contract</b> state information - internal state information recorded during a blockchain transaction.
 - To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
 The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[9]](https://en.wikipedia.org/wiki/Turing_machine)).
