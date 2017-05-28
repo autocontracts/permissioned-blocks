@@ -4,13 +4,25 @@
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
+## Background
+
+In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily would create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commerical real estate sector. 
+
+Although the vision of Midasium was appealing, there still remained technical challenges with blockchain technology at the time that needed further research and development for the full potential of this technology to be realised. These were:
+- <b>Scalability</b> - The throughput speeds and latency times of the leading blockchains were too slow for use cases that have large transactional volumes.
+- <b>Privacy</b> - All information on a public blockchain is visible to all participants to read.
+
+In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have also recently produced viable solutions in this area. However, I believe the design described in this white paper provides a different angle for solving the problem, and as such, there are some unique features and benefits when applied to various use cases.  
+
+Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
+
 ## Introduction
 
-Blockchain technology with smart contracts[[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises to impact our lives in many ways. By redefining business models and economies such that users can enter into transactions with one another, in a peer-to-peer fashion, without relying on intermediaries.
+Blockchain technology with smart contracts[[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promise the creation of new business models and economies. A major benefit is efficiencies realised by participants transacting with one another in a peer-to-peer manner, without requiring intermediaries.
 
-However, blockchain technology is still in development, and there are a few shortcomings that limit blockchain's practical use and uptake. One of such limitations is the lack of privacy[[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). The data associated with any transaction on a public blockchain used today, such as Ethereum[[3]](https://www.ethereum.org/), is available in the open and clear for all to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and security of confidential and personal information. 
+However, blockchain technology is still in development and maturing, and there are some shortcomings that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data recorded on a public blockchain, such as Ethereum[[7]](https://www.ethereum.org/), is available in the open and clear for all participants to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[4]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain private to those that have been granted permission to read the information. A working example is demonstrated [here](https://www.youtube.com/watch?v=Zt9DIopmzbA).
+This white paper describes technology developed by Autonomous Contracts[[8]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between parties. A protoype of Permissioned Blocks has been developed, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for further inspection.
 
 <p align="center">
 <img src="/images/blockchain-privacy.png">
@@ -18,43 +30,46 @@ This white paper describes technology developed by Autonomous Contracts[[4]](htt
 <b>Permissioned Blocks</b> - A figurative representation of a private block of data being shared with an authorised user.
 </p>
 
-Permissioned Blocks can be used in two modes:
-- To secure <b>smart contract</b> information - input values and calculation results of smart contract functions.
+There are two categories Permissioned Blocks can be applied:
+- To secure <b>smart contract</b> state information - internal state information recorded during a blockchain transaction.
 - To secure <b>digital content</b> attached to a smart contract - E.g. Legal documents, music, video...etc.
 
-The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities (is a turing complete virtual machine[[5]](https://en.wikipedia.org/wiki/Turing_machine)).
+The blockchain used and described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks, means that the technology can be used with any blockchain that has smart contract capabilities. That is, a blockchain with network nodes that contain turing complete virtual machines[[9]](https://en.wikipedia.org/wiki/Turing_machine) for processing transactions.
 
 <p align="center">
 <img src="/images/permissioned-blocks-architechture-demo.png">
 <br>
-<b>Working Demo</b> - The architecture of permissioned blocks.
+<b>Working Demo</b> - The architecture of a working demonstration of permissioned blocks.
 </p>
 
-Various solutions[[6]](http://www.learningmachine.com/) [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) have attempted to solve the blockchain privacy problem, by storing a unique fingerprint (known as a one-way hashing function[[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) on the blockchain in place of the actual private data. Ownership of the data is proved by whomever can produce the correct dataset that reproduces the fingerprint. These solutions however are not complete. There remains an open questions of where the data is to be stored and how sharing of the data is to be controlled.
+Many blockchain solutions[[10]](http://www.learningmachine.com/) [[11]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) link externally stored data to a blockchain using a unique fingerprint (known as a one-way hashing function[[12]](https://en.wikipedia.org/wiki/Cryptographic_hash_function)) of the data set. These solutions tend to rely on traditional centralised databases for the external storage, which in effect nullifies some of the unique characteristics of a distributed blockchain architecture.
 
-Permissioned Blocks goes further, and describes a decentralised model where private data is <i>attached</i> to the blockchain and shared only with authorised blockchain accounts. Furthermore, computation of smart contract functions, such as the calculation of bond payments, commissions and taxes, can also remain private using Permissioned Blocks technology. 
+Permissioned Blocks describes a decentralised model for linking external data to a public blockchain. External data that is <i>attached</i> to a smart contract and shared only with authorised accounts. Furthermore, computation of smart contract functions, such as calculation of bond payments, commissions and taxes, can also remain private using this technology. 
 
 Some use cases are:
-- Buying, selling and the subscription of digital content (books, magazines, music, movies...)
+- Buying, selling and subscription of digital content (books, magazines, music, movies...)
+- A distributed booking channel for the travel industry.
 - Digital certificate registrations (Land titles, birth certificates, university qualifications...).
 - Personal management of health records.
-- Real estate; cash-flow management of rental properties[[9]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf).
+- Real estate; cash-flow management of rental properties[[13]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf).
 - Know Your Customer (KYC) verification procedures for financial services.
 - Improved credit scoring for financial services via real-time and complete credit & trade histories. 
 - Trade finance, invoicing and payment records.
 - Insurance history.
+- and more...
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[10]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that the owner or creator of digital content has no control over which nodes in the network are permitted to receive the content.
+Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once content is added to a network node, the data will be freely shared with any other node. Creators and owners of digital content are almost powerless to stop copyright material being distriubuted on such networks.
 
-However, if we combine a file sharing protocol with a blockchain protocol to govern to whom content is shared, this opens the possibility to harness the benefits of both protocols, whilst avoiding copyright infringements or the leaking of sensitive or confidential information.
+If we combine a peer-to-peer file sharing protocol with a blockchain protocol, this opens the possibility to harness the benefits of both protocols. That is, a low cost data sharing network with security control logic that protects access to copyright material and confidential information.
 
 Benefits: 
-- No dependency on centralised services in order to control data access. 
-- No cloud service fees.
-- Higher network throughput as demand increases.
-- A low cost, self-sustaining system.
+- No dependency on a centralised service to control data access.
+- More resilient to network failures or cyber attacks due to a distributed architecture. One node failure will not compromise the entire network.
+- Improved security of confidential data.
+- Higher data throughput as demand increases.
+- A low cost, self-sustaining network.
 
 <p align="center">
 <img src="/images/blockchain-inegration-layers.png">
@@ -62,7 +77,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher. Instead of using a publisher such as Amazon[[11]](https://www.amazon.com/), they could instead use a permissioned based file sharing protocol. A smart contract would be used to distribute their e-book in exchange for a cryptocurrency[[12]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require in order to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of having to use an online publisher.
+For example, consider an author of an e-book who normally sells their work using an online publisher such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned based file sharing protocol where a smart contract is be used to distribute their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using the online publisher.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
@@ -88,9 +103,9 @@ For example, consider an author of an e-book who normally sells their work using
 
 ## The Smart Contract State Machine
 
-We can model a smart contract as a state machine[[13]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
+We can model a smart contract as a state machine[[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
 
-A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus[[14]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
+A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus[[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -100,14 +115,14 @@ A smart contract's state is modified by sending function input parameters as a t
 
 The disadvantage of storing the smart contract state information directly on a blockchain are:
 
-- <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a Merkle Patricia Tree[[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
-- <b> Cost. </b> In Ethereum there is a cost (the gas price[[16]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc)) for processing and storing the data sent in transaction messages.
+- <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a Merkle Patricia Tree[[19]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
+- <b> Cost. </b> In Ethereum there is a cost (the gas price[[20]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc)) for processing and storing the data sent in transaction messages.
 
 ## Separating State Persistence from Functional Behaviour
 
 If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
 
-To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[17]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
+To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[21]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
 ```
 var values = { a: 1 };
 
@@ -150,12 +165,12 @@ To apply a functional programming pattern to writing smart contracts, we combine
 
 <p align="center">
 <img src="/images/smart-contract-using-pure-functions.png">
-<b>A Smart Contract with Pure Functions</b> - The first stage change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
+<b>A Smart Contract with Pure Functions</b> - The first state change is caused by the combination of input parameter P1 and the initial contract state of S0 to produce the new contract state S1. The second state change is caused by the combination of input parameter P2 and the previous state S1, to produce the new state S2.
 </p>
 
 <p><br></p>
 
-Ethereum uses the Solidity[[19]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
+Ethereum uses the Solidity[[23]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
 ```
 contract ImpureSmartContract {
   uint public total; 
@@ -190,9 +205,9 @@ Here we see that the variables <i>total</i> and <i>tax</i> are returned by the f
 
 ## The Statechain
 
-If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[20]](https://ipfs.io/), which is a Content Addressed, Versioned, P2P File System[[21]](https://arxiv.org/pdf/1407.3561v1.pdf) was selected:
-- Uses a distributed p2p file sharing algorithm called BitSwap[[22]](https://github.com/ipfs/specs/tree/master/bitswap).
-- Uses a content addressing scheme[[23]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data.
+If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[24]](https://ipfs.io/), which is a Content Addressed, Versioned, P2P File System[[25]](https://arxiv.org/pdf/1407.3561v1.pdf) was selected:
+- Uses a distributed p2p file sharing algorithm called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap).
+- Uses a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data.
 - Serves versioned digital content of any size.
 
 To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
@@ -234,7 +249,7 @@ function calculateCommission(uint balance, uint tax, uint commission)
 Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which are state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why we see that they are returned by the function.
 
 1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
-2. He makes a <b>Call</b>[[24]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made on his own private blockchain node.
+2. He makes a <b>Call</b>[[28]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made to his own node.
 3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
 4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <b>Transaction</b> to the blockchain. 
 5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS and verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
@@ -243,7 +258,7 @@ Using a functional programming pattern, this function has parameters <i>balance<
 Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state inforation to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
 
 ### Complex Contracts: Multi-statechain validation
-A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain no requiring validation, and other statechains requiring validation by multiple oracles.
+A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain requiring no validation, and other statechains requiring validation by multiple endorser-oracles.
 
 ## Statechain Security Model
 
@@ -262,7 +277,7 @@ Resolving the statechain requires both authentication and authorisation of the r
 
 ## Token Authentication
 
-Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token (JWT)[[25]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token (JWT)[[29]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
 
 ```
 {
@@ -277,7 +292,7 @@ Token authentication is used to prove the authenticity of message requesting sta
 <b>Claims</b> - The first section of the token are the claims asserted by the requestor in JSON format and then Base64Url encoded. 
 </p>
 
-In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the blockchain itself is used as a reference point in time. Usually a timestamping authority is used in such distributed architectures to establish a unified reference point in time, such as in PKI systems. This however this would create a dependency on a third party, and the blockchain transaction count is a reliable, trustworthy heartbeat by design. The timestamp is generated by using latest Block Number and Transaction Number in combination this with the associated Transaction Hash.  
+In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the blockchain itself is used as a reference point in time. Usually a timestamping authority[[30]](https://en.wikipedia.org/wiki/Trusted_timestamping) is used in such distributed architectures to establish a unified reference point in time, such as in PKI systems. This however this would create a dependency on a third party, and the blockchain transaction count is a reliable, trustworthy heartbeat by design. The timestamp is generated by using latest Block Number and Transaction Number in combination this with the associated Transaction Hash.  
 
 <p align="center">
 <img src="/images/digital-signing.png">
@@ -331,28 +346,33 @@ In this paper we have introduced a new technology called Permissioned Blocks tha
 Current blockchain technology is designed to share all transaction data with all nodes in the blockchain network. Permission Blocks changes this by only sharing confidential and personal information with other nodes in the network upon permission being granted.
 
 ## Citations
-- [[1]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) "A Gentle Introduction to Smart Contracts" by Antony Lewis https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts
-- [[2]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) "Privacy on the Blockchain" by Vitalik Buterin https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/
-- [[3]](https://www.ethereum.org/) Ethereum https://www.ethereum.org/
-- [[4]](http://autocontracts.io/) Autonomous Contracts http://autocontracts.io/
-- [[5]](https://en.wikipedia.org/wiki/Turing_machine) Turing Machine https://en.wikipedia.org/wiki/Turing_machine
-- [[6]](http://www.learningmachine.com/) The Learning Machine http://www.learningmachine.com/
-- [[7]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain
-- [[8]](https://en.wikipedia.org/wiki/Cryptographic_hash_function) One way hashing function https://en.wikipedia.org/wiki/Cryptographic_hash_function
-- [[9]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in Commercial Real Estate" by Deloitte Financial Services https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf
-- [[10]](https://en.wikipedia.org/wiki/BitTorrent) Bit Torrent https://en.wikipedia.org/wiki/BitTorrent
-- [[11]](https://www.amazon.com/) Amazon https://www.amazon.com
-- [[12]](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
-- [[13]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
-- [[14]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
-- [[15]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
-- [[16]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc) "Ethereum Gas Fuel and Fees" by Joseph Chow https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc
-- [[17]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
-- [[18]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions in Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
-- [[19]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
-- [[20]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
-- [[21]](https://arxiv.org/pdf/1407.3561v1.pdf) "IPFS - Content Addressed, Versioned, P2P File System" by Juan Benet https://arxiv.org/pdf/1407.3561v1.pdf
-- [[22]](https://github.com/ipfs/specs/tree/master/bitswap) Bitswap Specs https://github.com/ipfs/specs/tree/master/bitswap
-- [[23]](https://en.wikipedia.org/wiki/Content-addressable_storage) Content Adressable Storage https://en.wikipedia.org/wiki/Content-addressable_storage
-- [[24]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) Interacting with Contracts https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html
-- [[25]](https://jwt.io/introduction/) JSON Web Tokens - Introduction https://jwt.io/introduction
+- [[1]](http://midasium.com/) "Midasium: Blockchain of Real Estate" http://midasium.com/
+- [[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in commercial real estate" by Deloitte https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf
+- [[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) "Quorum White Paper" by JP Morgan https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf
+- [[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) "External storage on the EVM: a static recompilation approach" by Luke Anthony Williams https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4
+- [[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) "A Gentle Introduction to Smart Contracts" by Antony Lewis https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts
+- [[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/) "Privacy on the Blockchain" by Vitalik Buterin https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/
+- [[7]](https://www.ethereum.org/) Ethereum https://www.ethereum.org/
+- [[8]](http://autocontracts.io/) Autonomous Contracts http://autocontracts.io/
+- [[9]](https://en.wikipedia.org/wiki/Turing_machine) Turing Machine https://en.wikipedia.org/wiki/Turing_machine
+- [[10]](http://www.learningmachine.com/) The Learning Machine http://www.learningmachine.com/
+- [[11]](https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain/) Blockwise Global Identity https://www.blockwise.org/2017/04/28/the-global-identity-on-blockchain
+- [[12]](https://en.wikipedia.org/wiki/Cryptographic_hash_function) One way hashing function https://en.wikipedia.org/wiki/Cryptographic_hash_function
+- [[13]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) "Blockchain in Commercial Real Estate" by Deloitte Financial Services https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf
+- [[14]](https://en.wikipedia.org/wiki/BitTorrent) Bit Torrent https://en.wikipedia.org/wiki/BitTorrent
+- [[15]](https://www.amazon.com/) Amazon https://www.amazon.com
+- [[16]](https://en.wikipedia.org/wiki/Cryptocurrency) Cryptocurrency https://en.wikipedia.org/wiki/Cryptocurrency
+- [[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) Solidity Smart Contract Patterns http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine
+- [[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe) "Consensus in Blockchain Systems. In Short." by Chris Hammerschmidt https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe
+- [[19]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) Merkle Patricia Tree Specification https://github.com/ethereum/wiki/wiki/Patricia-Tree
+- [[20]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc) "Ethereum Gas Fuel and Fees" by Joseph Chow https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc
+- [[21]](https://en.wikipedia.org/wiki/Pure_function) Pure Functions https://en.wikipedia.org/wiki/Pure_function
+- [[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/) Pure Functions in Javascript by Nicolas Carlo http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/
+- [[23]](http://solidity.readthedocs.io/) Solidity http://solidity.readthedocs.io/
+- [[24]](https://ipfs.io/) Interplanetary File System (https://ipfs.io/)
+- [[25]](https://arxiv.org/pdf/1407.3561v1.pdf) "IPFS - Content Addressed, Versioned, P2P File System" by Juan Benet https://arxiv.org/pdf/1407.3561v1.pdf
+- [[26]](https://github.com/ipfs/specs/tree/master/bitswap) Bitswap Specs https://github.com/ipfs/specs/tree/master/bitswap
+- [[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) Content Adressable Storage https://en.wikipedia.org/wiki/Content-addressable_storage
+- [[28]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) Interacting with Contracts https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html
+- [[29]](https://jwt.io/introduction/) JSON Web Tokens - Introduction https://jwt.io/introduction
+- [[30]](https://en.wikipedia.org/wiki/Trusted_timestamping) Trusted timestamping https://en.wikipedia.org/wiki/Trusted_timestamping
