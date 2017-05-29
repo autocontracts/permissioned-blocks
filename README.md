@@ -23,7 +23,8 @@ A docker image has been created as the easiest way to run the permissioned block
 
 Then run the following command:
 ```
-$ docker run --name device-1 -p 3001:3001 -p 4001:4001 -e LOCALHOST="0.0.0.0:3001" -e IPFS_SWARMHOST="/ip4/0.0.0.0/tcp/4001" autocontracts/permissionedblocks 
+$ docker run -d --name device-1 -p 3001:3001 -p 4001:4001 -e LOCALHOST="0.0.0.0:3001" -e IPFS_SWARMHOST="/ip4/0.0.0.0/tcp/4001" autocontracts/permissionedblocks
+$ docker exec -it device-1 contract-manager run -l=true
 ```
 
 This will host the contract-manager on port 3001, and IPFS on port 4001.
@@ -37,7 +38,8 @@ $ docker rm device-1
 
 If you want to create another docker container running on the same machine, then:
 ```
-$ docker run --name device-2 -p 3002:3002 -p 4002:4002 -e LOCALHOST="0.0.0.0:3002" -e IPFS_SWARMHOST="/ip4/0.0.0.0/tcp/4002" autocontracts/permissionedblocks 
+$ docker run -d --name device-2 -p 3002:3002 -p 4002:4002 -e LOCALHOST="0.0.0.0:3002" -e IPFS_SWARMHOST="/ip4/0.0.0.0/tcp/4002" autocontracts/permissionedblocks
+$ docker exec -it device-2 contract-manager run -l=true
 ```
 
 To clean up:
