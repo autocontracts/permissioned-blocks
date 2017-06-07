@@ -190,7 +190,7 @@ contract ImpureSmartContract {
 
 ```
 contract PureSmartContract {
-  function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) 
+  function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) constant
               returns (uint total, uint tax) {
         total = total + price * quantity;
         tax = tax + total * taxRate / 100
@@ -240,7 +240,7 @@ In this case validation by an oracle service should be employed to endorse the s
 
 The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
 ```
-function calculateCommission(uint balance, uint tax, uint commission) 
+function calculateCommission(uint balance, uint tax, uint commission) constant
           returns (uint balance, uint tax) {
       balance = balance + balance * commission / 100;
       tax = tax + balance * 20 / 100
