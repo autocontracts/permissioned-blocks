@@ -19,9 +19,6 @@ Demo Highlights:
 
 ## Run Demo
 
-NOTE: The application is currently down as I ran out of free credits with hosting the Tendermint Validators on Google Cloud :-( 
-If people are interested in donating I will set up a bitcoin account for donations. Post an issue if you would like to donate and I will start the test environment again.
-
 A docker image has been created as the easiest way to run the permissioned blocks demo, with all the environment settings setup for you. If you don't have Docker installed on your machine follow these instructions [here](https://docs.docker.com/engine/installation/). 
 
 Then run the following command:
