@@ -6,7 +6,7 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Background
 
-In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily would create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commerical real estate sector. 
+In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily would create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector. 
 
 Although the vision of Midasium was appealing, there still remained technical challenges with blockchain technology at the time that needed further research and development for the full potential of this technology to be realised. These were:
 - <b>Scalability</b> - The throughput speeds and latency times of the leading blockchains were too slow for use cases that have large transactional volumes.
@@ -22,7 +22,7 @@ Blockchain technology with smart contracts[[5]](https://bitsonblocks.net/2016/02
 
 However, blockchain technology is still in development and maturing, and there are some shortcomings that limit the technology's practical use and uptake. One of such limitation is the lack of privacy[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). For example, data recorded on a public blockchain, such as Ethereum[[7]](https://www.ethereum.org/), is available in the open and clear for all participants to read and interpret. This leaves blockchain technology in its current form, impractical for many use cases that require privacy and the security of confidential and personal information. 
 
-This white paper describes technology developed by Autonomous Contracts[[8]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between parties. A protoype of Permissioned Blocks has been developed, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for further inspection.
+This white paper describes technology developed by Autonomous Contracts[[8]](http://autocontracts.io/) called <b>Permissioned Blocks</b>. Using Permissioned Blocks, sensitive information can remain confidential and private between parties. A prototype of Permissioned Blocks has been developed, and you can find a working demonstration [here](https://www.youtube.com/watch?v=Zt9DIopmzbA) for further inspection.
 
 <p align="center">
 <img src="/images/blockchain-privacy.png">
@@ -60,7 +60,7 @@ Some use cases are:
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once content is added to a network node, the data will be freely shared with any other node. Creators and owners of digital content are almost powerless to stop copyright material being distriubuted on such networks.
+Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once content is added to a network node, the data will be freely shared with any other node. Creators and owners of digital content are almost powerless to stop copyright material being distributed on such networks.
 
 If we combine a peer-to-peer file sharing protocol with a blockchain protocol, this opens the possibility to harness the benefits of both protocols. That is, a low cost data sharing network with security control logic that protects access to copyright material and confidential information.
 
@@ -255,7 +255,7 @@ Using a functional programming pattern, this function has parameters <i>balance<
 5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS and verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
 
 ### Simple Contracts: No statechain validation
-Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state inforation to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
+Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state information to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
 
 ### Complex Contracts: Multi-statechain validation
 A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain requiring no validation, and other statechains requiring validation by multiple endorser-oracles.
@@ -283,6 +283,7 @@ Token authentication is used to prove the authenticity of message requesting sta
 {
       State Address: [IPFS Address]
       Blockchain: [Target Blockchain e.g. ETH]
+      ChainID: [Main chain, test net]
       Account: [Blockchain account]
       Issuer: [Node ID]
       IssuedAt: [BlockNumber.TransactionNumber.TransactionHash]
