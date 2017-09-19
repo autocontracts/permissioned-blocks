@@ -4,7 +4,7 @@
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
-<p align="center">**** ANNOUNCEMENT ****</p> <p align="center">Upcoming token sale: http://lightstreams.network ****</p>
+<p align="center">**** ANNOUNCEMENT ****</p> <p align="center">Upcoming token sale: http://lightstreams.network </p>
 
 ## Background
 
