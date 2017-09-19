@@ -1,3 +1,5 @@
+DEMO DEPRECATED. See: https://github.com/lightstreams/
+
 # Permissioned Blocks - Bringing Privacy to Public Blockchains
 
 [White Paper - Permissioned Blocks](https://github.com/autocontracts/permissioned-blocks/blob/master/whitepaper.md) 
