@@ -309,7 +309,7 @@ The Permissioned Blocks design extends IPFS such that certain blocks, known as <
 
 IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation need to occur. 
 
-Authorisation occurs by a remote call from IPFS to the blockchain to query the smart contract specified by the tagged block. The smart contract verifies whether the requestor is authorised to access the IPFS block. If authorised, the IPFS sends the block to the requestor via the IPFS bitswap protocol. 
+Authorisation of the requestor to access a block occurs by verifying that the requestor has been granted a 'read' capability. The capabilities are stored in the smart contract and these are queried via a remote call from IPFS to smart contract specified by each tagged block. If authorised, the IPFS sends the block to the requestor via the IPFS bitswap protocol. 
 
 <p align="center">
 <img src="/images/permissioned-block-request.png">
@@ -317,15 +317,28 @@ Authorisation occurs by a remote call from IPFS to the blockchain to query the s
 <b>IPFS Bitswap Authorisation Protocol</b> - A request is made from Bob's IPFS instance to Alice's IPFS instance for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's IPFS instance makes a remote call to her blockchain instance to verify if Bob is authorised to access the requested block.
 </p>
 
-If the requestor successfully receives the IPFS block, it is likewise tagged in the datastore as a Permissioned Block and the same authorisation logic occurs when other node peers request this block.
+When a requestor successfully receives the IPFS block, it is then tagged in the datastore with the smart contracts address and the same authorisation logic occur will occur if any other node in the network requests this block.
 
-If the requestor is not authorised, then request is simply ignored. The IPFS DHT router system will need to look elsewhere by querying other  nodes if they have the block. The routing system will continue to search for the requested block until a timeout occurs on the requestor's node. When the timeout occurs, this will signal to the requestor that the block cannot be resolved either because the block does not exist or they do not have permission to access the block.
+If the requestor is not authorised, then request is simply ignored. The IPFS Distributed Hash Table (DHT) routing system will need to look elsewhere by querying other nodes if they have the block. The routing system will continue to search for the requested block until a timeout occurs on the requestor's node. When the timeout occurs, this will signal to the requestor that the block cannot be resolved either because the block does not exist or they do not have permission to access the block.
+
+## User Capabilities
+
+The user capabilites are stored in the smart contract and specify the permissions that have been granted to each user. When granting a capability to a user, the user's public key is stored with the capability being granted. A user can have multiple capabilities granted to them. The capabilities are defined as follows:
+
+| Capability | Description                                                                                                           |
+|------------|-----------------------------------------------------------------------------------------------------------------------|
+| Write      | The user is able to add new state information to the statechain                                                       |
+| Read       | The user is able to read state information from the statechain. This capability is used in the authorisation process. |
+| Grant      | The user is able to grant a capability to another user.                                                               |
+| Revoke     | The is able to revoke a capability from another user.                                                                 |
+
+Any capability can be revoked from a user by any user that has been granted the 'revoke' capability. When revoking occurs, the specified capability that was assigned to user is deleted from the smart contract.
 
 ## A Secure Transmission Channel
 
-The IPFS bitswap channel used for transmission of blocks between nodes must be secured in order to retain the confidentiality of the smart contract's state information. To secure the channel, all communications are encrypted, such that only authorised blockchain accounts can decrypt the information.
+The IPFS bitswap channel used for transmission of blocks between nodes needs to be secured in order to avoid messages being read while in transit. To secure the channel, all communications are encrypted, such that only the receiver can decrypt the information being sent.
 
-Communication of the statechain information is encrypted using a shared contract key. The contract key an asymmetric key that is generated when the smart contract is deployed to the blockchain network. The key has a public key for encryption of communications and a private key for decryption. The public key is stored with the smart contract's metadata and the private key is shared only with those that are granted access to the statechain. 
+Communication of the statechain information is encrypted by the sender using the receiver's public key and decrypted by the receiver using their private key. The receiver's public key is part of an asymmetric key that the receiver generates. The asymmetric key has a public key element for encryption of communications and a private key for decryption. The public key is stored in the smart contract and the private key is kept secret by the receiver and is never transmitted.
 
 <p align="center">
 <img src="/images/secure_comms.png">
@@ -333,15 +346,7 @@ Communication of the statechain information is encrypted using a shared contract
 <b>Secure communication channel</b> - The IPFS bitswap channel is secured by token authentication and the encryption of permissioned blocks using a shared contract key. 
 </p>
 
-Sharing of the contract's private key occurs by a method of boxing. For example, Alice is owner of a smart contract and wishes to grant Bob permission to the access state information of the contract. Bob generates an Ethereum account and gives Alice the public key for that account. Alice encrypts the contract's private key using Bob's public key to create a boxed key that only Bob can decrypt. Alice stores Bob's boxed key on her IPFS instance, tagging each IPFS block with the smart contract address, such that they become Permissioned Blocks. Alice then updates the smart contract, adding Bob's account and the address of the boxed key. Bob queries the smart contract to retrieve the IPFS address of the box key and then makes an IPFS request to resolve the key. Upon receiving the boxed key, he decrypts the message using his private key to obtain the contract's private key.  
-
-<p align="center">
-<img src="/images/boxing_contract_key.png">
-<br>
-<b>Shared Contract Key</b> - The contract key is passed from Alice to Bob via the process of boxing, encrypting the private key using Bob's public key. The IPFS bitswap protocol is used for transmission of the boxed key.
-</p>
-
-Alice can revoke access to Bob by generating a new contract key and encrypting all state changes going forward with this key. Alice would then update the smart contract by removing Bob's capabilities, and updating any other users that may have been granted permissions with the address of the new contract key.
+All state information is stored encrypted within the IPFS datastore to ensure the full security of the data. When a user writes information to the statechain, those blocks are encrypted using their asymmetric key. When a requestor receives a block, they store the information in encrypted state as they have received it. Only when they send blocks to another requestor does the block get decrypted and then encrypted using the public key of the new requestor.
 
 ## Conclusion
 In this paper we have introduced a new technology called Permissioned Blocks that is a combination of blockchain and peer-to-peer file sharing technology. Permissioned Blocks allows businesses and individuals to conduct transactions on public blockchains whilst keeping sensitive information private. 
