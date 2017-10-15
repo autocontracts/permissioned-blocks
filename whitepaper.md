@@ -4,8 +4,6 @@
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
-<p align="center">**** ANNOUNCEMENT ****</p> <p align="center">Upcoming token sale: http://lightstreams.network </p>
-
 ## Background
 
 In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily would create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector. 
