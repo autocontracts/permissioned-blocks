@@ -1,5 +1,6 @@
 
-<h1 align="center">Permissioned Blocks White Paper</h1>
+<h1 align="center">Permissioned Blocks</h1>
+<h2 align="center">A Design for Confidential Smart Contracts</h2>
 <p align="center">
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
