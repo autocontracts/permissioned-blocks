@@ -71,7 +71,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who normally sells their work using an online publisher such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned based file sharing protocol where a smart contract is be used to distribute their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The minimum infrastructure the author would require to publish to a global audience would simply be an ordinary laptop. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using the online publisher.
+For example, consider an author of an e-book who would normally sell their work using an online marketplace such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned-based file sharing protocol where a smart contract is used for controlling distribution their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The centralised infrastructure that Amazon provides for hosting the content and managing the exchange or fiat currency for digital content would become redundant. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using Amazon.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
