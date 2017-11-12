@@ -1,19 +1,17 @@
 
 <h1 align="center">Permissioned Blocks</h1>
-<h2 align="center">A Design for Confidential Smart Contracts</h2>
+<h2 align="center">A Design for Blockchian Privacy & Confidentiality</h2>
 <p align="center">
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
 ## Background
 
-In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry, and secondarily would create a Virtual Credit Bureau to manage portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where  the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector. 
+In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry and secondarily to create a Virtual Credit Bureau for managing portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector.
 
-Although the vision of Midasium was appealing, there still remained technical challenges with blockchain technology at the time that needed further research and development for the full potential of this technology to be realised. These were:
-- <b>Scalability</b> - The throughput speeds and latency times of the leading blockchains were too slow for use cases that have large transactional volumes.
-- <b>Privacy</b> - All information on a public blockchain is visible to all participants to read.
+Although the vision of Midasium was appealing, one of the major technical challenges that needed further blockchain research and development was to do with privacy where on a public blockchain all information is visible to all participants to read. This is obviously was not an acceptable situation for the Midasium solution where the amount of rent a tenant was paying would be visible to everyone.
 
-In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan have also recently produced viable solutions in this area. However, I believe the design described in this white paper provides a different angle for solving the problem, and as such, there are some unique features and benefits when applied to various use cases.  
+In 2016, I set out to do my own work on solving the privacy issue. This white paper and the accompanying prototype is the result of that work. Various other platforms such as Quorum[[3]](https://github.com/jpmorganchase/quorum-docs/blob/master/Quorum%20Whitepaper%20v0.1.pdf) by JP Morgan and the Raiden Network[[31]](https://raiden.network/) have recently provided their own solutions to blockchain privacy, although each with certain limitations. 
 
 Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
 
@@ -383,3 +381,4 @@ Current blockchain technology is designed to share all transaction data with all
 - [[28]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) Interacting with Contracts https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html
 - [[29]](https://jwt.io/introduction/) JSON Web Tokens - Introduction https://jwt.io/introduction
 - [[30]](https://en.wikipedia.org/wiki/Trusted_timestamping) Trusted timestamping https://en.wikipedia.org/wiki/Trusted_timestamping
+- [[31]](https://raiden.network/) The Raiden Network https://raiden.network/
