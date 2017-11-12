@@ -55,15 +55,14 @@ Permissioned Blocks opens up the possibility for decentralised use cases that ha
 
 ## Permissioned Based File Sharing
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once content is added to a network node, the data will be freely shared with any other node. Creators and owners of digital content are almost powerless to stop copyright material being distributed on such networks.
+Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once the content is added to a network node, the data will be freely shared with any other node. 
 
-If we combine a peer-to-peer file sharing protocol with a blockchain protocol, this opens the possibility to harness the benefits of both protocols. That is, a low cost data sharing network with security control logic that protects access to copyright material and confidential information.
+If we combine a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as a point of control by the owner of the contract opening up the possibility to harness the benefits of both protocols together. That is a low-cost data sharing network with a programmable logic layer that can control access to content along with a method of transferring value in exchange for access.
 
 Benefits: 
-- No dependency on a centralised service to control data access.
-- More resilient to network failures or cyber attacks due to a distributed architecture. One node failure will not compromise the entire network.
-- Improved security of confidential data.
-- Higher data throughput as demand increases.
+- No dependency on a centralised service for managing access control.
+- Greater resilience to network failures or attacks due to a distributed architecture. 
+- Scalability of data throughput as demand increases.
 - A low cost, self-sustaining network.
 
 <p align="center">
