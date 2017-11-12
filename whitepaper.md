@@ -31,12 +31,6 @@ There are two categories of information that this protocol can be used for:
 
 The blockchain described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks means that the technology can be used with any blockchain that has smart contract capabilities. That is a blockchain with network nodes that contain turing complete virtual machines[[9]](https://en.wikipedia.org/wiki/Turing_machine) for processing transactions.
 
-<p align="center">
-<img src="/images/permissioned-blocks-architechture-demo.png">
-<br>
-<b>Working Demo</b> - The architecture of a working demonstration of permissioned blocks.
-</p>
-
 A standard Ethereum smart contract stores its state information on the blockchain along with the smart contract’s instruction code. State changes of the smart contract can occur by transactions being transmitted publicly to every node in the network.
 
 The Permissioned Blocks protocol gives additional functionality where state information that a party wishes to remain private and confidential is stored in a decentralised data store that has a security layer called the as opposed to the blockchain. This decentralised data store is called a decentralised secure vault. Rather than transmit transaction messages publicly to the blockchain network, only a reference address of the transaction that is stored in the secure vault is transmitted.
@@ -351,6 +345,11 @@ All state information is stored encrypted within the IPFS datastore to ensure th
 In this paper we have introduced a new technology called Permissioned Blocks that is a combination of blockchain and peer-to-peer file sharing technology. Permissioned Blocks allows businesses and individuals to conduct transactions on public blockchains whilst keeping sensitive information private. 
 
 Current blockchain technology is designed to share all transaction data with all nodes in the blockchain network. Permission Blocks changes this by only sharing confidential and personal information with other nodes in the network upon permission being granted.
+<p align="center">
+<img src="/images/permissioned-blocks-architechture-demo.png">
+<br>
+<b>Working Demo</b> - The architecture of a working demonstration of permissioned blocks.
+</p>
 
 ## Citations
 - [[1]](http://midasium.com/) "Midasium: Blockchain of Real Estate" http://midasium.com/
