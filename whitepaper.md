@@ -55,17 +55,17 @@ Permissioned Blocks opens up the possibility for decentralised use cases that ha
 
 ## High-level overview: A Permissioned File Sharing model for distributed networks.
 
-Peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) or IPFS[[24]](https://ipfs.io/) are distributed networks where nodes that freely share packets of data with other nodes in their network. Each node has an internal data store which it can add data to and an address is produced. Any other node in the network can use that address to request a copy of the data. There are no rules preventing access to addresses.
+Peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) or IPFS[[24]](https://ipfs.io/) are distributed networks that freely share packets of data between nodes in their network. Each node can add data to an internal data store which produces a routing address. Any node in the network can use this address to request a copy of the data be sent. There are no rules preventing access to addresses.
 
-On the other hand, blockchain protocols such as Ethereum[[7]](https://www.ethereum.org/) distribute all data that is created by a node in the form of transactions to every other node in their network. There is no addressing mechanism like peer-to-peer file sharing networks.
+Blockchain protocols broadcast all data that is created by a node in the form of a transaction to every other node in their network. There is no request data in like peer-to-peer file sharing networks.
 
-Blockchain protocols like Ethereum have the ability for a node to deploy a tamper-proof program known as Smart Contracts[5] to every node in the network. By design, every node in the blockchain network is certain that they all have the same version of smart contract code. 
+Blockchain protocols like Ethereum[[7]](https://www.ethereum.org/) have the ability for a node to deploy a tamper-proof program known as Smart Contracts[5] to all nodes in the network. By design, the nodes in the network are certain that for a certain block number that they all have the same version of smart contract code.  
 
 To deploy a smart contract, a party that runs a node needs to pay a fee from a blockchain account. The smart contract can be programmed to specify that the account used for deployment is the owner of the smart contract and that only that account can execute certain functions.  This opens up the possibility for a party to transmit a smart contract as a set of security rules that can only be updated by them, to other parties in the network. 
 
-If we combine a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as the security mechanism for the peer-to-peer file sharing network. A security mechanism such that, when a node run by Alice transmits data to another node run by Bob, Alice can specify in a smart contract that Bob can follow, the nodes in the network that Bob is only permitted to transmit the data to.  
+If we combine a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as the security mechanism for the peer-to-peer file sharing protocol. A security mechanism, such that when a node run by Alice transmits data to another node run by Bob, Alice can specify in a smart contract, the nodes in the network that Bob is only permitted to transmit the data to.    
 
-This creates a permissioned file sharing protocol where rules for accessing content can be specified by one node along with a method of transferring value between nodes in the form of cryptocurrency.
+This creates a permissioned file sharing protocol where the rules for accessing content can be controlled along with a method of transferring value between parties in the form of cryptocurrency.
 
 Benefits: 
 - A security mechanism for controlling access to confidential data.
