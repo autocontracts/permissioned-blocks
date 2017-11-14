@@ -216,28 +216,21 @@ contract PureSmartContract {
 
 Here we see that the variables <i>total</i> and <i>tax</i> are returned by the function and their values are not persisted by the smart contract function.
 
-## The Statechain
+## Recording State Changes in the Distributed Secure Vault
 
-If we store the smart contract state information on an alternative storage system, then in order to retain the benefits of the blockchain's distributed architecture, the storage system needs to also be distributed. For this, and the following reasons, IPFS[[24]](https://ipfs.io/), which is a Content Addressed, Versioned, P2P File System[[25]](https://arxiv.org/pdf/1407.3561v1.pdf) was selected:
-- Uses a distributed p2p file sharing algorithm called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap).
-- Uses a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data.
-- Serves versioned digital content of any size.
+To protect confidential smart contract state information, any member variables that are required to be confidential are removed from the smart contract and the related functions are converted into confidential functions, by being made into pure functions where any sensitive variable are made as parameters to the function.
 
-To store the history of the smart contract state changes, a linked list data structure is chosen such that each state change references the previous state, and the head address of the linked list is stored in the smart contract. We will call this a <b>statechain</b>.
+Transaction messages to confidential functions are not transmitted as blockchain transactions. Instead, these messages are recorded in a distributed secure vault. The secure vault is a modified version of IPFS[[24]](https://ipfs.io/) that has a security layer that prevents unauthorised access to content. IPFS has a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data and protocol called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap) for distributing data.
+
+The reference addresses for each transaction message stored in the secure vault are broadcast to the network as blockchain transactions. These are processed using a function on the smart contract that stores the reference address in an array data structure. This way, the state-changing messages stored in the secure vault are linked to the smart contract. The ordering of the array is decided by the validators of the network by consensus. Note that the validators do not know and do not need to know the contents of reference addresses in order to validate the transactions.
+
+Any node that has been granted access to the secure vault can retrieve the transaction messages and replay them in order to calculate the current state of the smart contract.
 
 <p align="center">
 <img src="/images/statechain.png">
 <br>
-<b>The Statechain</b> - A linked list of IPFS Hash Addresses. The smart contract only references the IPFS address of the latest state change.
+<b>The Statechain</b> - An array of Refence Addresses to the Secure Vault
 </p>
-
-IPFS uses a content addressing scheme for resolving data. This means that the address of a block of data is the hash of that data. By harnessing the IPFS addressing scheme, the statechain has the same immutability features of a blockchain. For example, if the statechain is linked together, such that each block links to the next using an IPFS address, then any modification to a block would cause the hash calculation for the statechain's head address to be different. This would result in statechain head address no longer matching the stored statechain address in the smart contract.
-
-This useful property means that we need only to store the address of the latest state change in the smart contract to be able to follow the linked references and resolve the complete statechain, knowing that we have the full untampered history of the smart contract's state.
-
-Benefits:
-- <b> Privacy</b> - The statechain address stored in the smart contract, is the result of a one-way hashing function of the statechain information. Determination of the statechain information cannot be calculated from the address alone. Only by resolving the content using the IPFS protocol, can the statechain information be known. 
-- <b> Cost</b> - By storing the statechain address on the blockchain, significantly reduces the storage costs to negligible, in comparison to storing the complete state history on the blockchain.
 
 ## Statechain Validation
 
