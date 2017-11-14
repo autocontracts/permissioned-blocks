@@ -1,6 +1,6 @@
 
 <h1 align="center">Permissioned Blocks</h1>
-<h2 align="center">A Design for Blockchian Privacy & Confidentiality</h2>
+<h2 align="center">A Design for Blockchain Privacy & Confidentiality</h2>
 <p align="center">
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
