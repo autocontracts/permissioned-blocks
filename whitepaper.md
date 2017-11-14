@@ -133,9 +133,9 @@ The disadvantage of storing the smart contract state information directly on a b
 
 ## Separating State Persistence from Functional Behaviour
 
-If we separate the action of storing the smart contract's state from its functional behaviour, we can then store this information on an alternative storage system. With the data stored separately, we are then able to design a security model for ensuring the privacy of the smart contract state, and at the same time significantly reduce the blockchain storage costs.
+If we separate the recording of a smart contract's state changes from its functional behaviour, we are then able to store these state-changing messages on an alternative storage system. With the data stored separately, we are then able to build a security model that only allows a subset of nodes to access these messages, and at the same time significantly reduce the size of data stored on the blockchain.
 
-To achieve this desired outcome, we need to program the functions of a smart contract as being pure functions. A pure function[[21]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). That means a pure function always returns the same result given same parameters.
+To achieve this desired outcome, we need to program the functions of a smart contract as pure functions. A pure function[[21]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). This means a pure function will always return the same result for a given set of parameters.
 ```
 var values = { a: 1 };
 
@@ -151,7 +151,7 @@ var c = impureFunction( values );
 // Now `values.a` is 3, the impure function modifies it.
 ```
 <p align="center">
-<b>An impure function</b> - A Javascript impure function
+<b>An impure function</b> - A Javascript impure function that depends on the variable 'values' outside its scope. If run a second time the result will be different.
 </p>
 
 <p><br></p>
@@ -171,7 +171,7 @@ var c = pureFunction( values.a );
 // `values.a` has not been modified, it's still 1
 ```
 <p align="center">
-<b>A Pure function</b> - A Javascript pure function
+<b>A Pure function</b> - A Javascript pure function that does not depend on a variable outside its scope. This function will always produce the same result for the same set of parameters.
 </p>
 <p><br></p>
 To apply a functional programming pattern to writing smart contracts, we combine the previous contract state, with the current input parameters of a function, to produce the new contract state.
