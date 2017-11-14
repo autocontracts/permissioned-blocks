@@ -222,7 +222,7 @@ To protect confidential smart contract state information, any member variables t
 
 Transaction messages to confidential functions are not transmitted as blockchain transactions. Instead, these messages are recorded in a distributed secure vault. The secure vault is a modified version of IPFS[[24]](https://ipfs.io/) that has a security layer that prevents unauthorised access to content. IPFS has a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data and protocol called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap) for distributing data.
 
-The reference addresses for each transaction message stored in the secure vault are broadcast to the network as blockchain transactions. These are processed using a function on the smart contract that stores the reference address in an array data structure. This way, the state-changing messages stored in the secure vault are linked to the smart contract. The ordering of the array is decided by the validators of the network by consensus. Note that the validators do not know and do not need to know the contents of reference addresses in order to validate the transactions.
+The reference addresses for each transaction message stored in the secure vault are broadcast to the network as blockchain transactions. These are processed using a function on the smart contract that adds the reference address in an array data structure. This way, the state-changing messages stored in the secure vault are linked to the smart contract. The function for adding the reference address will not process messages from unauthorised accounts. The ordering of the array is decided by the validators of the network by consensus. Note that the validators do not know and do not need to know the contents of reference addresses in order to validate the transactions.
 
 Any node that has been granted access to the secure vault can retrieve the transaction messages and replay them in order to calculate the current state of the smart contract.
 
@@ -232,48 +232,14 @@ Any node that has been granted access to the secure vault can retrieve the trans
 <b>The Statechain</b> - An array of Refence Addresses to the Secure Vault
 </p>
 
-## Statechain Validation
+## The Secure Vault
 
-Validation of the statechain may need to be required in some user cases if the functions of the smart contract are intended to be executed by more than one blockchain account. For example, a smart contract function may expect 
+The Secure Vault is an extension of the IPFS protocol with a security layer protecting access to data by unauthorised accounts.
 
-```a + b = c```, 
-
-but a malicious actor could claim to have executed the function and updates the statechain with the result as 
-
-```a + b = z```. 
-
-In this case validation by an oracle service should be employed to endorse the state changes. 
-
-The following simplified algorithm describes the proposing and endorsing behaviour needed to validate the statechain. Consider the following solidity function:
-```
-function calculateCommission(uint balance, uint tax, uint commission) constant
-          returns (uint balance, uint tax) {
-      balance = balance + balance * commission / 100;
-      tax = tax + balance * 20 / 100
-  }
-```
-Using a functional programming pattern, this function has parameters <i>balance</i> and <i>tax</i>, which are state information, and <i>commission</i>, which is an input. The state information is <b>not</b> stored on the blockchain, so <i>balance</i> and <i>tax</i> are <b>not</b> member variables of the contract. This is why we see that they are returned by the function.
-
-1. Bob retrieves the latest <i>balance</i> and <i>tax</i> variables from the statechain. 
-2. He makes a <b>Call</b>[[28]](https://ethereum.gitbooks.io/frontier-guide/content/interacting_contract.html) to the function calculateCommission with the variables <i>balance</i>, <i>tax</i> and <i>commission</i>. The function returns the new <i>balance</i> and <i>tax</i> state information. <br><b>Note:</b> This is not a <i>Transaction</i> sent to the blockchain network, it is a function call made to his own node.
-3. Bob updates the statechain by adding the new <i>balance</i> and <i>tax</i> state information and he also records the <i>commission</i> variable he used as an input. This generates an IPFS address of the statechain, which is a hash of the new history of state changes.
-4. Bob saves the new statechain address in a member variable of the smart contract called <i>proposed_state</i>. He does this by sending a <b>Transaction</b> to the blockchain. 
-5. The Endorser calls the same calculateCommission function as Bob did, using the previous state information <i>balance</i> and <i>tax</i> and the <i>commission</i> input parameter Bob. The Endorser stores the result in their instance of IPFS and verifies that the IPFS address stored in the <i>proposed_state</i> member variable is the same IPFS hash address. If so, the Endorser then copies the <i>proposed_state</i> value to another member variable of the smart contract called <i>state</i> which holds the new verified IPFS address of the statechain.
-
-### Simple Contracts: No statechain validation
-Validation of the statechain is not necessary for use cases where the calculation of state change information does not occur. For example, in scenarios where the smart contract does not have any functions that are using state information to perform calculations. This may be in the case for smart contracts where the statechain only links to digital content (e.g. a pdf file) to the smart contract. The purpose of  the smart contract is to control how the digital content is distributed.
-
-### Complex Contracts: Multi-statechain validation
-A smart contract could be configured with a hybrid of two or more statechains. For example, depending upon the use-case, there may be one statechain requiring no validation, and other statechains requiring validation by multiple endorser-oracles.
-
-## Statechain Security Model
-
-Permissioned Blocks extends the IPFS protocol with a security layer that protects the statechain from unauthorised access.
-
-Resolving the statechain requires both authentication and authorisation of the requestor. That is, authentication that a message sent by a requester for requesting statechain information is authentic, and verification that the requestor is authorised to access the statechain. 
+Accessing data from the Secure Vault requires both authentication and authorisation by a requestor. Authentication that a message sent by a requester is authentic, and verification that the requestor is authorised to access the information. 
 
 - <b> Authentication</b> - occurs by harnessing the blockchain's cryptography features. A requestor proves the authenticity of a message  by attaching a digital signature to the message being sent. The digital signature is produced and validated using the requestor's blockchain.
-- <b> Authorisation</b> - occurs through verification that the requestor is authorised to access the statechain information. This is performed by querying the smart contract linked to the statechain. The smart contract stores a mapping of blockchain accounts to permissions. The permissions are capabilities to access the statechain and to execute smart contract functions.
+- <b> Authorisation</b> - occurs by verification that the requestor is authorised to access the requested address. The Secure Vault queries the smart contract that has a mapping of blockchain accounts with permissions for accessing the data.
 
 <p align="center">
 <img src="/images/authentication_authorisation.png">
@@ -283,7 +249,7 @@ Resolving the statechain requires both authentication and authorisation of the r
 
 ## Token Authentication
 
-Token authentication is used to prove the authenticity of message requesting statechain data. The token is similar to a JSON Web Token (JWT)[[29]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+Token authentication is used to prove the authenticity of message requesting data from the secure vault. The token is similar to a JSON Web Token (JWT)[[29]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
 
 ```
 {
@@ -309,7 +275,7 @@ In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the bloc
 
 ## Permissioned Blocks Authorisation
 
-The Permissioned Blocks design extends IPFS such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
+IPFS is modified such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
 
 IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation need to occur. 
 
@@ -331,8 +297,8 @@ The user capabilites are stored in the smart contract and specify the permission
 
 | Capability | Description                                                                                                           |
 |------------|-----------------------------------------------------------------------------------------------------------------------|
-| Write      | The user is able to add new state information to the statechain                                                       |
-| Read       | The user is able to read state information from the statechain. This capability is used in the authorisation process. |
+| Write      | The user is able to add new state information.                                                       |
+| Read       | The user is able to read state information. This capability is used in the authorisation process. |
 | Grant      | The user is able to grant a capability to another user.                                                               |
 | Revoke     | The is able to revoke a capability from another user.                                                                 |
 
@@ -342,7 +308,7 @@ Any capability can be revoked from a user by any user that has been granted the 
 
 The IPFS bitswap channel used for transmission of blocks between nodes needs to be secured in order to avoid messages being read while in transit. To secure the channel, all communications are encrypted, such that only the receiver can decrypt the information being sent.
 
-Communication of the statechain information is encrypted by the sender using the receiver's public key and decrypted by the receiver using their private key. The receiver's public key is part of an asymmetric key that the receiver generates. The asymmetric key has a public key element for encryption of communications and a private key for decryption. The public key is stored in the smart contract and the private key is kept secret by the receiver and is never transmitted.
+Communication of the information is encrypted by the sender using the receiver's public key and decrypted by the receiver using their private key. The receiver's public key is part of an asymmetric key that the receiver generates. The asymmetric key has a public key element for encryption of communications and a private key for decryption. The public key is stored in the smart contract and the private key is kept secret by the receiver and is never transmitted.
 
 <p align="center">
 <img src="/images/secure_comms.png">
@@ -350,7 +316,9 @@ Communication of the statechain information is encrypted by the sender using the
 <b>Secure communication channel</b> - The IPFS bitswap channel is secured by token authentication and the encryption of permissioned blocks using a shared contract key. 
 </p>
 
-All state information is stored encrypted within the IPFS datastore to ensure the full security of the data. When a user writes information to the statechain, those blocks are encrypted using their asymmetric key. When a requestor receives a block, they store the information in encrypted state as they have received it. Only when they send blocks to another requestor does the block get decrypted and then encrypted using the public key of the new requestor.
+All state information is stored encrypted within the IPFS datastore to ensure the full security of the data. When a user writes information, those blocks are encrypted using their asymmetric key. When a requestor receives a block, they store the information in encrypted state as they have received it. Only when they send blocks to another requestor does the block get decrypted and then encrypted using the public key of the new requestor.
+
+## Zero-knowlege Proofs for Payments
 
 ## Conclusion
 In this paper we have introduced a new technology called Permissioned Blocks that is a combination of blockchain and peer-to-peer file sharing technology. Permissioned Blocks allows businesses and individuals to conduct transactions on public blockchains whilst keeping sensitive information private. 
