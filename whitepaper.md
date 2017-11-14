@@ -151,7 +151,7 @@ var c = impureFunction( values );
 // Now `values.a` is 3, the impure function modifies it.
 ```
 <p align="center">
-<b>An impure function</b> - A Javascript impure function that depends on the variable 'values' outside its scope. If run a second time the result will be different.
+<b>An impure function</b> - A Javascript impure function that depends on the variable 'values' outside its scope. If run a second time with the same parameters, the result of this function will be different.
 </p>
 
 <p><br></p>
@@ -183,7 +183,7 @@ To apply a functional programming pattern to writing smart contracts, we combine
 
 <p><br></p>
 
-Ethereum uses the Solidity[[23]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution. This is as shown in following example:
+Ethereum uses the Solidity[[23]](http://solidity.readthedocs.io/) programming language for writing smart contracts. It is possible to refactor a Solidity function to be a pure function, and thus not have state information persisted during execution of the function. This is as shown in following example:
 ```
 contract ImpureSmartContract {
   uint public total; 
