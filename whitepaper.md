@@ -53,16 +53,25 @@ Permissioned Blocks opens up the possibility for decentralised use cases that ha
 - Insurance history.
 - and much more...
 
-## Permissioned Based File Sharing
+## High-level overview: A Permissioned File Sharing model for distributed networks.
 
-Current peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) are permissionless based protocols. By design, their distributed architectures have no central point of control, which means that once the content is added to a network node, the data will be freely shared with any other node. 
+Peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) or IPFS[[24]](https://ipfs.io/) are distributed networks where nodes that freely share packets of data with other nodes in their network. Each node has an internal data store which it can add data to and an address is produced. Any other node in the network can use that address to request a copy of the data. There are no rules preventing access to addresses.
 
-If we combine a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as a point of control by the owner of the contract opening up the possibility to harness the benefits of both protocols together. That is a low-cost data sharing network with a programmable logic layer that can control access to content along with a method of transferring value in exchange for access.
+On the other hand, blockchain protocols such as Ethereum[[7]](https://www.ethereum.org/) distribute all data that is created by a node in the form of transactions to every other node in their network. There is no addressing mechanism like peer-to-peer file sharing networks.
+
+Blockchain protocols like Ethereum have the ability for a node to deploy a tamper-proof program known as Smart Contracts[5] to every node in the network. By design, every node in the blockchain network is certain that they all have the same version of smart contract code. 
+
+To deploy a smart contract, a party that runs a node needs to pay a fee from a blockchain account. The smart contract can be programmed to specify that the account used for deployment is the owner of the smart contract and that only that account can execute certain functions.  This opens up the possibility for a party to transmit a smart contract as a set of security rules that can only be updated by them, to other parties in the network. 
+
+If we combine a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as the security mechanism for the peer-to-peer file sharing network. A security mechanism such that, when a node run by Alice transmits data to another node run by Bob, Alice can specify in a smart contract that Bob can follow, the nodes in the network that Bob is only permitted to transmit the data to.  
+
+This creates a permissioned file sharing protocol where rules for accessing content can be specified by one node along with a method of transferring value between nodes in the form of cryptocurrency.
 
 Benefits: 
-- No dependency on a centralised service for managing access control.
-- Greater resilience to network failures or attacks due to a distributed architecture. 
-- Scalability of data throughput as demand increases.
+- A security mechanism for controlling access to confidential data.
+- No dependency on a centralised entity.
+- Greater resilience to network failures and attacks due to its distributed architecture. 
+- Scalability of bandwidth as demand increases.
 - A low cost, self-sustaining network.
 
 <p align="center">
@@ -71,7 +80,7 @@ Benefits:
 <b>Protocol Layers</b> - The integration of blockchain protocol such as Ethereum and a file sharing protocol such as IPFS.
 </p>
 
-For example, consider an author of an e-book who would normally sell their work using an online marketplace such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned-based file sharing protocol where a smart contract is used for controlling distribution their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The centralised infrastructure that Amazon provides for hosting the content and managing the exchange or fiat currency for digital content would become redundant. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using Amazon.
+For example, consider an author of an e-book who would normally sell their work using an online marketplace such as Amazon[[15]](https://www.amazon.com/). Instead, they use a permissioned file sharing protocol where a smart contract is used for controlling distribution their e-book in exchange for a cryptocurrency[[16]](https://en.wikipedia.org/wiki/Cryptocurrency) payment. The centralised infrastructure that Amazon provides for hosting the content and managing the exchange or fiat currency for digital content would become redundant. The benefit for the author would be a substantial increase in revenue by removing the dependency and costs of using Amazon.
 
 <p align="center">
 <b>Distribution of Digital Content using a Smart Contract</b>
