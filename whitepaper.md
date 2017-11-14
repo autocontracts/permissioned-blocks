@@ -116,9 +116,9 @@ Any node that has been granted authorisation can resolve and access these set of
 
 ## The Smart Contract State Machine
 
-We can model a smart contract as a state machine[[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state. 
+We can model a smart contract as a state machine[[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state.
 
-A smart contract's state is modified by sending function input parameters as a transaction messages to the blockchain network. The transaction is validated by the network, and upon consensus[[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new contract state becomes a permanent part of the blockchain. The output of the function can be obtained by any node in the network by querying the smart contract.
+A smart contract's state is modified by sending input parameters for functions as a transaction messages to the blockchain network. The transaction is validated by network validators (miners in Ethereum), and upon consensus[[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new state becomes a permanent part of the blockchain. The output of any function can be obtained by any node by querying the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -126,10 +126,10 @@ A smart contract's state is modified by sending function input parameters as a t
 <b>A Smart Contract Model</b> - Input to function F2 modifies the internal state and produces an output. 
 </p>
 
-The disadvantage of storing the smart contract state information directly on a blockchain are:
+The disadvantage of storing the smart contract state information directly on a blockchain in this manner are:
 
-- <b> No privacy.</b> The internal storage that holds the state information is available for all nodes in the network to read. Also, the transactions that hold the input parameters to smart contract functions are available for all nodes to read. In Ethereum this is a Merkle Patricia Tree[[19]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) 
-- <b> Cost. </b> In Ethereum there is a cost (the gas price[[20]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc)) for processing and storing the data sent in transaction messages.
+- <b> No privacy.</b> The parameters sent to smart contracts functions and the resulting state changes that are recorded in the internal data store (a Merkle Patricia Tree[[19]](https://github.com/ethereum/wiki/wiki/Patricia-Tree) in Ethereum) are available for all nodes in the network to read. 
+- <b> Cost. </b> There is usually a transaction cost (in Ethereum a gas price[[20]](https://media.consensys.net/ethereum-gas-fuel-and-fees-3333e17fe1dc))) for processing and storing the data sent in messages.
 
 ## Separating State Persistence from Functional Behaviour
 
