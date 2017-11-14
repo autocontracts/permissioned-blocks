@@ -216,7 +216,7 @@ contract PureSmartContract {
 
 Here we see that the variables <i>total</i> and <i>tax</i> are returned by the function and their values are not persisted by the smart contract function.
 
-## Recording State Changes in the Distributed Secure Vault
+## Recording State Changes
 
 To protect confidential smart contract state information, any member variables that are required to be confidential are removed from the smart contract and the related functions are converted into confidential functions, by being made into pure functions where any sensitive variable are made as parameters to the function.
 
@@ -232,7 +232,7 @@ Any node that has been granted access to the secure vault can retrieve the trans
 <b>The Statechain</b> - An array of Refence Addresses to the Secure Vault
 </p>
 
-## The Secure Vault
+## The Distributed Secure Vault
 
 The Secure Vault is an extension of the IPFS protocol with a security layer protecting access to data by unauthorised accounts.
 
