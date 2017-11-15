@@ -325,9 +325,8 @@ Communication of the information is encrypted by the sender using the receiver's
 All state information is stored encrypted within the IPFS datastore to ensure the full security of the data. When a user writes information, those blocks are encrypted using their asymmetric key. When a requestor receives a block, they store the information in encrypted state as they have received it. Only when they send blocks to another requestor does the block get decrypted and then encrypted using the public key of the new requestor.
 
 ## Conclusion
-In this paper we have introduced a new technology called Permissioned Blocks that is a combination of blockchain and peer-to-peer file sharing technology. Permissioned Blocks allows businesses and individuals to conduct transactions on public blockchains whilst keeping sensitive information private. 
+In this paper we have introduced a new technology called Permissioned Blocks that is a combination of peer-to-peer file sharing and blockchain technology. Permissioned Blocks allows parties to conduct transactions on public blockchains whilst keeping sensitive information private and confidential.
 
-Current blockchain technology is designed to share all transaction data with all nodes in the blockchain network. Permission Blocks changes this by only sharing confidential and personal information with other nodes in the network upon permission being granted.
 <p align="center">
 <img src="/images/permissioned-blocks-architechture-demo.png">
 <br>
