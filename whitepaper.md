@@ -110,7 +110,7 @@ For example, consider an author of an e-book who would normally sell their work 
 <b>Step 3</b> - In exchange for cryptocurrency, Node D is granted access. Node A & Node B share the digital content with Node D. Network throughput has increased, as two nodes are now serving the data to Node D.
 </p>
 
-## Adding Privacy & Confidentiality features to Smart Contracts
+## Privacy & Confidentiality for Smart Contracts
 
 Smart Contracts are deployed to a blockchain by broadcasting a transaction that contains the program code from a node in the network. All nodes in the network will receive this transaction as part of an immutable block and as such the instruction code of the smart contract is also immutable. 
 
@@ -235,7 +235,7 @@ Any node that has been granted access to the secure vault can retrieve the trans
 <p align="center">
 <img src="/images/statechain.png">
 <br>
-<b>The Statechain</b> - An array of Refence Addresses to the Secure Vault
+<b>The Statechain</b> - An array of Reference Addresses to the Secure Vault
 </p>
 
 ## The Distributed Secure Vault
