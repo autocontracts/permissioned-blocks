@@ -256,7 +256,7 @@ Accessing data from the secure vault requires both authentication and authorisat
 <p align="center">
 <img src="/images/authentication_authorisation.png">
 <br>
-<b>Authentication & Authorisation</b> - A signed request is used to authenticate the requestor. A call is then made to the smart contract to verify that the requestor has permission to access the secure vault.
+<b>The Distributed Secure Vault</b> - A signed request is used to authenticate the requestor. A call is then made to the smart contract to verify that the requestor has permission to access the secure vault.
 </p>
 
 ## Token Authentication
@@ -289,17 +289,17 @@ In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the bloc
 
 IPFS has been modified such that certain blocks, known as Permissioned Blocks, require authorisation to be resolved.
 
-IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation need to occur. 
+IPFS divides and stores data in block sizes of 256KB. To identify permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security process of authentication and authorisation occurs. 
 
-Authorisation of the requestor to access a block occurs by verifying that the requestor has been granted a 'read' capability. The capabilities are stored in the smart contract and these are queried via a remote call from IPFS to smart contract specified by each tagged block. If authorised, the IPFS sends the block to the requestor via the IPFS bitswap protocol. 
+Authorisation of the requestor to access a block occurs by verifying that the requestor has been granted a 'read' capability. The capabilities are stored in the smart contract and these are queried via an inter-process remote call from the IPFS instance to Ethereum instance using the smart contract address specified by each tagged block. If authorised, the IPFS sends the block to the requestor via the IPFS bitswap protocol. 
 
 <p align="center">
 <img src="/images/permissioned-block-request.png">
 <br>
-<b>IPFS Bitswap Authorisation Protocol</b> - A request is made from Bob's IPFS instance to Alice's IPFS instance for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's IPFS instance makes a remote call to her blockchain instance to verify if Bob is authorised to access the requested block.
+<b>IPFS Bitswap Authorisation Protocol</b> - A request is made from Bob's IPFS instance to Alice's IPFS instance for a Permissioned Block. The request contains a signed token that authenticates Bob's identity. Alice's IPFS instance makes a remote call to her Ethereum instance to verify if Bob is authorised to access the requested block.
 </p>
 
-When a requestor successfully receives the IPFS block, it is then tagged in the datastore with the smart contracts address and the same authorisation logic occur will occur if any other node in the network requests this block.
+When a requestor successfully receives the IPFS block, it is then tagged in their datastore with the smart contracts address and the same authorisation logic occur will occur if any other node in the network requests this block.
 
 If the requestor is not authorised, then request is simply ignored. The IPFS Distributed Hash Table (DHT) routing system will need to look elsewhere by querying other nodes if they have the block. The routing system will continue to search for the requested block until a timeout occurs on the requestor's node. When the timeout occurs, this will signal to the requestor that the block cannot be resolved either because the block does not exist or they do not have permission to access the block.
 
