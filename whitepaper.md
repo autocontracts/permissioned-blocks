@@ -45,7 +45,7 @@ With this design, the list of authorised users can be modified by the smart cont
 
 A beneficial side effect of the Permission Block's protocol of storing transaction information in a decentralised data store is a reduction in the data stored on the public blockchain. It also means that the parties are not restricted in the size of the data that is transmitted as they will avoid gas fees for storage on the public blockchain.
 
-Permissioned Blocks opens up the possibility for decentralised use cases that have until now not been possible as they have required privacy and confidentiality to be feasible, such as:
+Permissioned Blocks opens up the possibility for decentralised use cases such as:
 
 - Buying, selling and subscription of digital content (books, magazines, music, movies...)
 - A distributed booking channel for the travel industry.
