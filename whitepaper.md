@@ -115,15 +115,15 @@ Smart Contracts are deployed to a blockchain by broadcasting a transaction that 
 
 However, the state information of a smart contract is mutable and is modified by broadcasting additional transaction messages that are addressed to the smart contract. When these messages are broadcast, all nodes in the network will see this information. 
 
-In order to protect sensitive smart contract state information from being seen and available to all nodes, a node instead stores transaction messages addressed to a smart contract in a decentralised data store. A data store that has a security layer that prevents access to data from unauthorised accounts. The node then broadcasts to the network the address of the transaction message to the network. These transaction addresses are stored in the smart contract in a queue data structure.
+In this design, to protect certain information from being seen and available to other nodes, a node instead stores transaction messages addressed to a smart contract in a decentralised data store. A data store that has a security layer that prevents access from unauthorised accounts. The node then broadcasts to the address of the transaction message to the network. These addresses are stored in the smart contract in a queue data structure.
 
 Any node that has been granted authorisation can resolve and access these set of transactions from the decentralised data store and replay them in order to obtain the current state of the smart contract.
 
 ## The Smart Contract State Machine
 
-We can model a smart contract as a state machine[[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine). A state machine that has a set of functions that produce deterministic outputs based upon input parameters and its internal state.
+A smart contract is a state machine[[17]](http://solidity.readthedocs.io/en/develop/common-patterns.html#state-machine) that has a set of functions that produce deterministic outputs based upon input parameters and its internal state.
 
-A smart contract's state is modified by sending input parameters for functions as a transaction messages to the blockchain network. The transaction is validated by network validators (miners in Ethereum), and upon consensus[[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new state becomes a permanent part of the blockchain. The output of any function can be obtained by any node by querying the smart contract.
+The state is modified by sending input parameters for functions as blockchain transaction messages. Transactions are validated by network validators (miners in Ethereum), and upon consensus[[18]](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe), the new state becomes a permanent part of the blockchain. The output of any function can be obtained by any node by querying the smart contract.
 
 <p align="center">
 <img src="/images/smart-contract-model.png">
@@ -138,7 +138,7 @@ The disadvantage of storing the smart contract state information directly on a b
 
 ## Separating State Persistence from Functional Behaviour
 
-If we separate the recording of a smart contract's state changes from its functional behaviour, we are then able to store these state-changing messages on an alternative storage system. With the data stored separately, we are then able to build a security model that only allows a subset of nodes to access these messages, and at the same time significantly reduce the size of data stored on the blockchain.
+If we separate the recording of a smart contract's state changes from its functional behaviour, we are then able to store these state-changing messages on an alternative storage system. With the data stored separately, we can design a security model that limits the parties that can access these messages, and at the same time significantly reduce the size of data stored on the blockchain.
 
 To achieve this desired outcome, we need to program the functions of a smart contract as pure functions. A pure function[[21]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). This means a pure function will always return the same result for a given set of parameters.
 ```
