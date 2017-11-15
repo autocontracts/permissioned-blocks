@@ -7,15 +7,17 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Abstract
 
-This paper describes a protocol called Permissioned Blocks that enables privacy and confidentiality of smart contract transactions. A smart contract capability system is described that has specific permissions granted to the parties of a smart contract. This allows one or more parties who are the owner(s) of the smart contract give consent to other parties to access the confidential smart contract information and perform functional operations.
+This paper describes a protocol called Permissioned Blocks that enables privacy and confidentiality for blockchain smart contracts. The protocol has a smart contract based capability system that is used to control to access protected smart contract information. The capability system allows for one or more parties that are designated as the owner(s) of the smart contract to give consent to other parties in order to access confidential information and to execute smart contract operations.
 
-This protocol also enables files to be linked to a smart contract using the same capability system to control access. The data is stored in a decentralised secure vault that is a modified version of IPFS allowing for the peer-to-peer distribution of the content. A benefit of this configuration is that files of any size can be attached to a smart contract without being charged high blockchain (gas) fees.
+This design integrates the blockchain Ethereum with a decentralised secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault has a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
+
+The Permissioned Blocks protocol also enables files to be linked to a smart contract such that access to the files is controlled by the owners of the smart contract. 
 
 ## Background
 
 In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry and secondarily to create a Virtual Credit Bureau for managing portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector.
 
-Although the vision of Midasium was appealing, one of the major technical challenges that needed further blockchain research and development was the lack of privacy and confidentiality of blockchain transaction. It was not an acceptable in a public blockchain scenario for the Midasium solution to display the amount of rent a tenant was paying publicly.
+Although the vision of Midasium was appealing, one of the major technical challenges was the lack of privacy and confidentiality of blockchain transaction. It was not a viable for the Midasium solution to list the history of rental payments on a public blockchain.
 
 In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work. 
 
