@@ -1,17 +1,19 @@
 
 <h1 align="center">Permissioned Blocks</h1>
-<h2 align="center">A Design for Blockchain Privacy & Confidentiality</h2>
+<h2 align="center">A Protocol for Blockchain Privacy & Confidentiality</h2>
 <p align="center">
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
 ## Abstract
 
-This paper describes a protocol called Permissioned Blocks that enables privacy and confidentiality for blockchain smart contracts. The protocol has a smart contract based capability system that is used to control to access protected smart contract information. The capability system allows for one or more parties that are designated as the owner(s) of the smart contract to give consent to other parties in order to access confidential information and to execute smart contract operations.
+This paper describes a protocol called Permissioned Blocks that provides privacy and confidentiality for parties using blockchain smart contracts. The protocol has a smart contract-based capability system that is used to control to access protected smart contract information. This capability system allows for one or more parties that are designated as the owner(s) of the smart contract to give consent to other parties in order to access confidential information and to execute smart contract operations
 
-This design integrates the blockchain Ethereum with a decentralised secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault has a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
+The Permissioned Blocks design integrates the blockchain Ethereum with a distribute secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault uses a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
 
-The Permissioned Blocks protocol also enables files to be linked to a smart contract such that access to the files is controlled by the owners of the smart contract. 
+The Permissioned Blocks protocol also enables files to be linked to a smart contract with access control controlled by the owners of the smart contract.
+
+Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
 
 ## Background
 
@@ -19,9 +21,7 @@ In late 2015, I presented a blockchain prototype called Midasium[[1]](http://mid
 
 Although the vision of Midasium was appealing, one of the major technical challenges was the lack of privacy and confidentiality of blockchain transaction. It was not a viable for the Midasium solution to list the history of rental payments on a public blockchain.
 
-In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work. 
-
-Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
+In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work.In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work.
 
 ## Introduction
 
@@ -33,23 +33,21 @@ In order for blockchain technology to have a practical use in many use cases, it
 
 Along with privacy there also a need for confidentiality between parties. For example, in a medical scenario, a patient may wish to give consent to one or more physicians in order to access their health record and no one else.  
 
-This white paper describes a protocol for keeping information between parties both private and confidential. It is a protocol where one or more parties are defined as the owners of certain information who then control access by giving consent to others.
-
-There are two categories of information that this protocol can be used for:
+This white paper describes a protocol for keeping information between parties both private and confidential. It is a protocol where one or more parties are defined as the owners of information who as owners control access and use of the information by giving consent to others.
 
 There are two categories of information that this protocol can be used for:
 - To manage <b>smart contract</b> transactional information - the data that is transmitted to a smart contract.
 - To manage <b>digital content</b> linked to a smart contract - E.g. documents, music, video...etc.
 
-The blockchain described in this white paper is Ethereum. A standard Ethereum smart contract stores its state information on the blockchain along with the smart contract’s instruction code. State changes of the smart contract occur by transactions being transmitted publicly to every node in the network.
+The blockchain described in this white paper is Ethereum [[7]](https://www.ethereum.org/). A standard Ethereum smart contract stores its state information on the blockchain along with the smart contract’s instruction code. State changes of the smart contract occur by transactions being transmitted publicly to every node in the network..
 
-The Permissioned Blocks protocol enhances the Ethereum[[7]](https://www.ethereum.org/) blockchain such that state information that a party wishes to remain private and confidential is stored in a decentralised data store as opposed to the blockchain. This decentralised data store is designed with a security layer and is called a Decentralised Secure Vault. 
+The Permissioned Blocks protocol enhances the Ethereum blockchain such that state information that a party wishes to remain private and confidential is stored in a decentralised data store as opposed to the blockchain. This decentralised data store is designed with a security layer to protect the information and is called a distributed secure vault. 
 
-Rather than transmit transaction messages publicly to the blockchain network, only a reference address of the transaction that is stored in the Secure Vault is transmitted. Those that are granted read permissions to the Secure Vault are authorised to access the protected transactions.
+Rather than transmit transaction messages publicly to the blockchain network, only a reference address of the transaction that is stored in the secure vault is transmitted. Those that are granted read permissions to the secure vault are authorised to access the protected transactions.
 
-With this design, the list of authorised users can be modified by the smart contract owner throughout the lifetime of the contract. When a user is added to the smart contract's list of authorised users, this new user will inherit the full history of the transactions related to the smart contract. Likewise, when ownership changes hands, the new owner will inherit the full history of the smart contract.
+The list of authorised users can be modified by the smart contract owner throughout the lifetime of the contract. When a user is added to the smart contract's list of authorised users, this new user will inherit the full history of the transactions related to the smart contract. Likewise, when ownership changes hands, the new owner will inherit the full history of the smart contract.
 
-A beneficial side effect of storing transaction information in a decentralised data store as opposed to the blockchain is a reduction in the data stored on the global ledger and thus a saving in cost by the sender of the transaction. Parties are then not restricted by the size of the transaction since they will avoid gas fees.
+A beneficial side effect of storing transaction information in the distributed secure vault as opposed to the blockchain is a reduction in the data stored on the global public ledger and thus a cost saving by the sender of the transaction. Parties are then free to transmit large files between each other as they avoid being charged blockchain gas fees.
 
 Permissioned Blocks opens up the possibility for decentralised use cases such as:
 
@@ -66,15 +64,15 @@ Permissioned Blocks opens up the possibility for decentralised use cases such as
 
 ## A Permissioned File Sharing Model for Distributed Networks.
 
-Peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) or IPFS[[24]](https://ipfs.io/) aare distributed networks that freely share packets of data between nodes in their networks. If a node is interested in retrieving some data, an address representing a routing path is used for resolving where to find that data in the network. That is a routing path to the nodes that have a copy of the data or part of the dataset. There are no security rules preventing requests from accessing data from addresses.   
+Peer-to-peer file sharing protocols such as BitTorrent[[14]](https://en.wikipedia.org/wiki/BitTorrent) or IPFS[[24]](https://ipfs.io/) are distributed networks that freely share packets of data between nodes in their networks. If a node is interested in retrieving some data, an address is used for resolving where to find that data in the network. This address represents a routing path to the nodes that have a copy of the data or part of the dataset. There are no rules preventing requests for data from any address. 
 
-Blockchain protocols broadcast data that is created by a node in the form of a transaction to every other node in their network. There is no need for an addressing mechanism for retrieving data from a node as in a peer-to-peer file sharing protocol as all data is transmitted to all nodes.
+Blockchain protocols broadcast all data that is created by a node in the form of a transaction to every other node in their network. There is no need for an addressing mechanism for retrieving data from a node as in a peer-to-peer file sharing protocol.
 
-Blockchain protocols such as Ethereum have the ability for any node to deploy a tamper-proof program known as a Smart Contract to other nodes in the network. By design, the nodes in a blockchain network are certain that at a certain block number they will all have the same version of smart contract code. 
+Blockchain protocols such as Ethereum have the ability for any node to deploy a tamper-proof program known as a smart contract to all nodes in the network. By design, the nodes in a blockchain network are certain that at a certain block number they will all have the same version of smart contract code.
 
-To deploy a smart contract, a party that runs a node is required to pay a fee from a blockchain account. The smart contract can be programmed so that this account that was used for deployment is tagged as the owner of the smart contract and that only transactions sent from this account are permitted to execute certain functions. This opens up the possibility for a party to transmit an updateable set of security rules as a smart contract to a distributed network that is controlled by that party.
+To deploy a smart contract, a party that runs a node in the network is required to pay a fee from a blockchain account. The smart contract can be programmed such that this account used for deployment is the owner of the smart contract and that only transactions sent from this account are permitted to execute certain functions. This opens up the possibility for a party to transmit an updateable set of security rules as a smart contract to a distributed network that is only be controlled by that party.
 
-Combining a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as the security mechanism for the peer-to-peer file sharing protocol. A security mechanism where the smart contract becomes the untampered source of truth specifying the addresses of data of the file sharing network that only certain parties are authorised to access. For example, if Alice transmits data to Bob, Alice can specify in a smart contract another party such as Carol that Bob is permitted to transmit the data to. Therefore Carol can request data from Bob without relying on only Alice to share the data.   
+Combining a peer-to-peer file sharing protocol with a blockchain protocol, a smart contract can be used as the security mechanism for the peer-to-peer file sharing protocol. A security mechanism where the smart contract becomes the shared security rules that specifying the addresses of data that only certain parties are authorised to access. For example, if Alice transmits data to Bob, Alice can specify in a smart contract the other parties such as Carol that Bob is permitted to transmit the data to. Therefore Carol can request data from Bob without relying on only Alice to share the data.  
 
 This creates a permissioned file sharing protocol where the rules for accessing content can be controlled along with a method of transferring value between parties in the form of cryptocurrency.
 
@@ -124,6 +122,7 @@ However, the state information of a smart contract is mutable. It is modified by
 In the Permissioned Blocks design, to protect information from being available to other nodes, a node stores transaction messages addressed to a smart contract in a decentralised data store called the distributed secure vault. The secure vault is a data store that has a security layer that prevents access from unauthorised accounts. The node then broadcasts to the address of the transaction message to the network. These addresses are stored in the smart contract in a queue data structure.
 
 Any node that has been granted authorisation can resolve and access these set of transactions from the decentralised data store and replay them in order to obtain the current state of the smart contract.
+
 
 ## The Smart Contract State Machine
 
@@ -229,11 +228,13 @@ Here we see that the variables <i>total</i> and <i>tax</i> are returned by the f
 
 ## Recording State Changes
 
-To protect confidential smart contract state information, any member variables that are required to be confidential are removed from the smart contract and the related functions are converted into confidential functions, by being made into pure functions where any sensitive variable are made as parameters to the function.
+To protect confidential smart contract state information, the smart contract is refactored such that any state variables that would normally be declared as member variables to the smart contract are removed and the related functions are converted into into pure functions where the state variables are made as parameters to these functions.
 
-Transaction messages to confidential functions are not transmitted as blockchain transactions. Instead, these messages are recorded in a distributed secure vault. The secure vault is a modified version of IPFS[[24]](https://ipfs.io/) that has a security layer that prevents unauthorised access to content. IPFS has a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data and protocol called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap) for distributing data.
+Transaction messages to these pure functions are not transmitted as blockchain transactions. Instead, these messages are recorded in a distributed secure vault. 
 
-The reference addresses for each transaction message stored in the secure vault are broadcast to the network as blockchain transactions. These are processed using a function on the smart contract that adds the reference address in an array data structure. This way, the state-changing messages stored in the secure vault are linked to the smart contract. The function for adding the reference address will not process messages from unauthorised accounts. The ordering of the array is decided by the validators of the network by consensus. Note that the validators do not know and do not need to know the contents of reference addresses in order to validate the transactions.
+The reference addresses for each transaction message stored in the secure vault are broadcast to the network as blockchain transactions. These are processed using a function on the smart contract that adds the reference address in an array data structure. This way, the state-changing messages stored in the secure vault are linked to the smart contract. The function for adding the reference address will not process messages from unauthorised accounts. 
+
+The ordering of the array is decided by the validators of the network by consensus. Note, that the validators do not know and do not need to know the contents of reference addresses in order to validate the transactions.
 
 Any node that has been granted access to the secure vault can retrieve the transaction messages and replay them in order to calculate the current state of the smart contract.
 
@@ -245,22 +246,22 @@ Any node that has been granted access to the secure vault can retrieve the trans
 
 ## The Distributed Secure Vault
 
-The Secure Vault is an extension of the IPFS protocol with a security layer protecting access to data by unauthorised accounts.
+The distributed secure vault is a modified version of IPFS[[24]](https://ipfs.io/) that has a security layer that prevents unauthorised access to content. IPFS has a content addressing scheme[[27]](https://en.wikipedia.org/wiki/Content-addressable_storage) for resolving data and protocol called BitSwap[[26]](https://github.com/ipfs/specs/tree/master/bitswap) for distributing data.
 
-Accessing data from the Secure Vault requires both authentication and authorisation by a requestor. Authentication that a message sent by a requester is authentic, and verification that the requestor is authorised to access the information. 
+Accessing data from the secure vault requires both authentication and authorisation by a requestor. Authentication that a message sent by a requester is authentic, and verification that the requestor is authorised to access the information
 
-- <b> Authentication</b> - occurs by harnessing the blockchain's cryptography features. A requestor proves the authenticity of a message  by attaching a digital signature to the message being sent. The digital signature is produced and validated using the requestor's blockchain.
+- <b> Authentication</b> - occurs by harnessing the blockchain's cryptographic features. A requestor proves the authenticity of a message  by attaching a digital signature to the message being sent. The digital signature is produced and validated using the requestor's blockchain.
 - <b> Authorisation</b> - occurs by verification that the requestor is authorised to access the requested address. The Secure Vault queries the smart contract that has a mapping of blockchain accounts with permissions for accessing the data.
 
 <p align="center">
 <img src="/images/authentication_authorisation.png">
 <br>
-<b>Authentication & Authorisation</b> - A signed request authenticates the requestor and the smart contract authorises the associated blockchain account as having permission to access the statechain and execute its functions.
+<b>Authentication & Authorisation</b> - A signed request is used to authenticate the requestor. A call is then made to the smart contract to verify that the requestor has permission to access the secure vault.
 </p>
 
 ## Token Authentication
 
-Token authentication is used to prove the authenticity of message requesting data from the secure vault. The token is similar to a JSON Web Token (JWT)[[29]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor. 
+A token authentication scheme is used to prove the authenticity of message requesting data from the secure vault. The authentication token is similar to a JSON Web Token (JWT)[[29]](https://jwt.io/introduction/) employed in existing authentication systems used on the internet today. The authentication token is divided into two segments, the first segment contains claims, and last segment contains the digital signature. The token's signature is generated using the blockchain account of the requestor.
 
 ```
 {
@@ -286,7 +287,7 @@ In order to produce a reliable timestamp for the <i>IssuedAt</i> claim, the bloc
 
 ## Permissioned Blocks Authorisation
 
-IPFS is modified such that certain blocks, known as <b>Permissioned Blocks</b>, require authorisation to be resolved.
+IPFS has been modified such that certain blocks, known as Permissioned Blocks, require authorisation to be resolved.
 
 IPFS divides and stores data in block sizes of 256KB. To set apart permissioned blocks from regular blocks, permissioned blocks are tagged in the IPFS datastore with the smart contract's blockchain address. When a request is made to retrieve a block from the datastore, if it is tagged, then the security procedures of authentication and authorisation need to occur. 
 
@@ -304,7 +305,7 @@ If the requestor is not authorised, then request is simply ignored. The IPFS Dis
 
 ## User Capabilities
 
-The user capabilites are stored in the smart contract and specify the permissions that have been granted to each user. When granting a capability to a user, the user's public key is stored with the capability being granted. A user can have multiple capabilities granted to them. The capabilities are defined as follows:
+The user capabilities are stored in the smart contract and specify the permissions that have been granted to each user. When granting a capability to a user, the user's public key is stored with the capability being granted. A user can have multiple capabilities granted to them. The capabilities are defined as follows:
 
 | Capability | Description                                                                                                           |
 |------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -313,30 +314,38 @@ The user capabilites are stored in the smart contract and specify the permission
 | Grant      | The user is able to grant a capability to another user.                                                               |
 | Revoke     | The is able to revoke a capability from another user.                                                                 |
 
-Any capability can be revoked from a user by any user that has been granted the 'revoke' capability. When revoking occurs, the specified capability that was assigned to user is deleted from the smart contract.
+Any capability can be revoked by any user that has been granted the 'revoke' capability. When revoking occurs, the specified capability that was assigned to user is deleted from the smart contract.
 
 ## A Secure Transmission Channel
 
-The IPFS bitswap channel used for transmission of blocks between nodes needs to be secured in order to avoid messages being read while in transit. To secure the channel, all communications are encrypted, such that only the receiver can decrypt the information being sent.
+The IPFS bitswap channel used for transmission of blocks between nodes needs to be secured in order to avoid messages being read while in transit. To secure the channel, all communications are encrypted such that only the receiver can decrypt the information being sent.
 
-Communication of the information is encrypted by the sender using the receiver's public key and decrypted by the receiver using their private key. The receiver's public key is part of an asymmetric key that the receiver generates. The asymmetric key has a public key element for encryption of communications and a private key for decryption. The public key is stored in the smart contract and the private key is kept secret by the receiver and is never transmitted.
+Encryption is performed using an asymmetric key.  An asymmetric key has a public key element for encryption and a private key for decryption.
 
 <p align="center">
 <img src="/images/secure_comms.png">
 <br>
-<b>Secure communication channel</b> - The IPFS bitswap channel is secured by token authentication and the encryption of permissioned blocks using a shared contract key. 
+<b>Secure communication channel</b> - The IPFS bitswap channel is secured by encryption of the IPFS blocks using the requestor’s public key. 
 </p>
+
+Private information is encrypted by the sender using the receiver's public key and decrypted by the receiver once received using their private key. The public key is stored in the smart contract and the private key is kept secret by the receiver and is never transmitted.
 
 All state information is stored encrypted within the IPFS datastore to ensure the full security of the data. When a user writes information, those blocks are encrypted using their asymmetric key. When a requestor receives a block, they store the information in encrypted state as they have received it. Only when they send blocks to another requestor does the block get decrypted and then encrypted using the public key of the new requestor.
 
 ## Conclusion
-In this paper we have introduced a new technology called Permissioned Blocks that is a combination of peer-to-peer file sharing and blockchain technology. Permissioned Blocks allows parties to conduct transactions on public blockchains whilst keeping sensitive information private and confidential.
+In this paper we have described the Permissioned Blocks protocol that is a combination of peer-to-peer file sharing and blockchain technologies. Permissioned Blocks allows parties to conduct transactions on public blockchains whilst keeping sensitive information private and confidential between each other.
+
+Along with keeping transactions sent to a smart contract private and confidential, files of any size can also be attached to a smart contract and use the same security system. 
+
+A working prototype has been developed and it is planned to either integrate this into the Ethereum network or create a new independent blockchain.
 
 <p align="center">
 <img src="/images/permissioned-blocks-architechture-demo.png">
 <br>
 <b>Working Demo</b> - The architecture of a working demonstration of permissioned blocks.
 </p>
+
+Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
 
 ## Citations
 - [[1]](http://midasium.com/) "Midasium: Blockchain of Real Estate" http://midasium.com/
