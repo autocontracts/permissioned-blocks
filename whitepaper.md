@@ -7,9 +7,9 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Abstract
 
-This paper describes a protocol called Permissioned Blocks that enables privacy and confidentiality of smart contract transactions. A capability system is created for granting specific permissions to parties of a smart contract. This allows one or more parties who are the owner(s) of the smart contract give consent to other participants to access the confidential smart contract information and perform functional operations.
+This paper describes a protocol called Permissioned Blocks that enables privacy and confidentiality of smart contract transactions. A smart contract capability system is described that has specific permissions granted to the parties of a smart contract. This allows one or more parties who are the owner(s) of the smart contract give consent to other parties to access the confidential smart contract information and perform functional operations.
 
-This protocol also enables files to be linked to a smart contract with the smart contract controlling access. The data is stored in a decentralised secure vault that is a modified version of IPFS allowing for the peer-to-peer distribution of the content. A benefit of this configuration is that files of any size can be attached to a smart contract without being charged high blockchain (gas) fees.
+This protocol also enables files to be linked to a smart contract with permissions. The data is stored in a decentralised secure vault that is a modified version of IPFS allowing for the peer-to-peer distribution of the content. A benefit of this configuration is that files of any size can be attached to a smart contract without being charged high blockchain (gas) fees.
 
 ## Background
 
