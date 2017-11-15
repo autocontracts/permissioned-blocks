@@ -144,7 +144,7 @@ The disadvantage of storing the smart contract state information directly on a b
 
 ## Separating State Persistence from Functional Behaviour
 
-If we separate the recording of a smart contract's state changes from its functional behaviour, we are then able to store these state-changing messages on an alternative storage system. With the data stored separately, we can design a security model that limits the parties that can access these messages, and at the same time significantly reduce the size of data stored on the blockchain.
+If we separate the recording of a smart contract's state changes from its functional behaviour, we are then able to store these state-changing messages on an alternative storage system. With the data stored separately, we can design a security model that controls which parties can access these messages, and at the same time significantly reduce the size of data stored on the blockchain.
 
 To achieve this desired outcome, we need to program the functions of a smart contract as pure functions. A pure function[[21]](https://en.wikipedia.org/wiki/Pure_function), by definition in functional programming, does not depend on and does not modify the states of variables out of its scope[[22]](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/). This means a pure function will always return the same result for a given set of parameters.
 ```
