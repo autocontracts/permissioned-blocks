@@ -5,6 +5,12 @@
 By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 </p>
 
+## Abstract
+
+This paper describes a protocol called Permissioned Blocks enabling privacy and confidentiality for smart contract transactions. A capability system is created for granting specific permissions to parties of a smart contract. This allows one or more parties who are the owner(s) of the smart contract give consent to other participants to access the confidential smart contract information and perform functional operations.
+
+This protocol also enables files to be linked to a smart contract with the smart contract controlling access. The data is stored in a decentralised secure vault that is a modified version of IPFS allowing for the peer-to-peer distribution of the content. A benefit of this configuration is that files of any size can be attached to a smart contract without being charged high blockchain (gas) fees.
+
 ## Background
 
 In late 2015, I presented a blockchain prototype called Midasium[[1]](http://midasium.com/) at the finals of a Citibank competition. The aim of the prototype was to show how blockchain technology could primarily improve cash flow management in the real estate industry and secondarily to create a Virtual Credit Bureau for managing portfolio risk of real estate in real time. Midasium went on to come 2nd place in a Santander Bank competition in 2016. In 2017 Deloitte wrote the paper "Blockchain in commercial real estate"[[2]](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/financial-services/us-fsi-rec-blockchain-in-commercial-real-estate.pdf) where the Midasium concept was presented to convey the potential of such blockchain models to disrupt the commercial real estate sector.
