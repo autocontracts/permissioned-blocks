@@ -119,9 +119,9 @@ For example, consider an author of an e-book who would normally sell their work 
 
 Smart Contracts are deployed to a blockchain by broadcasting a transaction that contains the program code from a node in the network. All nodes in the network will receive this transaction as part of an immutable block and as such the instruction code of the smart contract is also immutable. 
 
-However, the state information of a smart contract is mutable and is modified by broadcasting additional transaction messages that are addressed to the smart contract. When these messages are broadcast, all nodes in the network will see this information. 
+However, the state information of a smart contract is mutable. It is modified by broadcasting additional transaction messages that are addressed to the smart contract. When these messages are broadcast, all nodes in the network will see this information.  
 
-In this design, to protect certain information from being seen and available to other nodes, a node instead stores transaction messages addressed to a smart contract in a decentralised data store. A data store that has a security layer that prevents access from unauthorised accounts. The node then broadcasts to the address of the transaction message to the network. These addresses are stored in the smart contract in a queue data structure.
+In this design, to protect certain information from being available to other nodes, a node stores transaction messages addressed to a smart contract in a decentralised data store. This is a data store that has a security layer that prevents access from unauthorised accounts. The node then broadcasts to the address of the transaction message to the network. These addresses are stored in the smart contract in a queue data structure.
 
 Any node that has been granted authorisation can resolve and access these set of transactions from the decentralised data store and replay them in order to obtain the current state of the smart contract.
 
