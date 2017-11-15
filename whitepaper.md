@@ -49,7 +49,7 @@ Rather than transmit transaction messages publicly to the blockchain network, on
 
 With this design, the list of authorised users can be modified by the smart contract owner throughout the lifetime of the contract. When a user is added to the smart contract's list of authorised users, this new user will inherit the full history of the transactions related to the smart contract. Likewise, when ownership changes hands, the new owner will inherit the full history of the smart contract.
 
-A beneficial side effect of the Permission Block's protocol storing transaction information in a decentralised data store is a reduction in the data stored on the public blockchain. Parties are also not restricted by the size of the data that is transmitted since they will avoid gas fees by not storing the data on the blockchain.
+A beneficial side effect of storing transaction information in a decentralised data store as opposed to the blockchain is a reduction in the data stored on the global ledger and thus a saving in cost by the sender of the transaction. Parties are then not restricted by the size of the transaction since they will avoid gas fees.
 
 Permissioned Blocks opens up the possibility for decentralised use cases such as:
 
