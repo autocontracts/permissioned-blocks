@@ -23,24 +23,23 @@ Further work based on this paper, "External storage on the EVM: a static recompi
 
 ## Introduction
 
-Blockchain technology with smart contracts[[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. A major benefit is the efficiencies realised by participants transacting with one another in a peer-to-peer manner without requiring intermediaries.
+Blockchain technology with smart contracts[[5]](https://bitsonblocks.net/2016/02/01/a-gentle-introduction-to-smart-contracts/) promises the creation of new business models and economies. A major benefit is the efficiencies gained by participants transacting with one another in a peer-to-peer fashion without requiring a trusted intermediary.
 
-However, blockchain technology is still in development and maturing, and there are some shortcomings that limit its practical use and uptake. One of such limitation is the lack of privacy and confidentiality of blockchain transactions[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). Companies have compliance requirements to keep customer information private and they may also want to keep certain transactions private from competitors. 
+Blockchain technology is still maturing and in development so there are some shortcomings that limit its practical use and uptake. One such limitation is the lack of privacy and confidentiality of blockchain transactions[[6]](https://blog.ethereum.org/2016/01/15/privacy-on-the-blockchain/). Blockchain technology is still maturing and in development so there are some shortcomings that limit its practical use and uptake. One such limitation is the lack of privacy and confidentiality of blockchain transactions.
 
-There are also business use cases where confidentiality is important between parties. For example, in a medical situation, a patient may want to give consent to a set of physicians in order to access their health record but no one else.  
+Along with privacy there also a need for confidentiality of transactions between parties. For example, in a medical scenario, a patient may wish to give consent to one or more physicians in order to access their health record and no one else.   
 
-This white paper describes a protocol where private information that is controlled by a party can give consent to others to in order to access and use that information.
+This white paper describes a protocol where private information can be controlled by one or more parties by giving consent to others in order to access and use that information.
 
 There are two categories of information that this protocol can be used for:
-- To manage <b>smart contract</b> transactions -  data that is sent to a smart contract that is stored on a public blockchain.
+- To manage <b>smart contract</b> transactional information - the data that is transmitted to a smart contract.
 - To manage <b>digital content</b> linked to a smart contract - E.g. documents, music, video...etc.
 
-The blockchain described in this white paper is the Ethereum blockchain. However, the modular and decoupled design of Permissioned Blocks means that the technology can be used with any blockchain that has smart contract capabilities. That is a blockchain with network nodes that contain turing complete virtual machines[[9]](https://en.wikipedia.org/wiki/Turing_machine) for processing transactions.
+The blockchain described in this white paper is the Ethereum blockchain. However, the decoupled design of Permissioned Blocks means that the technology can be used with any blockchain that has smart contract capabilities. That is a blockchain with network nodes containing turing complete virtual machines[[9]](https://en.wikipedia.org/wiki/Turing_machine) for processing transactions.
 
-A standard Ethereum smart contract stores its state information on the blockchain along with the smart contract’s instruction code. State changes of the smart contract can occur by transactions being transmitted publicly to every node in the network.
+A standard Ethereum smart contract stores its state information on the blockchain along with the smart contract’s instruction code. State changes of the smart contract occur by transactions being transmitted publicly to every node in the network.
 
-The Permissioned Blocks protocol gives additional functionality where state information that a party wishes to remain private and confidential is stored in a decentralised data store that has a security layer called the as opposed to the blockchain. This decentralised data store is called a decentralised secure vault. Rather than transmit transaction messages publicly to the blockchain network, only a reference address of the transaction that is stored in the secure vault is transmitted.
-Those that are granted read permissions to the secure vault are authorised to access the smart contract’s private transactions.
+The Permissioned Blocks protocol enhances the Ethereum blockchain such that state information that a party wishes to remain private and confidential is stored in a decentralised data store that has a security layer as opposed to the blockchain. This decentralised data store is called a decentralised secure vault. Rather than transmit transaction messages publicly to the blockchain network, only a reference address of the transaction that is stored in the secure vault is transmitted. Those that are granted read permissions to the secure vault are authorised to access the smart contract’s private transactions.
 
 With this design, the list of authorised users can be modified by the smart contract owner throughout the lifetime of the contract. When a user is added to the smart contract's list of authorised users, this user will have to access the full history of the transactions related to the smart contract. Likewise, when ownership changes hands, the new owner with inherit the full history of the smart contract.
 
