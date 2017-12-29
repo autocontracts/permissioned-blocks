@@ -9,7 +9,7 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 This paper describes a protocol called Permissioned Blocks that provides privacy and confidentiality for parties using blockchain smart contracts. The protocol has a smart contract-based capability system that is used to control to access protected smart contract information. This capability system allows for one or more parties that are designated as the owner(s) of the smart contract to give consent to other parties in order to access confidential information and to execute smart contract operations
 
-The Permissioned Blocks design integrates the blockchain Ethereum with a distribute secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault uses a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
+The Permissioned Blocks design integrates the blockchain Ethereum with a distributed secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault uses a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
 
 The Permissioned Blocks protocol also enables files to be linked to a smart contract with access control controlled by the owners of the smart contract.
 
