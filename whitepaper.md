@@ -7,9 +7,9 @@ By <a href="https://mikesmo.github.io/">Michael Smolenski</a>
 
 ## Abstract
 
-This paper describes a protocol called Permissioned Blocks, a decentralised privacy and confidentiality protocol for accessing data attached to blockchain smart contracts. The protocol has a capability system to control to access to protected smart contract information. This allows one or more parties that are designated as the owner(s) of the smart contract to give consent to others in order to access confidential information.
+This paper describes a protocol called Permissioned Blocks, a decentralised privacy and confidentiality protocol for securing confidential information attached to blockchain smart contracts. At the core of the protocol is a role based system that enables one or more parties who are the administrator(s) of the smart contract to give consent to authorised network nodes to share the confidential information with designated blockchain accounts.
 
-The Permissioned Blocks design integrates the Ethereum blockchain with a distributed secure vault that is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault uses a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
+The Permissioned Blocks design integrates the Ethereum blockchain with a distributed secure vault, which is an extension of IPFS, a content-addressed peer-to-peer file system. The secure vault uses a token authentication scheme to control access to protected content. Private and confidential transactions are stored in the secure vault as opposed to being publicly broadcast to the blockchain network.
 
 Further work based on this paper, "External storage on the EVM: a static recompilation approach"[[4]](https://gist.github.com/shmookey/e1df57beeea0a2b8e6014bce6c69c0a4) by Luke Anthony Williams, describes a technique that abstracts away some of the complexities of writing smart contracts in a functional manner that are discussed in this paper. 
 
