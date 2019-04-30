@@ -14,7 +14,7 @@ Demo Highlights:
 - Grant access rights to digital content   
 - Transfer ownership of digital contract (Land Title in this demo)
 - An order of magnitude faster than vanilla ethereum (using [Tendermint](https://tendermint.com/) consensus engine).
-- Decentralised solution using a folk of [IPFS](https://ipfs.io/) for the secure storage of smart contract state information.
-- Compatible with any Turing Complete blockchain (e.g. [Ethereum](https://www.ethereum.org/), [Hyperledger](https://www.hyperledger.org/)). Decoupled and modular design.
+- Decentralised solution using a fork of [IPFS](https://ipfs.io/) for the secure storage of smart contract state information.
+- Compatible with any Smart Contract based blockchain (e.g. [Ethereum](https://www.ethereum.org/). Decoupled and modular design.
 - Multi user/role security model capabilities.  
 
