@@ -19,7 +19,7 @@ In late 2015, I presented a blockchain prototype called Midasium[[1]](http://mid
 
 Although the vision of Midasium was appealing, one of the major technical challenges was the lack of privacy and confidentiality of blockchain transaction. It was not a viable for the Midasium solution to list the history of rental payments on a public blockchain.
 
-In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work.In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work.
+In 2016, I set out to do research and development to come up with a viable solution. This white paper and the accompanying prototype is the result of that work.
 
 ## Introduction
 
