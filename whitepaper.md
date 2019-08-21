@@ -211,7 +211,7 @@ contract ImpureSmartContract {
 
 ```
 contract PureSmartContract {
-  function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) constant
+  function calculateTotal(uint total, uint tax, uint price, uint quantity, uint taxRate) pure
               returns (uint total, uint tax) {
         total = total + price * quantity;
         tax = tax + total * taxRate / 100
